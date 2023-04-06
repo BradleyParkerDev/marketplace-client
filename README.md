@@ -1,5 +1,8 @@
-# chat-app
+# Marketplace
 
-##Overview
+## Overview
 
-This project will be a chat app, like whatsapp.  I will incorporate all of the required frameworks and libraries. 
+This project will be a marketplace app, like Craigslist.  I will incorporate all of the required frameworks and libraries. 
+
+## Features
+
