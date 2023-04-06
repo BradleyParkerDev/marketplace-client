@@ -21,12 +21,18 @@ _Layout:_
 
 ## Server Routes:
 - POST
+    create user
+- POST
     create listing
 - GET
     all listings
 - GET
     single listing
 - PUT
+    update user
+- PUT
     update listing
+- Delete
+    delete user
 - Delete
     delete listing
