@@ -12,7 +12,7 @@ _Pages:_
 - User Page
 - Listing Page
 
--Components:_
+_Components:_
 - Navbar
 - Registration Modal
 
