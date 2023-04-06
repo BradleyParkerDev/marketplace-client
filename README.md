@@ -4,5 +4,29 @@
 
 This project will be a marketplace app, like Craigslist.  I will incorporate all of the required frameworks and libraries. 
 
-## Features
+## Client Views:
+_Pages:_
+- Home Page
+- Login Page
+- Registration Page
+- User Page
+- Listing Page
 
+-Components:_
+- Navbar
+- Registration Modal
+
+_Layout:_
+- Global Layout (for navbar and outlet)
+
+## Server Routes:
+- POST
+    create listing
+- GET
+    all listings
+- GET
+    single listing
+- PUT
+    update listing
+- Delete
+    delete listing
