@@ -1,0 +1,1 @@
+//The ListingCard shows a listing's title, main photo, seller name, and description.
