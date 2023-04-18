@@ -1,0 +1,199 @@
+/* 
+////////////////////////////////////////////////////////////////////
+NavBar 
+////////////////////////////////////////////////////////////////////
+*/
+/* Solid border */
+hr.solid {
+    border-top: 1px solid rgb(35, 33, 33);
+    margin-top: 5px;
+  }
+#navDiv{
+    width: 320px;
+    height: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    /* border: black dashed 2px; */
+    border-right: black solid 1px;
+    overflow-y: scroll;
+}
+
+#logo{
+    margin-bottom: 5px;
+}
+#loginMessage{
+    margin-top: 2px;
+    margin-bottom: 3px;
+
+}
+
+#loginEmail{
+    /* width: 360px; */
+}
+
+#loginPassword{
+    /* width: 360px; */
+}
+
+#loginButton{
+    margin-top: 10px;
+    width: 280px;
+    font-weight: bold;
+}
+
+#registrationButton{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    width: 280px;
+    font-weight: bold;
+    /* justify-content: left; */
+
+}
+
+/* Nav category items */
+.categoryMenuCard{
+    width:280px;
+    height: 40px;
+    margin-bottom: 5px;
+    /* border: dashed black 2px; */
+    /* border: black solid 1px ;  */
+    border-radius: 5px; 
+    display:flex;
+
+}
+.categoryMenuCard:hover {
+    background-color: rgb(235, 231, 231);
+  }
+.categoryPhoto{
+    width:50px;
+    height: 40px;
+    /* border: dashed black 1px; */
+    display:flex;
+
+}
+.categoryName{
+    width:230px;
+    height: 40px;
+    font-weight: bold;
+    font-size: 14px;
+    /* text-align: center; */
+    /* border: dashed black 1px; */
+    display: flex;
+    /* align-items: center; */
+    justify-content: left;
+}
+
+/* 
+////////////////////////////////////////////////////////////////////
+HomePage
+////////////////////////////////////////////////////////////////////
+*/
+#homepageCardContainer{
+    height: 500px;
+    width: 500px;
+    border: dashed black 2px;
+}
+
+/* 
+////////////////////////////////////////////////////////////////////
+Listing Card
+////////////////////////////////////////////////////////////////////
+*/
+.listingCardBody{
+    height: 210px;
+    width: 200px;
+    /* border: dashed black 2px; */
+    border: black solid 1px ;
+    border-radius: 5px;
+
+
+}
+.listingPhoto{
+    width:150px;
+    height: 150px ;
+}
+.listingInfo{
+
+}
+
+
+/* 
+////////////////////////////////////////////////////////////////////
+Registration Modal 
+////////////////////////////////////////////////////////////////////
+*/
+#registrationModal{
+    width: 400px;
+}
+#registration{
+    padding-top: 10px;
+    align-items: center;
+    margin-top: 15px;
+    margin-left: 25px;
+    width: 450px;
+    height: auto;
+    border: black solid 1px ;
+    border-radius: 5px;
+    text-align: center;
+
+}
+#name{
+    display: flex;
+}
+#firstName{
+    width: 190px;
+    margin-left: 25px;
+    margin-right: 10px;
+}
+#lastName{
+    width: 190px;
+    margin-left: 10px;
+    /* margin-right: 25px; */
+
+}
+#email{
+    width: 400px;
+    margin-left: 25px;
+    margin-right: 25px;
+
+
+}
+#password{
+    width: 400px;
+    margin-left: 25px;
+    margin-right: 25px;
+
+}
+#birthday{
+    width: 400px;
+    margin-left: 25px;
+    margin-right: 25px; 
+}
+
+#gender{
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    width: 400px;
+
+}
+
+/* for genderForm function */
+#genderDiv{
+    display: flex;
+    margin-bottom: 15px;
+
+}
+#pronouns{
+    width: 190px;
+    margin-left: 25px;
+    margin-right: 10px;
+
+}
+#genderInputText{
+    width: 200px;
+    width: 190px;
+    margin-left: 10px;
+}
+
+
