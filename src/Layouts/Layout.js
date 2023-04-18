@@ -3,7 +3,7 @@ import NavBar from "../Components/NavBar";
 
 const Layout = (props) => {
     return (
-        <div>
+        <div id="layoutDiv">
 
             <NavBar categoriesList = {props.categoriesList}/>
             <Outlet/>

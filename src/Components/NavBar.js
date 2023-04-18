@@ -56,7 +56,7 @@ const NavBar = (props) => {
                 <input 
                 id="loginPassword"
                 class="form-control"
-                type = "text" 
+                type = "password" 
                 name = "password"
                 placeholder = "Password"
                 autocomplete = "off"
