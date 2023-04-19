@@ -49,14 +49,14 @@ hr.solid {
 
 #loginButton{
     margin-top: 10px;
-    width: 280px;
+    width: 100%;
     font-weight: bold;
 }
 
 #registrationButton{
     margin-top: 10px;
     margin-bottom: 5px;
-    width: 280px;
+    width: 100%;
     font-weight: bold;
     /* justify-content: left; */
 
@@ -64,8 +64,9 @@ hr.solid {
 
 /* Nav category items */
 .categoryMenuCard{
-    width:280px;
+    width:100%;
     height: 40px;
+    padding-top: 2px;
     margin-bottom: 5px;
     /* border: dashed black 2px; */
     /* border: black solid 1px ;  */
@@ -74,7 +75,7 @@ hr.solid {
 
 }
 .categoryMenuCard:hover {
-    background-color: rgb(235, 231, 231);
+    background-color: 	#F0F0F0;
   }
 .categoryPhoto{
     width:50px;
@@ -84,10 +85,11 @@ hr.solid {
 
 }
 .categoryName{
-    width:230px;
+    width:100%;
     height: 40px;
     font-weight: bold;
     font-size: 14px;
+    padding-left: 3px;
     /* text-align: center; */
     /* border: dashed black 1px; */
     display: flex;
@@ -105,10 +107,23 @@ HomePage
     width: 1500px;
     height: 100vh;
     /* width: 100vw; */
-    border: dashed black 2px;
+    /* border: dashed black 2px; */
     overflow-y: scroll;
 
 }
+/* 
+////////////////////////////////////////////////////////////////////
+CreateListingPage
+////////////////////////////////////////////////////////////////////
+*/
+
+
+#createListingDiv{
+
+    
+}
+
+
 
 /* 
 ////////////////////////////////////////////////////////////////////
@@ -118,6 +133,7 @@ Listing Card
 .listingCardBody{
     height: 210px;
     width: 200px;
+    margin: 10px;
     /* border: dashed black 2px; */
     border: black solid 1px ;
     border-radius: 5px;

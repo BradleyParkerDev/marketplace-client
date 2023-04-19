@@ -1,5 +1,6 @@
 import HomePage from './Pages/HomePage';
 import ListingPage from './Pages/ListingPage';
+import CreateListingPage from './Pages/CreateListingPage';
 import Layout from './Layouts/Layout';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
@@ -68,7 +69,13 @@ function App(props) {
           urlEndPoint={urlEndPoint} 
           setShouldRefresh={setShouldRefresh}/>
         },
-
+        { 
+          path: "/listings/create-listing",
+          element: <CreateListingPage 
+          categoriesList={categoriesList} 
+          urlEndPoint={urlEndPoint} 
+          setShouldRefresh={setShouldRefresh}/>
+        },
         
 
       ]

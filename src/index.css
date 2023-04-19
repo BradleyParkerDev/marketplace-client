@@ -1,13 +1,358 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* 
+////////////////////////////////////////////////////////////////////
+Layout 
+////////////////////////////////////////////////////////////////////
+*/
+
+#layoutDiv{
+  display: flex;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+/* 
+////////////////////////////////////////////////////////////////////
+NavBar 
+////////////////////////////////////////////////////////////////////
+*/
+/* Solid border */
+hr.solid {
+  border-top: 1px solid rgb(35, 33, 33);
+  margin-top: 5px;
 }
+#navDiv{
+  width: 320px;
+  height: 100vh;
+  padding-left: 20px;
+  padding-right: 20px;
+  /* border: black dashed 2px; */
+  border-right: black solid 1px;
+  overflow-y: scroll;
+  margin-right: 20px;
+}
+
+#logo{
+  margin-bottom: 5px;
+}
+#loginMessage{
+  margin-top: 2px;
+  margin-bottom: 3px;
+
+}
+
+#loginEmail{
+  /* width: 360px; */
+}
+
+#loginPassword{
+  /* width: 360px; */
+}
+
+#loginButton{
+  margin-top: 10px;
+  width: 100%;
+  font-weight: bold;
+}
+
+#registrationButton{
+  margin-top: 10px;
+  margin-bottom: 5px;
+  width: 100%;
+  font-weight: bold;
+  /* justify-content: left; */
+
+}
+
+/* Nav category items */
+.categoryMenuCard{
+  width:100%;
+  height: 40px;
+  padding-top: 2px;
+  margin-bottom: 5px;
+  /* border: dashed black 2px; */
+  /* border: black solid 1px ;  */
+  border-radius: 5px; 
+  display:flex;
+
+}
+.categoryMenuCard:hover {
+  background-color: 	#F0F0F0;
+}
+.categoryPhoto{
+  width:50px;
+  height: 40px;
+  /* border: dashed black 1px; */
+  display:flex;
+
+}
+.categoryName{
+  width:100%;
+  height: 40px;
+  font-weight: bold;
+  font-size: 14px;
+  padding-left: 3px;
+  /* text-align: center; */
+  /* border: dashed black 1px; */
+  display: flex;
+  /* align-items: center; */
+  justify-content: left;
+}
+
+/* 
+////////////////////////////////////////////////////////////////////
+HomePage
+////////////////////////////////////////////////////////////////////
+*/
+#homepageCardContainer{
+  /* height: 500px; */
+  width: 1500px;
+  height: 100vh;
+  /* width: 100vw; */
+  /* border: dashed black 2px; */
+  overflow-y: scroll;
+
+}
+/* 
+////////////////////////////////////////////////////////////////////
+CreateListingPage
+////////////////////////////////////////////////////////////////////
+*/
+
+
+#createListingDiv{
+  /* height: 500px; */
+  margin-top: 30px;
+  margin-left: 60px;
+  margin-right: 60px;
+
+  width: 80%;
+  max-width: 100%;
+  height:700px;
+  /* width: 100vw; */
+  border: solid black 2px;
+  border-radius: 5px; 
+  padding:20px 20px 20px 20px;
+  overflow-y: scroll;
+  background-color: 	#F0F0F0;
+  display:flex;
+
+  
+}
+
+/* createContainerOne holds the form */
+#createContainerOne{
+  /* border: dashed black 2px; */
+
+  width: 65%;
+  max-width: 100%;
+  height: 100%;
+
+}
+
+
+#createTextArea{
+  /* height: 500px; */
+  width: 100%;
+  max-width: 100%;
+  height: 70%;
+  /* width: 100vw; */
+  border: solid black 2px;
+  border-radius: 5px; 
+  padding:10px 10px 10px 10px;
+  overflow-y: scroll;
+  background-color: 	white;
+
+}
+#cld-title{
+  /* border: dashed black 2px; */
+  width: 100%;
+
+}
+#newListingTitle{
+  margin-top: 10px;
+  width: 100%;
+  /* border: dashed black 1px; */
+
+}
+#priceCategoryCondition{
+  display: flex;
+  width: 100% ;
+}
+
+#newListingPrice{
+  margin-top: 10px;
+  margin-right: 5px;
+  width: 33%
+} 
+
+#conditionSelector{
+  width:33%;
+  height: 30px;
+  justify-self: end;
+  position: relative;
+  bottom:0;
+}
+#categorySelector{
+  width:33%;
+  height: 30px;
+  justify-self: end;
+  /* position: relative; */
+  margin-right: 5px;
+
+  bottom:0;
+}
+#cld-description{
+  margin-top: 10px;
+  width:100%;
+  height: 63%;
+  /* max-height: 350px; */
+}
+
+.createListingDetails{
+  margin-top: 10px;
+  width: 100%;
+  height: 28%;
+  border: solid black 2px;
+  background-color: white;
+  border-radius: 5px; 
+
+}
+
+
+
+/* createContainerTwo holds the photos and submit button */
+#createContainerTwo{
+  height: 100%;
+  width: 35%; 
+  /* border: dashed black 2px; */
+  border-radius: 5px; 
+  margin-left: 20px;
+
+  /* background-color: white; */
+}
+#createImageUpload{
+  height: 92%;
+  width: 100%; 
+  border: solid black 2px;
+  border-radius: 5px; 
+  background-color: white;
+}
+#uploadPhotoTitle{
+  height: 30px;
+  width: 70px;
+  font-weight: bold;
+  font-size: larger;
+  border: dashed black 2px;
+  text-align: center;
+  margin-left: 35%;
+}
+#createSubmitButton{
+  margin-top: 2%;
+  font-weight: bold;
+  margin-left: 75%;
+}
+
+/* 
+////////////////////////////////////////////////////////////////////
+ListingCard
+////////////////////////////////////////////////////////////////////
+*/
+.listingCardBody{
+  height: 210px;
+  width: 200px;
+  margin: 10px;
+  /* border: dashed black 2px; */
+  border: black solid 1px ;
+  border-radius: 5px;
+
+
+}
+.listingPhoto{
+  width:150px;
+  height: 150px ;
+}
+.listingInfo{
+
+}
+
+
+/* 
+////////////////////////////////////////////////////////////////////
+RegistrationModal 
+////////////////////////////////////////////////////////////////////
+*/
+#registrationModal{
+  width: 400px;
+}
+#registration{
+  padding-top: 10px;
+  align-items: center;
+  margin-top: 15px;
+  margin-left: 25px;
+  width: 450px;
+  height: auto;
+  border: black solid 1px ;
+  border-radius: 5px;
+  text-align: center;
+
+}
+#name{
+  display: flex;
+}
+#firstName{
+  width: 190px;
+  margin-left: 25px;
+  margin-right: 10px;
+}
+#lastName{
+  width: 190px;
+  margin-left: 10px;
+  /* margin-right: 25px; */
+
+}
+#email{
+  width: 400px;
+  margin-left: 25px;
+  margin-right: 25px;
+
+
+}
+#password{
+  width: 400px;
+  margin-left: 25px;
+  margin-right: 25px;
+
+}
+#birthday{
+  width: 400px;
+  margin-left: 25px;
+  margin-right: 25px; 
+}
+
+#gender{
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  width: 400px;
+
+}
+
+/* for genderForm function */
+#genderDiv{
+  display: flex;
+  margin-bottom: 15px;
+
+}
+#pronouns{
+  width: 190px;
+  margin-left: 25px;
+  margin-right: 10px;
+
+}
+#genderInputText{
+  width: 200px;
+  width: 190px;
+  margin-left: 10px;
+}
+
+
+
