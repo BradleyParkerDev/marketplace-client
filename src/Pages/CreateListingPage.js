@@ -78,7 +78,7 @@ function CreateListingPage (props){
                     </div>
                 </div>
                 <Button id="createSubmitButton" variant="success" >
-                    Submit
+                    Publish
                 </Button>
             </div>
 

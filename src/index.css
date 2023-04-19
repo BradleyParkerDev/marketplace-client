@@ -6,6 +6,12 @@ Layout
 
 #layoutDiv{
   display: flex;
+  background-color: lavender;
+  background-image: url('background.png');
+  /* 
+  use math.random in layout to have various background images and colors
+  do the styling on the page, not here.
+  */
 }
 
 
@@ -28,6 +34,7 @@ hr.solid {
   border-right: black solid 1px;
   overflow-y: scroll;
   margin-right: 20px;
+  background-color: white;
 }
 
 #logo{
@@ -248,7 +255,7 @@ CreateListingPage
 #createSubmitButton{
   margin-top: 2%;
   font-weight: bold;
-  margin-left: 75%;
+  width: 100%;
 }
 
 /* 
