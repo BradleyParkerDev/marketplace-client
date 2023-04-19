@@ -133,7 +133,7 @@ CreateListingPage
 
   width: 80%;
   max-width: 100%;
-  height:700px;
+  height:750px;
   /* width: 100vw; */
   border: solid black 2px;
   border-radius: 5px; 
@@ -169,11 +169,35 @@ CreateListingPage
   background-color: 	white;
 
 }
-#cld-title{
-  /* border: dashed black 2px; */
+#createHeaderContainer{
+  display: flex;
+  height: 55px;
   width: 100%;
 
 }
+#lt-title{
+text-align: center;
+font-weight: bold;
+margin-bottom: 3px;
+}
+
+#listingRadio{
+display: flex;
+justify-content: space-evenly;
+
+}
+
+#cld-title{
+  /* border: dashed black 2px; */
+  width:60%;
+
+}
+#listingType{
+  height: 100%;
+  width: 100%;
+  /* border: dashed black 2px; */
+}
+
 #newListingTitle{
   margin-top: 10px;
   width: 100%;
@@ -183,34 +207,52 @@ CreateListingPage
 #priceCategoryCondition{
   display: flex;
   width: 100% ;
+  /* border: dashed black 1px; */
+
+}
+#contactSubCategory{
+  /* margin-top: 5px; */
+  display: flex;
+  width: 100%;
+  border: dashed black 1px;
+
+}
+#contactEmail{
+  margin-top: 10px;
+  margin-right: 5px;
+  width: 33%
+}
+#contactPhone{
+  margin-top: 10px;
+  margin-right: 5px;
+  width: 33%
 }
 
 #newListingPrice{
   margin-top: 10px;
   margin-right: 5px;
   width: 33%
+
 } 
 
 #conditionSelector{
+  margin-top: 12px;
   width:33%;
-  height: 30px;
-  justify-self: end;
-  position: relative;
+  height: 35px;
+  margin-right: 5px;
   bottom:0;
 }
 #categorySelector{
+  margin-top: 12px;
   width:33%;
-  height: 30px;
-  justify-self: end;
-  /* position: relative; */
+  height: 35px;
   margin-right: 5px;
-
   bottom:0;
 }
 #cld-description{
   margin-top: 10px;
   width:100%;
-  height: 63%;
+  height: 40%;
   /* max-height: 350px; */
 }
 
