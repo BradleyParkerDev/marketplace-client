@@ -10,7 +10,19 @@ import Tabs from 'react-bootstrap/Tabs';
 const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
 const RegistrationModal = (props) =>{
+
+    const auth = useAuth(); //access the authentication context 
+    const navigate = useNavigate();
+    const [registerMessage, setRegisterMessage] = useState("");
+
     const [show, setShow] = useState(false);
+
+    const [firstName,setFirstName] = useState("");
+    const [lastName,setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [dob,setDob] = useState("");
+    const [pronouns, setPronouns] = useState("")
     const [genderValue, setGenderValue] = useState('');
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -46,8 +58,22 @@ const RegistrationModal = (props) =>{
     function handleGenderChange(e){
       setGenderValue(e.target.value)
     }
-    
-  
+    function handleFirstNameChange(e){
+      setFirstName(e.target.value)
+    }    
+    function handleLastNameChange(e){
+      setLastName(e.target.value)
+    }   
+
+    function handleEmailChange(e){
+      setEmail(e.target.value)
+    }
+    function handlePasswordChange(e){
+      setPassword(e.target.value)
+    }    
+    function handleDobChange(e){
+      setDob(e.target.value)
+    }  
     return (
       <>
         <Button id="registrationButton" variant="success" onClick={handleShow}>
@@ -67,7 +93,7 @@ const RegistrationModal = (props) =>{
                 name = "firstName"
                 placeholder = "First Name"
                 autocomplete = "off"
-
+                onChange={handleFirstNameChange}
               />
               <input
                 id="lastName" 
@@ -77,6 +103,7 @@ const RegistrationModal = (props) =>{
                 name = "lastName"
                 placeholder = "Last Name"
                 autocomplete = "off"
+                onChange={handleLastNameChange}
 
 
               />
@@ -86,22 +113,23 @@ const RegistrationModal = (props) =>{
             <input 
               id="email"
               class="form-control"
-
               type = "text" 
               name = "email"
               placeholder = "Email"
               autocomplete = "off"
+              onChange={handleEmailChange}
 
             /> 
             <br/> 
             <input 
               id="password"
               class="form-control"
-
-              type = "text" 
+              type = "password" 
               name = "password"
               placeholder = "Password"
               autocomplete = "off"
+              onChange={handlePasswordChange}
+
 
 
             />  
@@ -110,9 +138,10 @@ const RegistrationModal = (props) =>{
             <div id = "birthday">
               <input 
                 class="form-control"
-
                 type = "date" 
                 name = "date"
+                onChange={handleDobChange}
+
 
               /> 
             </div>
@@ -129,7 +158,7 @@ const RegistrationModal = (props) =>{
                   name = "gender"
                   value="male"
                   onChange = {handleGenderChange}
-                  checked = {genderValue === "male"}
+                  checked = {genderValue === "male" && pronouns === "(He/Him)"}
                 />
               </div>
               {/* female div */}
@@ -141,7 +170,7 @@ const RegistrationModal = (props) =>{
                   name = "gender"
                   value="female"
                   onChange = {handleGenderChange}
-                  checked = {genderValue === "female"}
+                  checked = {genderValue === "female" && pronouns === "(She/Her)"}
                 />                
               </div>
               {/* custom div */}
@@ -167,7 +196,20 @@ const RegistrationModal = (props) =>{
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="success" onClick={handleClose}>
+            <Button 
+              variant="success" 
+              // onClick={handleClose}
+              onClick={async () => {
+                const registerResult = await auth.register(email, password,firstName,lastName);
+                if (registerResult.success) {
+                  navigate("/");
+                }
+                if (!registerResult.success) {
+                  setRegisterMessage(registerResult.message);
+                }
+              }}
+              
+              >
               Sign Up
             </Button>
         </Modal.Footer>

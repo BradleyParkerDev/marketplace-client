@@ -14,8 +14,10 @@ function App(props) {
   const [categoriesList, setCategoriesList] = useState([]);
   const [listings, setListings] = useState([]);
 
-  //Get all categories
   useEffect(()=> {
+
+
+    //Get Categories
     axios.get(`${urlEndPoint}/categories/get-all-categories`)
     .then(function (response){
       console.log(response.data.categories);
@@ -29,10 +31,8 @@ function App(props) {
       //always executed
     })
 
-  },[shouldRefresh])
 
-  //Get all listings
-  useEffect(()=> {
+    //Get Listings
     axios.get(`${urlEndPoint}/listings/all-listings`)
     .then(function (response){
       console.log(response.data.listings);
@@ -46,7 +46,11 @@ function App(props) {
       //always executed
     })
 
+
+
   },[shouldRefresh])
+
+
 
   const router = createBrowserRouter([
     {

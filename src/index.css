@@ -59,13 +59,23 @@ hr.solid {
   width: 100%;
   font-weight: bold;
 }
-
+#logoutButton{
+  margin-top: 10px;
+  width: 100%;
+  font-weight: bold;
+}
 #registrationButton{
   margin-top: 10px;
   margin-bottom: 5px;
   width: 100%;
   font-weight: bold;
   /* justify-content: left; */
+
+}
+#createButton{
+  margin-top: 10px;
+  width: 100%;
+  font-weight: bold;
 
 }
 
@@ -174,6 +184,7 @@ CreateListingForm
   display: flex;
   height: 90px;
   width: 100%;
+  border: dashed black 2px;
 
 }
 #lt-title{
@@ -269,7 +280,7 @@ margin-bottom: 3px;
 #cld-description{
   margin-top: 10px;
   width:100%;
-  height: 40%;
+  height: 45%;
   /* max-height: 350px; */
 }
 
@@ -284,7 +295,7 @@ margin-bottom: 3px;
 
 
 }
-/* Vehicle Form Facts*/
+/* Vehicle Form Details*/
 #createVehicleHeader{
   font-weight: bold;
   /* border: black dashed 1px; */
@@ -360,6 +371,59 @@ margin-bottom: 3px;
   margin: 5px;
 
 }
+
+/* Property Form Details */
+
+#createStreetAddress{
+  width:25%;
+  margin: 5px;
+}
+#createCity{
+  width:25%;
+  margin: 5px;
+}
+#createState{
+  width:25%;
+  margin: 5px;
+}
+#createZipCode{
+  width:15%;
+  margin: 5px;
+}
+#createPropertyYearBuilt{
+  width:20%;
+  margin: 5px;
+
+}
+#createBasement{
+  width:15px;
+  margin: 5px;
+}
+#createGarage{
+  width:15px;
+  margin: 5px;
+}
+#createBedroomLabel{
+  margin-top: 16px;
+  /* border: black dashed 1px; */
+  height: 30px;
+  margin-left: 5px;
+}
+#createBedroomNum{
+  width:40px;
+  margin: 5px;
+}
+#createBathroomLabel{
+  margin-top: 16px;
+  /* border: black dashed 1px; */
+  height: 30px;
+  margin-left: 5px;
+}
+#createBathroomNum{
+  width:40px;
+  margin: 5px;
+}
+
 /* createContainerTwo holds the photos and submit button */
 #createContainerTwo{
   height: auto;
@@ -397,24 +461,41 @@ margin-bottom: 3px;
 ListingCard
 ////////////////////////////////////////////////////////////////////
 */
-.listingCardBody{
+/* .listingCardBody{
   height: 210px;
   width: 200px;
   margin: 10px;
-  /* border: dashed black 2px; */
   border: black solid 1px ;
   border-radius: 5px;
 
-
-}
+} */
 .listingPhoto{
   width:150px;
   height: 150px ;
 }
-.listingInfo{
+/* .listingInfo{
+
+} */
+.listingCard {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 150px;
+  margin: 5px 5px 5px 5px;
+  background-color: white;
+  border-radius: 5px 5px 0 0;
 
 }
 
+/* On mouse-over, add a deeper shadow */
+.listingCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.cardContainer {
+  padding: 2px 16px;
+}
 
 /* 
 ////////////////////////////////////////////////////////////////////

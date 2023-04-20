@@ -1,4 +1,6 @@
 //The ListingCard shows a listing's title, main photo, seller name, and description.
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 function ListingCard(props){
 
@@ -9,7 +11,7 @@ function ListingCard(props){
     
     return(
         <div>
-            {listings.map(listing=>(
+            {/* {listings.map(listing=>(
                 <div className="listingCardBody">
                     <div className="listingPhoto">
                         <img 
@@ -22,35 +24,29 @@ function ListingCard(props){
                         <ul>
                             <li>{`$${listing.price}`}</li>
                             <li>{listing.title}</li>
-                            {/* <li>{listing.description}</li> */}
                         </ul>
                     </div>
                 </div>
             )
-        ) }
+        ) } */}
+            {listings.map(listing=>(
+
+            <div class="listingCard">
+                <img className ="listingPhoto" src={`/css/ListingPhotos/${listing.title}.jpg`}
+                    alt={listing.title} /> 
+                <div class="cardContainer">
+                    <h4><b>{`$${listing.price}`}</b></h4>
+                    <p>{listing.title}</p>
+                </div>
+            </div> 
+
+            ))}
+
+
+        
         </div>
     )
 }
 export default ListingCard;
 
 
-// import Button from 'react-bootstrap/Button';
-// import Card from 'react-bootstrap/Card';
-
-// function BasicExample() {
-//   return (
-//     <Card style={{ width: '18rem' }}>
-//       <Card.Img variant="top" src="holder.js/100px180" />
-//       <Card.Body>
-//         <Card.Title>Card Title</Card.Title>
-//         <Card.Text>
-//           Some quick example text to build on the card title and make up the
-//           bulk of the card's content.
-//         </Card.Text>
-//         <Button variant="primary">Go somewhere</Button>
-//       </Card.Body>
-//     </Card>
-//   );
-// }
-
-// export default BasicExample;

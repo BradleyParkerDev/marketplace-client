@@ -6,20 +6,26 @@ Layout
 
 #layoutDiv{
     display: flex;
-}
-
-
-/* 
-////////////////////////////////////////////////////////////////////
-NavBar 
-////////////////////////////////////////////////////////////////////
-*/
-/* Solid border */
-hr.solid {
+    background-color: lavender;
+    background-image: url('background.png');
+    /* 
+    use math.random in layout to have various background images and colors
+    do the styling on the page, not here.
+    */
+  }
+  
+  
+  /* 
+  ////////////////////////////////////////////////////////////////////
+  NavBar 
+  ////////////////////////////////////////////////////////////////////
+  */
+  /* Solid border */
+  hr.solid {
     border-top: 1px solid rgb(35, 33, 33);
     margin-top: 5px;
   }
-#navDiv{
+  #navDiv{
     width: 320px;
     height: 100vh;
     padding-left: 20px;
@@ -28,42 +34,53 @@ hr.solid {
     border-right: black solid 1px;
     overflow-y: scroll;
     margin-right: 20px;
-}
-
-#logo{
+    background-color: white;
+  }
+  
+  #logo{
     margin-bottom: 5px;
-}
-#loginMessage{
+  }
+  #loginMessage{
     margin-top: 2px;
     margin-bottom: 3px;
-
-}
-
-#loginEmail{
+  
+  }
+  
+  #loginEmail{
     /* width: 360px; */
-}
-
-#loginPassword{
+  }
+  
+  #loginPassword{
     /* width: 360px; */
-}
-
-#loginButton{
+  }
+  
+  #loginButton{
     margin-top: 10px;
     width: 100%;
     font-weight: bold;
-}
-
-#registrationButton{
+  }
+  #logoutButton{
+    margin-top: 10px;
+    width: 100%;
+    font-weight: bold;
+  }
+  #registrationButton{
     margin-top: 10px;
     margin-bottom: 5px;
     width: 100%;
     font-weight: bold;
     /* justify-content: left; */
+  
+  }
+  #createButton{
+    margin-top: 10px;
+    width: 100%;
+    font-weight: bold;
 
-}
-
-/* Nav category items */
-.categoryMenuCard{
+  }
+  
+  /* Nav category items */
+  .categoryMenuCard{
     width:100%;
     height: 40px;
     padding-top: 2px;
@@ -72,19 +89,19 @@ hr.solid {
     /* border: black solid 1px ;  */
     border-radius: 5px; 
     display:flex;
-
-}
-.categoryMenuCard:hover {
+  
+  }
+  .categoryMenuCard:hover {
     background-color: 	#F0F0F0;
   }
-.categoryPhoto{
+  .categoryPhoto{
     width:50px;
     height: 40px;
     /* border: dashed black 1px; */
     display:flex;
-
-}
-.categoryName{
+  
+  }
+  .categoryName{
     width:100%;
     height: 40px;
     font-weight: bold;
@@ -95,69 +112,400 @@ hr.solid {
     display: flex;
     /* align-items: center; */
     justify-content: left;
-}
-
-/* 
-////////////////////////////////////////////////////////////////////
-HomePage
-////////////////////////////////////////////////////////////////////
-*/
-#homepageCardContainer{
+  }
+  
+  /* 
+  ////////////////////////////////////////////////////////////////////
+  HomePage
+  ////////////////////////////////////////////////////////////////////
+  */
+  #homepageCardContainer{
     /* height: 500px; */
     width: 1500px;
     height: 100vh;
     /* width: 100vw; */
     /* border: dashed black 2px; */
     overflow-y: scroll;
-
-}
-/* 
-////////////////////////////////////////////////////////////////////
-CreateListingPage
-////////////////////////////////////////////////////////////////////
-*/
-
-
-#createListingDiv{
-
+  
+  }
+  /* 
+  ////////////////////////////////////////////////////////////////////
+  CreateListingForm
+  ////////////////////////////////////////////////////////////////////
+  */
+  
+  
+  #createListingDiv{
+    /* height: 500px; */
+    margin-top: 30px;
+    margin-left: 60px;
+    margin-right: 60px;
+  
+    width: 80%;
+    max-width: 100%;
+    height:750px;
+    /* width: 100vw; */
+    border: solid black 2px;
+    border-radius: 5px; 
+    padding:20px 20px 20px 20px;
+    overflow-y: scroll;
+    background-color: 	#F0F0F0;
+    display:flex;
+  
     
-}
-
-
-
-/* 
-////////////////////////////////////////////////////////////////////
-Listing Card
-////////////////////////////////////////////////////////////////////
-*/
-.listingCardBody{
+  }
+  
+  /* createContainerOne holds the form */
+  #createContainerOne{
+    /* border: dashed black 2px; */
+  
+    width: 65%;
+    max-width: 100%;
+    height: 100%;
+  
+  }
+  
+  
+  #createTextArea{
+    /* height: 500px; */
+    width: 100%;
+    max-width: 100%;
+    height: 70%;
+    /* width: 100vw; */
+    border: solid black 2px;
+    border-radius: 5px; 
+    padding:10px 10px 10px 10px;
+    overflow-y: scroll;
+    background-color: 	white;
+  
+  }
+  /* Header area for new listing */
+  #createHeaderContainer{
+    display: flex;
+    height: 90px;
+    width: 100%;
+    border: dashed black 2px;
+  
+  }
+  #lt-title{
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 3px;
+  }
+  
+  #listingRadio{
+    display: flex;
+    justify-content: space-evenly;
+    /* border: dashed black 2px; */
+  }
+  #propertyRadio{
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+    /* border: dashed black 2px; */
+  }
+  /* New listing title input */
+  #cld-title{
+    /* border: dashed black 2px; */
+    width:60%;
+  
+  }
+  #listingType{
+    height: 100%;
+    width: 100%;
+    /* border: dashed black 2px; */
+  }
+  
+  #newListingTitle{
+    margin-top: 10px;
+    width: 100%;
+    /* border: dashed black 1px; */
+  
+  }
+  #priceCategorySubcategory{
+    display: flex;
+    width: 100% ;
+    /* border: dashed black 1px; */
+  
+  }
+  #conditionContact{
+    /* margin-top: 5px; */
+    display: flex;
+    width: 100%;
+    /* border: dashed black 1px; */
+  
+  }
+  #contactEmail{
+    margin-top: 10px;
+    margin-right: 5px;
+    width: 33%
+  }
+  #contactPhone{
+    margin-top: 10px;
+    margin-right: 5px;
+    width: 33%
+  }
+  
+  #newListingPrice{
+    margin-top: 10px;
+    margin-right: 5px;
+    width: 33%
+  
+  } 
+  
+  #conditionSelector{
+    margin-top: 12px;
+    width:33%;
+    height: 37px;
+    margin-right: 5px;
+    bottom:0;
+  }
+  #categorySelector{
+    margin-top: 12px;
+    width:33%;
+    height: 37px;
+    margin-right: 5px;
+    bottom:0;
+  }
+  
+  #subCategorySelector{
+    margin-top: 12px;
+    width:33%;
+    height: 37px;
+    margin-right: 5px;
+    bottom:0;
+  }
+  
+  #cld-description{
+    margin-top: 10px;
+    width:100%;
+    height: 45%;
+    /* max-height: 350px; */
+  }
+  
+  .createListingDetails{
+    margin-top: 10px;
+    width: 100%;
+    height: 28%;
+    border: solid black 2px;
+    background-color: white;
+    border-radius: 5px; 
+    padding:10px 10px 10px 10px;
+  
+  
+  }
+  /* Vehicle Form Details*/
+  #createVehicleHeader{
+    font-weight: bold;
+    /* border: black dashed 1px; */
+    height: 30px;
+    padding-left: 5px;
+  
+  }
+  #createVehicleFacts{
+    display: flex;
+    /* border: black dashed 1px; */
+    width: 100%;
+    height: auto;
+  }
+  #createVehicleFactsL2{
+    display: flex;
+    /* border: black dashed 1px; */
+    width: 100%;
+  }
+  #createVehicleFactsL3{
+    display: flex;
+    /* border: black dashed 1px; */
+    width: 100%;
+  }
+  
+  #createMileageLabel{
+  
+    margin-top: 16px;
+    /* border: black dashed 1px; */
+    height: 30px;
+    margin-left: 5px;
+  }
+  .rangeLabels{
+    /* border: black dashed 1px; */
+    margin-top: 16px;
+    margin-left: 3px;
+    margin-right: 3px;
+  
+    height: 30px;
+  
+  }
+  #createVehicleMpg1{
+    width:40px;
+    margin: 5px;
+  }
+  #createVehicleMpg2{
+    width:40px;
+    margin: 5px;
+  }
+  #createVehicleMake{
+    width:33%;
+    margin: 5px;
+  }
+  #createVehicleModel{
+    width:33%;
+    margin: 5px;
+  
+  }
+  #createVehicleYear{
+    width:33%;
+    margin: 5px;
+  
+  }
+  #createVehicleTransmisson{
+    width:33%;
+    margin: 5px;
+  
+  }#createVehicleColor{
+    width:33%;
+    margin: 5px;
+  
+  }#createVehicleMilesDriven{
+    width:33%;
+    margin: 5px;
+  
+  }
+  
+  /* Property Form Details */
+  
+  #createStreetAddress{
+    width:25%;
+    margin: 5px;
+  }
+  #createCity{
+    width:25%;
+    margin: 5px;
+  }
+  #createState{
+    width:25%;
+    margin: 5px;
+  }
+  #createZipCode{
+    width:15%;
+    margin: 5px;
+  }
+  #createPropertyYearBuilt{
+    width:20%;
+    margin: 5px;
+  
+  }
+  #createBasement{
+    width:15px;
+    margin: 5px;
+  }
+  #createGarage{
+    width:15px;
+    margin: 5px;
+  }
+  #createBedroomLabel{
+    margin-top: 16px;
+    /* border: black dashed 1px; */
+    height: 30px;
+    margin-left: 5px;
+  }
+  #createBedroomNum{
+    width:40px;
+    margin: 5px;
+  }
+  #createBathroomLabel{
+    margin-top: 16px;
+    /* border: black dashed 1px; */
+    height: 30px;
+    margin-left: 5px;
+  }
+  #createBathroomNum{
+    width:40px;
+    margin: 5px;
+  }
+  
+  /* createContainerTwo holds the photos and submit button */
+  #createContainerTwo{
+    height: auto;
+    width: 35%; 
+    /* border: dashed black 2px; */
+    border-radius: 5px; 
+    margin-left: 20px;
+  
+    /* background-color: white; */
+  }
+  #createImageUpload{
+    height: 93%;
+    width: 100%; 
+    border: solid black 2px;
+    border-radius: 5px; 
+    background-color: white;
+  }
+  #uploadPhotoTitle{
+    height: 30px;
+    width: 70px;
+    font-weight: bold;
+    font-size: larger;
+    /* border: dashed black 2px; */
+    text-align: center;
+    margin-left: 35%;
+  }
+  #createSubmitButton{
+    margin-top: 2%;
+    font-weight: bold;
+    width: 100%;
+  }
+  
+  /* 
+  ////////////////////////////////////////////////////////////////////
+  ListingCard
+  ////////////////////////////////////////////////////////////////////
+  */
+  /* .listingCardBody{
     height: 210px;
     width: 200px;
     margin: 10px;
-    /* border: dashed black 2px; */
     border: black solid 1px ;
     border-radius: 5px;
-
-
-}
-.listingPhoto{
+  
+  } */
+  .listingPhoto{
     width:150px;
     height: 150px ;
-}
-.listingInfo{
+  }
+  /* .listingInfo{
+  
+  } */
+  .listingCard {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 150px;
+    margin: 5px 5px 5px 5px;
+    background-color: white;
+    border-radius: 5px 5px 0 0;
 
-}
-
-
-/* 
-////////////////////////////////////////////////////////////////////
-Registration Modal 
-////////////////////////////////////////////////////////////////////
-*/
-#registrationModal{
+  }
+  
+  /* On mouse-over, add a deeper shadow */
+  .listingCard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  /* Add some padding inside the card container */
+  .cardContainer {
+    padding: 2px 16px;
+  }
+  
+  /* 
+  ////////////////////////////////////////////////////////////////////
+  RegistrationModal 
+  ////////////////////////////////////////////////////////////////////
+  */
+  #registrationModal{
     width: 400px;
-}
-#registration{
+  }
+  #registration{
     padding-top: 10px;
     align-items: center;
     margin-top: 15px;
@@ -167,65 +515,67 @@ Registration Modal
     border: black solid 1px ;
     border-radius: 5px;
     text-align: center;
-
-}
-#name{
+  
+  }
+  #name{
     display: flex;
-}
-#firstName{
+  }
+  #firstName{
     width: 190px;
     margin-left: 25px;
     margin-right: 10px;
-}
-#lastName{
+  }
+  #lastName{
     width: 190px;
     margin-left: 10px;
     /* margin-right: 25px; */
-
-}
-#email{
+  
+  }
+  #email{
     width: 400px;
     margin-left: 25px;
     margin-right: 25px;
-
-
-}
-#password{
+  
+  
+  }
+  #password{
     width: 400px;
     margin-left: 25px;
     margin-right: 25px;
-
-}
-#birthday{
+  
+  }
+  #birthday{
     width: 400px;
     margin-left: 25px;
     margin-right: 25px; 
-}
-
-#gender{
+  }
+  
+  #gender{
     align-items: center;
     display: flex;
     justify-content: space-evenly;
     width: 400px;
-
-}
-
-/* for genderForm function */
-#genderDiv{
+  
+  }
+  
+  /* for genderForm function */
+  #genderDiv{
     display: flex;
     margin-bottom: 15px;
-
-}
-#pronouns{
+  
+  }
+  #pronouns{
     width: 190px;
     margin-left: 25px;
     margin-right: 10px;
-
-}
-#genderInputText{
+  
+  }
+  #genderInputText{
     width: 200px;
     width: 190px;
     margin-left: 10px;
-}
-
-
+  }
+  
+  
+  
+  
