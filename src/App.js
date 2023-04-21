@@ -20,7 +20,7 @@ function App(props) {
     //Get Categories
     axios.get(`${urlEndPoint}/categories/get-all-categories`)
     .then(function (response){
-      console.log(response.data.categories);
+      // console.log(response.data.categories);
       setCategoriesList(response.data.categories);
       
     })
@@ -35,7 +35,7 @@ function App(props) {
     //Get Listings
     axios.get(`${urlEndPoint}/listings/all-listings`)
     .then(function (response){
-      console.log(response.data.listings);
+      // console.log(response.data.listings);
       setListings(response.data.listings);
       
     })

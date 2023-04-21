@@ -17,7 +17,7 @@ const NavBar = (props) => {
     const navigate = useNavigate();
 
     const {categoriesList} = props;
-    console.log(categoriesList)
+    // console.log(categoriesList)
 
     function ShowLogoutButton(){
         return(
@@ -70,9 +70,8 @@ const NavBar = (props) => {
                     navigate("/") }}>
                 Parker's Market</h1>
             {/* divider */}
-            <h3>{auth.userEmail && `${auth.userEmail}`}</h3>
-
             <hr class="solid"/> 
+            <h3>{auth.userEmail && `Hi, ${auth.userEmail}`}</h3>
             <div id = "login">
                 <p id="loginMessage">(Login to create a listing)</p>
                 <input 

@@ -27,6 +27,8 @@ const RegistrationModal = (props) =>{
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
+
     function genderForm(){
       return(
         <div id = "genderDiv">
@@ -158,7 +160,7 @@ const RegistrationModal = (props) =>{
                   name = "gender"
                   value="male"
                   onChange = {handleGenderChange}
-                  checked = {genderValue === "male" && pronouns === "(He/Him)"}
+                  checked = {genderValue === "male" }
                 />
               </div>
               {/* female div */}
@@ -170,7 +172,7 @@ const RegistrationModal = (props) =>{
                   name = "gender"
                   value="female"
                   onChange = {handleGenderChange}
-                  checked = {genderValue === "female" && pronouns === "(She/Her)"}
+                  checked = {genderValue === "female"}
                 />                
               </div>
               {/* custom div */}
@@ -200,13 +202,25 @@ const RegistrationModal = (props) =>{
               variant="success" 
               // onClick={handleClose}
               onClick={async () => {
-                const registerResult = await auth.register(email, password,firstName,lastName);
+                const newUser = {
+                  firstName: firstName,
+                  lastName: lastName,
+                  email: email,
+                  password: password,
+                  dob: dob,
+                  gender: genderValue,
+                  pronouns: pronouns
+
+                }
+                const registerResult = await auth.register(newUser);
                 if (registerResult.success) {
                   navigate("/");
                 }
                 if (!registerResult.success) {
                   setRegisterMessage(registerResult.message);
                 }
+                handleClose()
+
               }}
               
               >

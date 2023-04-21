@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form';
 function CreateListingForm(props){
     const navigate = useNavigate();
     const { urlEndPoint } = props;
+    console.log(urlEndPoint)
     const {categoriesList} = props;
     const {setShouldRefresh} = props;
     // const { setShouldRefresh } = props;
@@ -15,6 +16,9 @@ function CreateListingForm(props){
     const [listingType, setListingType] = useState("regular")
     //User id
     const [listingUserId, setListingUserId] = useState("");
+
+    //category 
+    const [subCategoriesList, setSubCategoriesList] = useState([]);
 
     // Regular Listing States
     const [listingTitle,setListingTitle] = useState("")
@@ -51,7 +55,7 @@ function CreateListingForm(props){
 
 
 
-    console.log(categoriesList)
+    // console.log(categoriesList)
 
 
     const postListing = () =>{
@@ -92,6 +96,12 @@ function CreateListingForm(props){
     }
     function handleCategoryChange(e){
         setListingCategory(e.target.value)
+        const filterCategory = categoriesList.find(
+            category => category._id === e.target.value    
+        )
+        setSubCategoriesList(filterCategory.subCategories)
+        setListingSubCategory("");
+
     }
     function handleSubCategoryChange(e){
         setListingSubCategory(e.target.value)
@@ -323,8 +333,19 @@ function CreateListingForm(props){
     // displays subcategories
     function showSubCategoryOptions(){
         return(
-            <Form.Select class="form-control" id ="subCategorySelector" aria-label="subCategory">
+            <Form.Select 
+            class="form-control" 
+            id ="subCategorySelector" 
+            aria-label="subCategory"
+            onChange={handleSubCategoryChange}
+            >
                 <option value = "">Subcategory</option>
+                {
+                subCategoriesList.length > 0 &&
+                subCategoriesList.map(subCategory=>(
+                    <option value={subCategory}>{subCategory}</option>))} 
+                
+
             </Form.Select> 
         )
     }
@@ -432,10 +453,15 @@ function CreateListingForm(props){
 
                             /> 
 
-                            <Form.Select class="form-control" id ="categorySelector" aria-label="category">
+                            <Form.Select 
+                            class="form-control" 
+                            id ="categorySelector" 
+                            aria-label="category"
+                            onChange = {handleCategoryChange}
+                            >
                                 <option value = "">Category</option>
                                 {categoriesList.map(category=>(
-                                <option value={`${category.id}`}>{category.name}</option>))} 
+                                <option value={category._id}>{category.name}</option>))} 
                             </Form.Select>
 
                             {/* Dispays options for subcategories */}
@@ -445,7 +471,12 @@ function CreateListingForm(props){
 
                         </div>
                         <div id="conditionContact">
-                        <Form.Select class="form-control" id ="conditionSelector" aria-label="condition">
+                        <Form.Select 
+                        class="form-control" 
+                        id ="conditionSelector" 
+                        aria-label="condition"
+                        onChange = {handleConditionChange}
+                        >
                                 <option value = "">Condition</option>
                                 <option value="New">New</option>
                                 <option value="Used - Like New">Used - Like New</option>
@@ -460,6 +491,7 @@ function CreateListingForm(props){
                                 name = "contactEmail"
                                 placeholder = "Contact Email"
                                 autocomplete = "off"
+                                onChange={handleEmailChange}
                             />
                             <input 
                                 id="contactPhone"
@@ -468,12 +500,19 @@ function CreateListingForm(props){
                                 name = "contactPhone"
                                 placeholder = "Contact Phone Number"
                                 autocomplete = "off"
+                                onChange={handlePhoneNumberChange}
                             />
                         </div>
                     </div>
 
 
-                    <textarea class="form-control" id="cld-description" name="" placeholder="Description">
+                    <textarea 
+                    class="form-control" 
+                    id="cld-description" 
+                    name="" 
+                    placeholder="Description"
+                    onChange={handleDescriptionChange}
+                    >
                     </textarea>
                 </div>
                 {listingType === "vehicle"&& showVehicleFormDetails()}

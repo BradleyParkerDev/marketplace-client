@@ -10,38 +10,14 @@ function ListingCard(props){
      
     
     return(
-        <div>
-            {/* {listings.map(listing=>(
-                <div className="listingCardBody">
-                    <div className="listingPhoto">
-                        <img 
-                            className="listingPhoto"
-                            src={`/css/ListingPhotos/${listing.title}.jpg`}
-                            alt={`${listing.title}`}       
-                        />
-                    </div>
-                    <div className="listingInfo">
-                        <ul>
-                            <li>{`$${listing.price}`}</li>
-                            <li>{listing.title}</li>
-                        </ul>
-                    </div>
-                </div>
-            )
-        ) } */}
-            {listings.map(listing=>(
+        <div className="listingCard">
 
-            <div class="listingCard">
-                <img className ="listingPhoto" src={`/css/ListingPhotos/${listing.title}.jpg`}
-                    alt={listing.title} /> 
-                <div class="cardContainer">
-                    <h4><b>{`$${listing.price}`}</b></h4>
-                    <p>{listing.title}</p>
-                </div>
-            </div> 
-
-            ))}
-
+            <div className="innerCardOne">
+                
+            </div>
+            <div className="innerCardTwo">
+                
+            </div>
 
         
         </div>
@@ -50,3 +26,36 @@ function ListingCard(props){
 export default ListingCard;
 
 
+// {listings.map(listing=>(
+
+//     <div class="listingCard">
+//         <img className ="listingPhoto" src={`/css/ListingPhotos/${listing.title}.jpg`}
+//             alt={listing.title} /> 
+//         <div class="cardContainer">
+//             <h4><b>{`$${listing.price}`}</b></h4>
+//             <p>{listing.title}</p>
+//         </div>
+//     </div> 
+
+//     ))}
+
+
+
+// {listings.map(listing=>(
+//     <div className="listingCardBody">
+//         <div className="listingPhoto">
+//             <img 
+//                 className="listingPhoto"
+//                 src={`/css/ListingPhotos/${listing.title}.jpg`}
+//                 alt={`${listing.title}`}       
+//             />
+//         </div>
+//         <div className="listingInfo">
+//             <ul>
+//                 <li>{`$${listing.price}`}</li>
+//                 <li>{listing.title}</li>
+//             </ul>
+//         </div>
+//     </div>
+// )
+// ) }

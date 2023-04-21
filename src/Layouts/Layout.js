@@ -6,7 +6,10 @@ const Layout = (props) => {
         <div id="layoutDiv">
 
             <NavBar categoriesList = {props.categoriesList}/>
-            <Outlet/>
+            <div id="siteBackground">
+                <Outlet/>                
+            </div>
+
         </div>
     );
 }

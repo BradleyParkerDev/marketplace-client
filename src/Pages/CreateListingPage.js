@@ -7,6 +7,7 @@ function CreateListingPage (props){
     return(
         <CreateListingForm 
             categoriesList = {props.categoriesList}
+            urlEndPoint = {props.urlEndPoint}
             setShouldRefresh = {props.setShouldRefresh}
         />)
 }
