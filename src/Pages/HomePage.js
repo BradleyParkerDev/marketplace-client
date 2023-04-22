@@ -19,9 +19,58 @@ function HomePage (props){
 
 
     return(
-        <div>
-            <h1>{`${searchCategoryName}`}</h1>
-            {/* {result.length > 0 && <CarouselCardContainer result = {props.result}/>} */}
+        <div id="card-container-outer-div">
+
+            <div id="card-container-header">
+
+                <div id="card-container-header-title">
+                    <h1 id="card-container-header-text">{`${searchCategoryName}`}</h1>
+
+
+                </div>
+
+            </div>
+            <div id="card-container">
+            {/* <h1>{`${searchCategory}`}</h1> */}
+                {/* <ListingCard 
+                    searchCategoryName = {props.searchCategoryName}
+                    listingCategorySearchResult = {props.listingCategorySearchResult}
+                    searchCategory = {props.searchCategory}
+                    categoriesList = {props.categoriesList}
+                    listings = {props.listings}
+
+                /> */}
+                {searchCategory === "All Listings" && <ListingCard 
+                                                        listings = {props.listings}
+                                                        searchCategoryName = {props.searchCategoryName}
+                                                        />}
+                {searchCategory !== "All Listings" && <ListingCard listingCategorySearchResult = {props.listingCategorySearchResult}/>}
+
+                {/* <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard />
+                <ListingCard /> */}
+
+            </div>
     
         </div>
 

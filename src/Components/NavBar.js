@@ -60,7 +60,7 @@ const NavBar = (props) => {
             categoriesList.map(category=>(
                 <div className="categoryMenuCard"
                 onClick={()=>{
-                    // setSearchCategory(`${category._id}`)
+                    setSearchCategory(`${category._id}`)
                     setSearchCategoryName(`${category.name}`)
                     console.log(searchCategory)
                 }}
@@ -105,7 +105,7 @@ const NavBar = (props) => {
     return(
         <div id = "navDiv">
             <h1 id="logo" onClick={()=>{
-                    setSearchCategory("")
+                    setSearchCategory("All Listings")
                     setSearchCategoryName("All Listings")
                     console.log(searchCategory)
                     navigate("/") }}>

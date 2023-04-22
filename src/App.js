@@ -14,8 +14,8 @@ function App(props) {
   const [categoriesList, setCategoriesList] = useState([]);
   const [listings, setListings] = useState([]);
   const [listingCategorySearchResult, setListingCategorySearchResult] = useState([])
-  const [searchCategory, setSearchCategory] = useState("")
-  const [searchCategoryName, setSearchCategoryName] = useState("")
+  const [searchCategory, setSearchCategory] = useState("All Listings")
+  const [searchCategoryName, setSearchCategoryName] = useState("All Listings")
 
   useEffect(()=> {
 
@@ -55,24 +55,24 @@ function App(props) {
 
 
 
-  // useEffect(()=> {
-  //   //Get listings by category
+  useEffect(()=> {
+    //Get listings by category
 
     
-  //   axios.get(`${urlEndPoint}/listings/get-listings-by-category/${searchCategory}`)
-  //   .then(function (response){
-  //     console.log(response.data);
-  //       setListingCategorySearchResult(response.data.listings);
-  //       console.log(listingCategorySearchResult);
+    axios.get(`${urlEndPoint}/listings/get-listings-by-category/${searchCategory}`)
+    .then(function (response){
+      console.log(response.data);
+        setListingCategorySearchResult(response.data.listings);
+        console.log(listingCategorySearchResult);
   
-  //   })
-  //   .catch(function (error){
-  //       console.log(error);
-  //   })
-  //   .finally(function (){
-  //     //always executed
-  //   })
-  // },[shouldRefresh])
+    })
+    .catch(function (error){
+        console.log(error);
+    })
+    .finally(function (){
+      //always executed
+    })
+  },[shouldRefresh])
 
 
   const router = createBrowserRouter([
