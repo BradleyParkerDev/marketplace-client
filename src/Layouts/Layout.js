@@ -5,9 +5,18 @@ const Layout = (props) => {
     return (
         <div id="layoutDiv">
 
-            <NavBar categoriesList = {props.categoriesList}/>
+            <NavBar 
+                categoriesList = {props.categoriesList}
+                setShouldRefresh={props.setShouldRefresh}
+                searchCategory={props.searchCategory}
+                searchCategoryName={props.searchCategoryName}
+
+                setSearchCategoryName={props.setSearchCategoryName}
+                setSearchCategory={props.setSearchCategory}
+            />
             <div id="siteBackground">
-                <Outlet/>                
+                <Outlet
+                />                
             </div>
 
         </div>

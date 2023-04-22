@@ -6,17 +6,29 @@ The NavBar will take up the left side of the page.
 import RegistrationModal from "../Components/RegistrationModal";
 import Button from 'react-bootstrap/Button';
 import { useNavigate  } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect,createContext } from 'react';
 import { useAuth } from "../Hooks/Auth";
+import axios from 'axios';
+const UserContext = createContext()
+const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
 const NavBar = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loginMessage, setLoginMessage] = useState("");
+
+    // const [listingCategorySearch, setListingCategorySearch] = useState([])
+    // const [searchCategory, setSearchCategory] = useState("")
+
     const auth = useAuth(); //access the authentication context 
     const navigate = useNavigate();
 
     const {categoriesList} = props;
+    const {shouldRefresh} = props
+    const {searchCategory} = props
+    const {setSearchCategory} = props
+    const {searchCategoryName} = props
+    const {setSearchCategoryName} = props
     // console.log(categoriesList)
 
     function ShowLogoutButton(){
@@ -42,10 +54,18 @@ const NavBar = (props) => {
 
 
 
-    function CategoryDivs(){
+
+    function CategoryDivs(props){
         return(
             categoriesList.map(category=>(
-                <div className="categoryMenuCard">
+                <div className="categoryMenuCard"
+                onClick={()=>{
+                    // setSearchCategory(`${category._id}`)
+                    setSearchCategoryName(`${category.name}`)
+                    console.log(searchCategory)
+                }}
+
+                >
                     <div className="categoryPhoto">
                         <img 
                             src={`/css/Icons/${category.name}.png`}
@@ -63,10 +83,31 @@ const NavBar = (props) => {
         )
     }
 
+    // useEffect(()=> {
+    //     //Get Listings
+    //     axios.get(`${urlEndPoint}/listings/get-listings-by-category/${searchCategory}`)
+    //     .then(function (response){
+    //       console.log(response.data);
+    //         setListingCategorySearch("")
+    //         setListingCategorySearch(response.data.listings);
+    //         console.log(listingCategorySearch);
+    
+    //     })
+    //     .catch(function (error){
+    //         console.log(error);
+    //     })
+    //     .finally(function (){
+    //       //always executed
+    //     })
+    // },[])
+    
 
     return(
         <div id = "navDiv">
             <h1 id="logo" onClick={()=>{
+                    setSearchCategory("")
+                    setSearchCategoryName("All Listings")
+                    console.log(searchCategory)
                     navigate("/") }}>
                 Parker's Market</h1>
             {/* divider */}
