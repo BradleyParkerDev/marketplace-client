@@ -55,6 +55,7 @@ hr.solid {
 
 #loginEmail{
   /* width: 360px; */
+  margin-bottom: 5px;
 }
 
 #loginPassword{
@@ -405,7 +406,7 @@ margin-bottom: 3px;
 }
 /* New listing title input */
 #cld-title{
-  padding-top: 20px;;
+  padding-top: 20px;
   /* border: dashed black 2px; */
   width:60%;
 
