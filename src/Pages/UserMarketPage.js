@@ -1,1 +1,0 @@
-// Page allows visitors to see all of a user's listings
