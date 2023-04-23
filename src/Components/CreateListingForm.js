@@ -4,7 +4,9 @@ import { useNavigate  } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
+import { storage }from "../firebase"
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { v4 } from 'uuid';
 function CreateListingForm(props){
     const navigate = useNavigate();
     const { urlEndPoint } = props;
@@ -29,7 +31,10 @@ function CreateListingForm(props){
     const [listingContactEmail, setListingContactEmail] = useState("")
     const [listingContactPhoneNumber, setListingContactPhoneNumber] = useState("");
     const [listingDescription,setListingDescription] = useState("")
-
+    
+    //Holds listng Images
+    const [listingImages, setListingImages] = useState([])
+    
     // Vehicle Listing States
     const [listingVehicleType, setListingVehicleType] = useState("");
     const [listingVehicleMake, setListingVehicleMake] = useState("");
@@ -55,7 +60,35 @@ function CreateListingForm(props){
 
 
 
-    // console.log(categoriesList)
+
+    //Uploading images to firebase
+    const [imageUpload, setImageUpload] = useState(null)
+    const [imageUrls, setImageUrls] = useState([]);
+    const imageListRef = ref(storage, "listingPhotos/")
+    const uploadImage = () => {
+        //remove upload button, upload images with publish button. 
+        // hold the images in the state, then publish them
+        if(imageUpload == null) return;
+        const imageRef = ref(storage, `listingPhotos/${imageUpload.name + v4() }`)
+        uploadBytes(imageRef, imageUpload).then((snapshot) =>{
+            getDownloadURL(snapshot.ref).then((url) => {
+                setImageUrls((prev) => [...prev, url ]);
+            })
+            alert("Image Uploaded")
+        })
+    }
+    useEffect( () => {
+        listAll(imageListRef).then((response) => {
+            response.items.forEach((item) => {
+                getDownloadURL(item).then((url) => {
+                    setImageUrls((prev) => [...prev, url]);
+                })
+            })
+            console.log(response);
+        })
+    },[])
+
+
 
 
     const postListing = () =>{
@@ -438,6 +471,7 @@ function CreateListingForm(props){
                         name = "title"
                         placeholder = "Title"
                         autocomplete = "off"
+                        maxLength="75"
                         onChange = {handleTitleChange}
                     /> 
                     <div>
@@ -487,7 +521,7 @@ function CreateListingForm(props){
                             <input 
                                 id="contactEmail"
                                 class="form-control"
-                                type = "text" 
+                                type = "email" 
                                 name = "contactEmail"
                                 placeholder = "Contact Email"
                                 autocomplete = "off"
@@ -511,6 +545,7 @@ function CreateListingForm(props){
                     id="cld-description" 
                     name="" 
                     placeholder="Description"
+                    maxlength="620"
                     onChange={handleDescriptionChange}
                     >
                     </textarea>
@@ -526,6 +561,16 @@ function CreateListingForm(props){
                 <div id="createImageUpload">
                     <div id="uploadPhotoTitle">
                         <p>Photos</p>
+                    </div>
+                    <div id="createImageUploadArea">
+                        <input 
+                        type="file"
+                        onChange={(event)=>{setImageUpload(event.target.files[0])}}
+                        />
+                        {imageUrls.map((url) => {
+                            return <img src={url} />
+                        })}
+                        <Button onClick = {uploadImage}>Upload Image</Button>
                     </div>
                 </div>
                 <Button 

@@ -14,6 +14,9 @@ function App(props) {
   const [categoriesList, setCategoriesList] = useState([]);
   const [listings, setListings] = useState([]);
   const [listingCategorySearchResult, setListingCategorySearchResult] = useState([])
+    
+  //When searchCategoryName is set to "All Listings" the get request
+  //to get listings by category wont work
   const [searchCategory, setSearchCategory] = useState("All Listings")
   const [searchCategoryName, setSearchCategoryName] = useState("All Listings")
 
@@ -53,11 +56,9 @@ function App(props) {
 
 
 
-
+  //Get listings by category
 
   useEffect(()=> {
-    //Get listings by category
-
     
     axios.get(`${urlEndPoint}/listings/get-listings-by-category/${searchCategory}`)
     .then(function (response){

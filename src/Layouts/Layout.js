@@ -10,7 +10,6 @@ const Layout = (props) => {
                 setShouldRefresh={props.setShouldRefresh}
                 searchCategory={props.searchCategory}
                 searchCategoryName={props.searchCategoryName}
-
                 setSearchCategoryName={props.setSearchCategoryName}
                 setSearchCategory={props.setSearchCategory}
             />

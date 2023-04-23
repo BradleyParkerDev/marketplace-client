@@ -217,8 +217,9 @@ HomePage
   box-shadow: 5px 5px;
   padding: 20px 20px 20px 20px;
   border-radius: 5px; 
+  border: solid black 2px;
 
-  background-color: white;
+  background-color: 	#F0F0F0;
 }
 
 #card-container-header{
@@ -229,15 +230,19 @@ HomePage
 
 #card-container-header-title{
   height: 60px;
-  width: 550px;
+  width: 600px;
   margin-top: 30px;
-
+  /* background-color: white; */
+  /* border: solid black 2px; */
+  border-radius: 10px 10px 10px 10px;
   margin-left: 20px;
   /* border: dashed black 2px; */
 }
 #card-container-header-text{
   display:inline-block;
-  border-bottom:5px solid black;
+  margin-left: 10px;
+
+  /* border-bottom:5px solid black; */
   padding-bottom:3px;
 }
 #card-container{
@@ -731,4 +736,27 @@ RegistrationModal
 }
 
 
+/* 
+////////////////////////////////////////////////////////////////////
+ListingPage 
+////////////////////////////////////////////////////////////////////
+*/
 
+#listingPageDiv{
+  /* height: 500px; */
+  margin-top: 30px;
+  margin-left: 60px;
+  margin-right: 60px;
+
+  width: 90%;
+  max-width: 100%;
+  height:750px;
+  /* width: 100vw; */
+  border: solid black 2px;
+  border-radius: 5px; 
+  padding:20px 20px 20px 20px;
+  overflow-y: scroll;
+  background-color: 	#F0F0F0;
+  display:flex;
+  box-shadow: 5px 5px;
+}
