@@ -19,8 +19,31 @@ function CreateListingForm(props){
     //User id
     const [listingUserId, setListingUserId] = useState("");
 
-    //category 
+    //category
+    // const [newCategoriesList, setNewCategoriesList] = useState(categoriesList)
+    let newCategoriesList = categoriesList;
+    const vehicleCategory = newCategoriesList[17]
+    const propertyRentalCategory = newCategoriesList[16]
+    const homeSalesCategory = newCategoriesList[10]
+    // console.log(newCategoriesList)
+
+
+    // console.log(vehicleCategory)
+    // console.log(propertyRentalCategory)
+
+    // console.log(homeSalesCategory)
+
+    // console.log(newCategoriesList)
+
+
+    const [updatedCategoryList, setUpdatedCategoryList] = useState([])
+    const [vehicleTypeList, setVehicleTypeList] = useState(vehicleCategory);
+    const [propertyTypeList, setPropertyTypeList] = useState([]);
     const [subCategoriesList, setSubCategoriesList] = useState([]);
+
+    ///////////////////////////////////////////////////////////////////////////
+    // States and event handlers for regular listings
+    ///////////////////////////////////////////////////////////////////////////
 
     // Regular Listing States
     const [listingTitle,setListingTitle] = useState("")
@@ -31,96 +54,11 @@ function CreateListingForm(props){
     const [listingContactEmail, setListingContactEmail] = useState("")
     const [listingContactPhoneNumber, setListingContactPhoneNumber] = useState("");
     const [listingDescription,setListingDescription] = useState("")
-    
     //Holds listng Images
     const [listingImages, setListingImages] = useState([])
+
     
-    // Vehicle Listing States
-    const [listingVehicleType, setListingVehicleType] = useState("");
-    const [listingVehicleMake, setListingVehicleMake] = useState("");
-    const [listingVehicleModel, setListingVehicleModel] = useState("");
-    const [listingVehicleYear, setListingVehicleYear] = useState("");
-    const [listingVehicleTransmission, setListingVehicleTransmission] = useState("");
-    const [listingVehicleColor, setListingVehicleColor] = useState("");
-    const [listingVehicleMilesDriven, setListingVehicleMilesDriven] = useState("");
-    const [listingVehicleMpgMin, setListingVehicleMpgMin] = useState("");
-    const [listingVehicleMpgMax, setListingVehicleMpgMax] = useState("");
-
-    // Property Listing States
-    const [listingPropertyType, setListingPropertyType] = useState("");
-    const [listingPropertyStreetAddress, setListingPropertyStreetAddress] = useState("");
-    const [listingPropertyCity, setListingPropertyCity] = useState("");
-    const [listingPropertyState, setListingPropertyState] = useState("");
-    const [listingPropertyZipcode, setListingPropertyZipcode] = useState("");
-    const [listingPropertyYearBuilt, setListingPropertyYearBuilt] = useState("");
-    const [listingPropertyHasBasement, setListingPropertyHasBasement] = useState("");
-    const [listingPropertyHasGarage, setListingPropertyHasGarage] = useState("");
-    const [listingPropertyNumBedrooms, setListingPropertyNumBedrooms] = useState("");
-    const [listingPropertyNumBathrooms, setListingPropertyNumBathrooms] = useState("");
-
-
-
-
-    //Uploading images to firebase
-    const [imageUpload, setImageUpload] = useState(null)
-    const [imageUrls, setImageUrls] = useState([]);
-    const imageListRef = ref(storage, "listingPhotos/")
-    const uploadImage = () => {
-        //remove upload button, upload images with publish button. 
-        // hold the images in the state, then publish them
-        if(imageUpload == null) return;
-        const imageRef = ref(storage, `listingPhotos/${imageUpload.name + v4() }`)
-        uploadBytes(imageRef, imageUpload).then((snapshot) =>{
-            getDownloadURL(snapshot.ref).then((url) => {
-                setImageUrls((prev) => [...prev, url ]);
-            })
-            alert("Image Uploaded")
-        })
-    }
-    useEffect( () => {
-        listAll(imageListRef).then((response) => {
-            response.items.forEach((item) => {
-                getDownloadURL(item).then((url) => {
-                    setImageUrls((prev) => [...prev, url]);
-                })
-            })
-            console.log(response);
-        })
-    },[])
-
-
-
-
-    const postListing = () =>{
-        setShouldRefresh(true)
-        console.log(urlEndPoint)
-        const req =  {
-            title: listingTitle,
-            price: listingPrice,
-            category: listingCategory,
-            subCategory: listingSubCategory,
-            condition: listingCondition,
-            email: listingContactEmail,
-            phoneNumber: listingContactPhoneNumber,
-            description: listingDescription,
-
-        }
-        axios.post(`${urlEndPoint}/listings/create-listing`, req)
-        .then(function (response) {
-          console.log(response);
-            setShouldRefresh(false);
-    
-        },{
-          'Content-Type': 'application/x-www-form-urlencoded'
-        })
-        .catch(function (error) {
-          console.log(error);
-        }); 
-    
-    }
-    
-
-
+    //Handlers for regular listings
     function handleTitleChange(e){
         setListingTitle(e.target.value)
     }
@@ -151,7 +89,200 @@ function CreateListingForm(props){
     function handleDescriptionChange(e){
         setListingDescription(e.target.value)
     }
+    ///////////////////////////////////////////////////////////////////////////
 
+
+    ///////////////////////////////////////////////////////////////////////////
+    // States and event handlers for vehicle listings
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Vehicle Listing States
+    const [listingVehicleType, setListingVehicleType] = useState("");
+    const [listingVehicleMake, setListingVehicleMake] = useState("");
+    const [listingVehicleModel, setListingVehicleModel] = useState("");
+    const [listingVehicleYear, setListingVehicleYear] = useState("");
+    const [listingVehicleTransmission, setListingVehicleTransmission] = useState("");
+    const [listingVehicleColor, setListingVehicleColor] = useState("");
+    const [listingVehicleMilesDriven, setListingVehicleMilesDriven] = useState("");
+    const [listingVehicleMpgMin, setListingVehicleMpgMin] = useState("");
+    const [listingVehicleMpgMax, setListingVehicleMpgMax] = useState("");
+
+
+    //Handlers for vehicle listings
+    function handleListingVehicleTypeChange(e){
+        setListingVehicleType(e.target.value)
+    }
+
+    function handleListingVehicleMakeChange(e){
+        setListingVehicleMake(e.target.value)
+    }
+
+    function handleListingVehicleModelChange(e){
+        setListingVehicleModel(e.target.value)
+    }
+
+    function handleListingVehicleYearChange(e){
+        setListingVehicleYear(e.target.value)
+    }
+
+    function handleListingVehicleTransmissionChange(e){
+        setListingVehicleTransmission(e.target.value)
+    }
+
+    function handleListingVehicleColorChange(e){
+        setListingVehicleColor(e.target.value)
+    }
+
+    function handleListingVehicleMilesDrivenChange(e){
+        setListingVehicleMilesDriven(e.target.value)
+    }
+
+    function handleListingVehicleMpgMinChange(e){
+        setListingVehicleMpgMin(e.target.value)
+    }
+
+    function handleListingVehicleMpgMaxChange(e){
+        setListingVehicleMpgMax(e.target.value)
+    }
+    ///////////////////////////////////////////////////////////////////////////
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // States and event handlers for property listings
+    ///////////////////////////////////////////////////////////////////////////
+    
+    // Property Listing States
+    const [listingPropertyType, setListingPropertyType] = useState("");
+    const [listingPropertyListingType, setListingPropertyListingType] = useState("");
+    const [listingPropertyStreetAddress, setListingPropertyStreetAddress] = useState("");
+    const [listingPropertyCity, setListingPropertyCity] = useState("");
+    const [listingPropertyState, setListingPropertyState] = useState("");
+    const [listingPropertyZipcode, setListingPropertyZipcode] = useState("");
+    const [listingPropertyYearBuilt, setListingPropertyYearBuilt] = useState("");
+    const [listingPropertyHasBasement, setListingPropertyHasBasement] = useState("");
+    const [listingPropertyHasGarage, setListingPropertyHasGarage] = useState("");
+    const [listingPropertyNumBedrooms, setListingPropertyNumBedrooms] = useState("");
+    const [listingPropertyNumBathrooms, setListingPropertyNumBathrooms] = useState("");
+
+    function handleListingPropertyTypeChange(e){
+        setListingPropertyType(e.target.value)
+    }
+
+    function handleListingPropertyListingTypeChange(e){
+        setListingPropertyListingType(e.target.value)
+    }
+
+    function handleListingPropertyStreetAddressChange(e){
+        setListingPropertyStreetAddress(e.target.value)
+    }
+
+    function handleListingPropertyCityChange(e){
+        setListingPropertyCity(e.target.value)
+    }
+
+    function handleListingPropertyStateChange(e){
+        setListingPropertyState(e.target.value)
+    }
+
+    function handleListingPropertyZipcodeChange(e){
+        setListingPropertyZipcode(e.target.value)
+    }
+
+    function handleListingPropertyYearBuiltChange(e){
+        setListingPropertyYearBuilt(e.target.value)
+    }
+
+    function handleListingPropertyHasBasementChange(e){
+        setListingPropertyHasBasement(e.target.value)
+    }
+
+    function handleListingPropertyNumBedroomsChange(e){
+        setListingPropertyNumBedrooms(e.target.value)
+    }
+
+    function handleListingPropertyNumBathroomsChange(e){
+        setListingPropertyNumBathrooms(e.target.value)
+    }
+    ///////////////////////////////////////////////////////////////////////////
+
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Functions change category and subcategory options
+    ///////////////////////////////////////////////////////////////////////////
+
+    function showFixedCategory(){
+        return(
+            <div id="fixedCategory">
+                <p>{listingCategory}</p>
+            </div>
+        )
+    }
+    function showCategories () {
+        return(
+            <Form.Select 
+            class="form-control" 
+            id ="categorySelector" 
+            aria-label="category"
+            onChange = {handleCategoryChange}
+            >
+                <option value = "">Category</option>
+                {categoriesList.map(category=>(
+
+                <option value={category._id}>{category.name}</option>
+                
+                ))} 
+            </Form.Select>
+        )
+    }
+    function showVehicleTypeOptions(){
+        return(
+            <Form.Select class="form-control" id ="subCategorySelector" aria-label="subCategory">
+                <option value = "">Vehicle Type</option>
+                {vehicleCategory.vehicleType.map(vType=>(
+                    <option value={vType}>{vType}</option>))} 
+            </Form.Select>
+        )
+    }
+    // dislpays property type options
+    function showPropertyRentalTypeOptions(){
+        return(
+            <div>
+                <Form.Select class="form-control" id ="subCategorySelector" aria-label="subCategory">
+                    <option value = "">Property Type</option>
+                    {propertyRentalCategory.propertyType.map(pType=>(
+                        <option value={pType}>{pType}</option>))} 
+
+                </Form.Select>
+                {setListingCategory("Property Rentals")}                
+            </div>
+
+        )
+    }
+
+    // dislpays property type options
+    function showHomeSalesTypeOptions(){
+        return(
+            <Form.Select class="form-control" id ="subCategorySelector" aria-label="subCategory">
+                <option value = "">Property Type</option>
+                {homeSalesCategory.propertyType.map(pType=>(
+                    <option value={pType}>{pType}</option>))} 
+            </Form.Select>
+        )
+    }
+
+    function handleTypeChange(e){
+        setListingType(e.target.value)
+                
+        console.log(listingType)
+    }
+    ///////////////////////////////////////////////////////////////////////////
+
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Functions to display vehicle and property forms
+    ///////////////////////////////////////////////////////////////////////////
     //Shows vehicle form details
     function showVehicleFormDetails(){
         return(  
@@ -167,6 +298,7 @@ function CreateListingForm(props){
                         name = "createVehicleMake"
                         placeholder = "Make"
                         autocomplete = "off"
+                        onChange={handleListingVehicleMakeChange}
                     />
                     <input 
                         id="createVehicleModel"
@@ -175,6 +307,7 @@ function CreateListingForm(props){
                         name = "createVehicleModel"
                         placeholder = "Model"
                         autocomplete = "off"
+                        onChange={handleListingVehicleModelChange}
                     />
                     <input 
                         id="createVehicleYear"
@@ -183,10 +316,15 @@ function CreateListingForm(props){
                         name = "createVehicleYear"
                         placeholder = "Year"
                         autocomplete = "off"
+                        onChange={handleListingVehicleYearChange}
                     />
                 </div>
                 <div id="createVehicleFactsL2">
-                    <Form.Select class="form-control" id ="createVehicleTransmisson" aria-label="condition">
+                    <Form.Select class="form-control" 
+                    id ="createVehicleTransmisson" 
+                    aria-label="condition"
+                    onChange={handleListingVehicleTransmissionChange}
+                    >
                             <option value = "">Transmission</option>
                             <option value="Automatic">Automatic</option>
                             <option value="Manual">Manual</option>
@@ -198,6 +336,7 @@ function CreateListingForm(props){
                         name = "createVehicleColor"
                         placeholder = "Color"
                         autocomplete = "off"
+                        onChange={handleListingVehicleColorChange}
                     />   
                     <input 
                         id="createVehicleMilesDriven"
@@ -206,6 +345,7 @@ function CreateListingForm(props){
                         name = "createVehicleMilesDriven"
                         placeholder = "# of Miles Driven"
                         autocomplete = "off"
+                        onChange={handleListingVehicleMilesDrivenChange}
                     />      
                 </div>
                 <div id="createVehicleFactsL3">
@@ -219,6 +359,7 @@ function CreateListingForm(props){
                         name = "createVehicleMpg1"
                         placeholder = ""
                         autocomplete = "off"
+                        onChange={handleListingVehicleMpgMinChange}
                     /> 
                     <div className="rangeLabels">
                         <p> to </p>
@@ -230,6 +371,7 @@ function CreateListingForm(props){
                         name = "createVehicleMpg2"
                         placeholder = ""
                         autocomplete = "off"
+                        onChange={handleListingVehicleMpgMaxChange}
                     /> 
                     <div className="rangeLabels">
                         <p> MPG </p>
@@ -255,6 +397,7 @@ function CreateListingForm(props){
                         name = "address"
                         placeholder = "Street Address"
                         autocomplete = "off"
+                        onChange={handleListingPropertyStreetAddressChange}
                     />   
                     <input 
                         id="createCity"
@@ -263,6 +406,7 @@ function CreateListingForm(props){
                         name = "createCity"
                         placeholder = "City"
                         autocomplete = "off"
+                        onChange={handleListingPropertyCityChange}
                     /> 
                     <input 
                         id="createState"
@@ -271,6 +415,7 @@ function CreateListingForm(props){
                         name = "createState"
                         placeholder = "State"
                         autocomplete = "off"
+                        onChange={handleListingPropertyStateChange}
                     />
                     <input 
                         id="createZipCode"
@@ -279,6 +424,7 @@ function CreateListingForm(props){
                         name = "createZipCode"
                         placeholder = "Zipcode"
                         autocomplete = "off"
+                        onChange={handleListingPropertyZipcodeChange}
                     />
 
                 </div>
@@ -291,6 +437,8 @@ function CreateListingForm(props){
                         name = "createPropertyYearBuilt"
                         placeholder = "Year Built"
                         autocomplete = "off"
+                        maxlength="4"
+                        onChange={handleListingPropertyYearBuiltChange}
                     />
                     <div id="createBedroomLabel">
                         <p>Basement: </p>
@@ -299,7 +447,8 @@ function CreateListingForm(props){
                         id="createBasement"
                         type = "checkbox" 
                         name = "createBasement"
-                    /> 
+                        onChange={handleListingPropertyHasBasementChange}
+                        /> 
                     <div id="createBathroomLabel">
                         <p>Garage: </p>
                     </div>
@@ -307,6 +456,7 @@ function CreateListingForm(props){
                         id="createGarage"
                         type = "checkbox" 
                         name = "createGarage"
+                        onChange={handleListingPropertyHasBasementChange}
                     />
                 </div>
                 <div id="createVehicleFactsL3">
@@ -319,7 +469,9 @@ function CreateListingForm(props){
                         type = "text" 
                         name = "createVehicleMpg1"
                         placeholder = ""
+                        maxlength = "2"
                         autocomplete = "off"
+                        onChange={handleListingPropertyNumBedroomsChange}
                     /> 
                     <div id="createMileageLabel">
                         <p>Number of Bathrooms: </p>
@@ -331,12 +483,33 @@ function CreateListingForm(props){
                         name = "createVehicleMpg1"
                         placeholder = ""
                         autocomplete = "off"
+                        onChange={handleListingPropertyNumBathroomsChange}
                     /> 
                 </div>
             </div>
         )
     }
     //Shows property radio buttons
+    function handleChangePropertyRental(e){
+
+        setListingCategory(e.target.value)
+        setListingPropertyListingType(e.target.value)
+
+    }
+    function handleChangeHomeSales(e){
+
+        setListingCategory(e.target.value)
+        setListingPropertyListingType(e.target.value)
+
+    }
+
+    function handleTypeChangeVehicles(e){
+
+        setListingCategory(e.target.value)
+        // setListingPropertyListingType(e.target.value)
+
+    }
+        
     function showPropertyRadios(){
         return(
 
@@ -347,7 +520,8 @@ function CreateListingForm(props){
                 <input 
                     type="radio"
                     name ="propertyListingType"
-                    value ="vehicle"
+                    value ="Property Rentals"
+                    onChange={handleChangePropertyRental}
                 />
             </div>
             <div className='createRadio'>
@@ -356,7 +530,9 @@ function CreateListingForm(props){
                 <input 
                     type="radio"
                     name ="propertyListingType"
-                    value ="property"
+                    value ="Home Sales"
+                    onChange={handleChangeHomeSales}
+
                 />                                    
             </div> 
             </div>
@@ -382,27 +558,74 @@ function CreateListingForm(props){
             </Form.Select> 
         )
     }
-    // displays vehicle type options
-    function showVehicleTypeOptions(){
-        return(
-            <Form.Select class="form-control" id ="subCategorySelector" aria-label="subCategory">
-                <option value = "">Vehicle Type</option>
-            </Form.Select>
-        )
-    }
-    // dislpays property type options
-    function showPropertyTypeOptions(){
-        return(
-            <Form.Select class="form-control" id ="subCategorySelector" aria-label="subCategory">
-                <option value = "">Property Type</option>
-            </Form.Select>
-        )
-    }
+    ///////////////////////////////////////////////////////////////////////////
 
-    function handleTypeChange(e){
-        setListingType(e.target.value)
-        console.log(listingType)
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Image upload
+    ///////////////////////////////////////////////////////////////////////////
+    //Uploading images to firebase
+    const [imageUpload, setImageUpload] = useState(null)
+    const [imageUrls, setImageUrls] = useState([]);
+    const imageListRef = ref(storage, "listingPhotos/")
+    const uploadImage = () => {
+        //remove upload button, upload images with publish button. 
+        // hold the images in the state, then publish them
+        if(imageUpload == null) return;
+        const imageRef = ref(storage, `listingPhotos/${imageUpload.name + v4() }`)
+        uploadBytes(imageRef, imageUpload).then((snapshot) =>{
+            getDownloadURL(snapshot.ref).then((url) => {
+                setImageUrls((prev) => [...prev, url ]);
+            })
+            alert("Image Uploaded")
+        })
     }
+    useEffect( () => {
+        listAll(imageListRef).then((response) => {
+            response.items.forEach((item) => {
+                getDownloadURL(item).then((url) => {
+                    setImageUrls((prev) => [...prev, url]);
+                })
+            })
+            console.log(response);
+        })
+    },[])
+    ///////////////////////////////////////////////////////////////////////////
+
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Post Listing
+    ///////////////////////////////////////////////////////////////////////////
+    const postListing = () =>{
+        setShouldRefresh(true)
+        console.log(urlEndPoint)
+        const req =  {
+            title: listingTitle,
+            price: listingPrice,
+            category: listingCategory,
+            subCategory: listingSubCategory,
+            condition: listingCondition,
+            email: listingContactEmail,
+            phoneNumber: listingContactPhoneNumber,
+            description: listingDescription,
+        }
+        axios.post(`${urlEndPoint}/listings/create-listing`, req)
+        .then(function (response) {
+          console.log(response);
+            setShouldRefresh(false);
+    
+        },{
+          'Content-Type': 'application/x-www-form-urlencoded'
+        })
+        .catch(function (error) {
+          console.log(error);
+        }); 
+    }
+    ///////////////////////////////////////////////////////////////////////////
+
+
 
     return(
         <div id="createListingDiv">
@@ -437,7 +660,7 @@ function CreateListingForm(props){
                                         type="radio"
                                         name ="listingType"
                                         value ="vehicle"
-                                        onChange = {handleTypeChange}
+                                        onChange = {handleTypeChangeVehicles}
                                         checked = {listingType === "vehicle"}
                                     />
                                 </div>
@@ -487,19 +710,13 @@ function CreateListingForm(props){
 
                             /> 
 
-                            <Form.Select 
-                            class="form-control" 
-                            id ="categorySelector" 
-                            aria-label="category"
-                            onChange = {handleCategoryChange}
-                            >
-                                <option value = "">Category</option>
-                                {categoriesList.map(category=>(
-                                <option value={category._id}>{category.name}</option>))} 
-                            </Form.Select>
+                            {listingType === "regular"&& showCategories()}
+                            {listingType !== "regular"&& showFixedCategory()}
 
                             {/* Dispays options for subcategories */}
-                            {listingType === "property"&& showPropertyTypeOptions()}
+                            {/* {listingType === "property"&& showPropertyRentalTypeOptions()} */}
+                            {listingType === "property"&& showHomeSalesTypeOptions()}
+
                             {listingType === "vehicle"&& showVehicleTypeOptions()}
                             {listingType === "regular"&& showSubCategoryOptions()}
 
@@ -517,7 +734,7 @@ function CreateListingForm(props){
                                 <option value="Used - Good">Used - Good</option>
                                 <option value="Used - Fair">Used - Fair</option>
 
-                            </Form.Select>                            
+                        </Form.Select>                            
                             <input 
                                 id="contactEmail"
                                 class="form-control"

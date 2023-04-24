@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 import CarouselCardContainer from "../Components/CarouselCardContainer";
 import userEvent from "@testing-library/user-event";
+import { list } from "firebase/storage";
 function HomePage (props){
     const {listings} = props
     const {categoriesList} = props
@@ -24,51 +25,16 @@ function HomePage (props){
             <div id="card-container-header">
 
                 <div id="card-container-header-title">
-                    <h1 id="card-container-header-text">{`${searchCategoryName}`}</h1>
+                    <h1 id="card-container-header-text">{searchCategoryName}</h1>
 
 
                 </div>
 
             </div>
             <div id="card-container">
-            {/* <h1>{`${searchCategory}`}</h1> */}
-                {/* <ListingCard 
-                    searchCategoryName = {props.searchCategoryName}
-                    listingCategorySearchResult = {props.listingCategorySearchResult}
-                    searchCategory = {props.searchCategory}
-                    categoriesList = {props.categoriesList}
-                    listings = {props.listings}
+                {searchCategory === "All Listings" && listings.map(listing=>(<ListingCard listing =  {listing}/>))}
+                {listingCategorySearchResult.length > 0 && listingCategorySearchResult.map(listing=>(<ListingCard listing = {listing}/>))}
 
-                /> */}
-                {searchCategory === "All Listings" && <ListingCard 
-                                                        listings = {props.listings}
-                                                        searchCategoryName = {props.searchCategoryName}
-                                                        />}
-                {searchCategory !== "All Listings" && <ListingCard listingCategorySearchResult = {props.listingCategorySearchResult}/>}
-
-                {/* <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard /> */}
 
             </div>
     

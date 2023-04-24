@@ -469,6 +469,19 @@ margin-bottom: 3px;
   bottom:0;
 }
 
+#fixedCategory{
+  margin-top: 12px;
+  border: lightgrey solid 2px;
+  border-radius: 5px;
+  width:33%;
+  height: 37px;
+  margin-right: 5px;
+  bottom:0;
+  padding-top: 5px;
+  padding-left: 5px;
+  text-align: left;
+}
+
 #subCategorySelector{
   margin-top: 12px;
   width:33%;
@@ -610,7 +623,7 @@ margin-bottom: 3px;
   margin-left: 5px;
 }
 #createBedroomNum{
-  width:40px;
+  width:60px;
   margin: 5px;
 }
 #createBathroomLabel{
@@ -620,7 +633,7 @@ margin-bottom: 3px;
   margin-left: 5px;
 }
 #createBathroomNum{
-  width:40px;
+  width:60px;
   margin: 5px;
 }
 

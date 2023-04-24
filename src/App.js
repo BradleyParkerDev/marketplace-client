@@ -17,7 +17,7 @@ function App(props) {
     
   //When searchCategoryName is set to "All Listings" the get request
   //to get listings by category wont work
-  const [searchCategory, setSearchCategory] = useState("All Listings")
+  const [searchCategory, setSearchCategory] = useState("")
   const [searchCategoryName, setSearchCategoryName] = useState("All Listings")
 
   useEffect(()=> {
@@ -62,7 +62,7 @@ function App(props) {
     
     axios.get(`${urlEndPoint}/listings/get-listings-by-category/${searchCategory}`)
     .then(function (response){
-      console.log(response.data);
+      console.log(response);
         setListingCategorySearchResult(response.data.listings);
         console.log(listingCategorySearchResult);
   
@@ -73,7 +73,7 @@ function App(props) {
     .finally(function (){
       //always executed
     })
-  },[shouldRefresh])
+  },[searchCategory])
 
 
   const router = createBrowserRouter([
