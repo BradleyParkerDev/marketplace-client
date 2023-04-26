@@ -38,11 +38,6 @@ function CreateListingForm(props){
     },[categoriesList])
 
 
-
-
-    // const [updatedCategoryList, setUpdatedCategoryList] = useState([])
-    // const [vehicleTypeList, setVehicleTypeList] = useState(vehicleCategory);
-    // const [propertyTypeList, setPropertyTypeList] = useState([]);
     const [subCategoriesList, setSubCategoriesList] = useState([]);
 
     ///////////////////////////////////////////////////////////////////////////
@@ -53,7 +48,6 @@ function CreateListingForm(props){
     const [listingTitle,setListingTitle] = useState("")
     const [listingPrice,setListingPrice] = useState(0)
     const [listingCategory,setListingCategory] = useState("")
-    // const [listingCategoryId, setListingCategoryId] = useState("")
     const [listingSubCategory,setListingSubCategory] = useState("")
     const [listingCondition,setListingCondition] = useState("")
     const [listingContactEmail, setListingContactEmail] = useState("")
@@ -166,8 +160,8 @@ function CreateListingForm(props){
     const [listingPropertyState, setListingPropertyState] = useState("");
     const [listingPropertyZipcode, setListingPropertyZipcode] = useState("");
     const [listingPropertyYearBuilt, setListingPropertyYearBuilt] = useState("");
-    const [listingPropertyHasBasement, setListingPropertyHasBasement] = useState("");
-    const [listingPropertyHasGarage, setListingPropertyHasGarage] = useState("");
+    const [listingPropertyHasBasement, setListingPropertyHasBasement] = useState(false);
+    const [listingPropertyHasGarage, setListingPropertyHasGarage] = useState(false);
     const [listingPropertyNumBedrooms, setListingPropertyNumBedrooms] = useState("");
     const [listingPropertyNumBathrooms, setListingPropertyNumBathrooms] = useState("");
 
@@ -202,11 +196,11 @@ function CreateListingForm(props){
     }
 
     function handleListingPropertyHasBasementChange(e){
-        setListingPropertyHasBasement(e.target.value)
+        setListingPropertyHasBasement((prevState)=> !prevState)
     }
 
     function handleListingPropertyHasGarageChange(e){
-        setListingPropertyHasBasement(e.target.value)
+        setListingPropertyHasGarage((prevState)=> !prevState)
     }
 
     function handleListingPropertyNumBedroomsChange(e){
@@ -279,7 +273,6 @@ function CreateListingForm(props){
     // dislpays property type options
     function showPropertyRentalTypeOptions(){
         return(
-            <div>
                 <Form.Select 
                 class="form-control" 
                 id ="subCategorySelector" 
@@ -292,7 +285,6 @@ function CreateListingForm(props){
                         <option value={pType}>{pType}</option>))} 
 
                 </Form.Select>
-            </div>
         )
     }
 
@@ -510,7 +502,8 @@ function CreateListingForm(props){
                         id="createBasement"
                         type = "checkbox" 
                         name = "createBasement"
-                        value = "true"
+                        value = {true}
+                        checked = {listingPropertyHasBasement}
                         onChange={handleListingPropertyHasBasementChange}
                         /> 
                     <div id="createBathroomLabel">
@@ -520,7 +513,8 @@ function CreateListingForm(props){
                         id="createGarage"
                         type = "checkbox" 
                         name = "createGarage"
-                        value = "true"
+                        value = {true}
+                        checked = {listingPropertyHasGarage}
                         onChange={handleListingPropertyHasGarageChange}
                     />
                 </div>
@@ -633,26 +627,31 @@ function CreateListingForm(props){
         //remove upload button, upload images with publish button. 
         // hold the images in the state, then publish them
         if(imageUpload == null) return;
-        const imageRef = ref(storage, `listingPhotos/${imageUpload.name + v4() }`)
+        const imageRef = ref(storage, `images/${imageUpload.name + v4() }`)
         uploadBytes(imageRef, imageUpload).then((snapshot) =>{
             getDownloadURL(snapshot.ref).then((url) => {
-                setListingImages((prev) => [...prev, url ]);
+                setListingImages([url]);
+                return url
+
+            }).then((url)=>{
+                postListing(url)
+                // navigate('/')
             })
             alert("Image Uploaded")
         })
 
     }
-    useEffect( () => {
-        listAll(imageListRef).then((response) => {
-            response.items.forEach((item) => {
-                getDownloadURL(item).then((url) => {
-                    setListingImages((prev) => [...prev, url]);
+    // useEffect( () => {
+    //     listAll(imageListRef).then((response) => {
+    //         response.items.forEach((item) => {
+    //             getDownloadURL(item).then((url) => {
+    //                 setListingImages((prev) => [...prev, url]);
 
-                })
-            })
-            console.log(response);
-        })
-    },[])
+    //             })
+    //         })
+    //         console.log(response);
+    //     })
+    // },[])
     ///////////////////////////////////////////////////////////////////////////
 
 
@@ -660,12 +659,12 @@ function CreateListingForm(props){
     ///////////////////////////////////////////////////////////////////////////
     // Post Listing
     ///////////////////////////////////////////////////////////////////////////
-    const postListing = () =>{
+    const postListing = (url) =>{
         setShouldRefresh(true)
         console.log(urlEndPoint)
         const req =  {
             title: listingTitle,
-            listingImages: listingImages,
+            listingImages: url,
             listingType: listingType,
             price: listingPrice,
             category: listingCategory,
@@ -700,10 +699,10 @@ function CreateListingForm(props){
             req.numberOfBathrooms = listingPropertyNumBathrooms
 
         }
-
+        console.log(req)
         axios.post(`${urlEndPoint}/listings/create-listing`, req)
         .then(function (response) {
-          console.log(response);
+            navigate('/')
             setShouldRefresh(false);
     
         },{
@@ -883,8 +882,6 @@ function CreateListingForm(props){
                 id="createSubmitButton" 
                 variant="success"
                 onClick={()=>{
-                    postListing()
-                    navigate("/")
                     uploadImage()
                     }} >
                     Publish

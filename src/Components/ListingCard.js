@@ -19,7 +19,7 @@ function ListingCard(props){
                 <div className="innerCardOne">
                     <div className="listingPhoto">
                         <img className ="listingPhoto" 
-                            src={`${listing.listingImages[2]}.jpg`}
+                            src={`${listing.listingImages}.jpg`}
                             alt={listing.title}
                         /> 
                     </div>

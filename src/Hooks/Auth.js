@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [userToken, setUserToken] = useState(null);
 	const [userEmail, setUserEmail] = useState("");
   const [userFirstName, setUserFirstName] = useState("");
+  const [userId, setUserId] = useState("");
 
   const [scope, setScope] = useState("");
   const [isAuthLoading, setIsAuthLoading] = useState(false);
@@ -29,6 +30,9 @@ export const AuthProvider = ({ children }) => {
     if(userData && userData.userFirstName){
       setUserFirstName(userData.userFirstName);
     }
+    if(userData && userData.userId){
+      setUserId(userData.userId);
+    }
   }, [isAuthLoading]);
 
   // call this function when you want to register the user
@@ -46,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 		console.log("auth hook loginResult: ", loginResult)
     if (loginResult.success) {
       //update browser session details 
-      setLSUserData(loginResult.token, loginResult.email, loginResult.userType, loginResult.userFirstName);
+      setLSUserData(loginResult.token, loginResult.email, loginResult.userType, loginResult.userFirstName, loginResult.userId);
     }
     setIsAuthLoading(false);
     setScope(loginResult.userType)
@@ -118,13 +122,13 @@ const loginUser = async (email, password) => {
   return responseJSON;
 };
 
-const setLSUserData = (token, email, userType, userFirstName) => {
+const setLSUserData = (token, email, userType, userFirstName, userId) => {
 
   // caching our token session/ email 
   // in the browser window
   localStorage.setItem(
     process.env.REACT_APP_TOKEN_HEADER_KEY,
-    JSON.stringify({token, email, userType, userFirstName})
+    JSON.stringify({token, email, userType, userFirstName, userId})
   );
 };
 
