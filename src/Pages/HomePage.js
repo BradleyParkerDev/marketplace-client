@@ -13,23 +13,12 @@ function HomePage (props){
     const {listingCategorySearchResult} = props
 
 
-
-
- 
-
-
-
     return(
         <div id="card-container-outer-div">
-
             <div id="card-container-header">
-
                 <div id="card-container-header-title">
                     <h1 id="card-container-header-text">{searchCategoryName}</h1>
-
-
                 </div>
-
             </div>
             <div id="card-container">
                 {searchCategory === "All Listings" && listings.map(listing=>(<ListingCard listing =  {listing}/>))}

@@ -89,7 +89,7 @@ const NavBar = (props) => {
     function ShowCreateListingLogoutButtons(){
         return(
             <>
-            <h3>{auth.userEmail && `Hi, ${auth.userEmail}`}</h3>
+            <h3>{auth.userFirstName && `Hi, ${auth.userFirstName}`}</h3>
             <Button id="createButton" onClick={()=>{
                 navigate("/listings/create-listing")
                 }}>

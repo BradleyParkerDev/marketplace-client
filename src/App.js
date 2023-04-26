@@ -17,7 +17,7 @@ function App(props) {
     
   //When searchCategoryName is set to "All Listings" the get request
   //to get listings by category wont work
-  const [searchCategory, setSearchCategory] = useState("")
+  const [searchCategory, setSearchCategory] = useState("All Listings")
   const [searchCategoryName, setSearchCategoryName] = useState("All Listings")
 
   useEffect(()=> {
@@ -106,6 +106,7 @@ function App(props) {
           element: <ListingPage 
           urlEndPoint={urlEndPoint} 
           setShouldRefresh={setShouldRefresh}/>
+
         },
         { 
           path: "/listings/create-listing",
@@ -113,6 +114,7 @@ function App(props) {
           categoriesList={categoriesList} 
           urlEndPoint={urlEndPoint} 
           setShouldRefresh={setShouldRefresh}/>
+
         },
         
 
