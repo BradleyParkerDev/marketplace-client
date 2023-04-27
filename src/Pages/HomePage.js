@@ -2,9 +2,9 @@
 import ListingCard from "../Components/ListingCard";
 import { useState, useEffect } from 'react';
 
-import CarouselCardContainer from "../Components/CarouselCardContainer";
-import userEvent from "@testing-library/user-event";
-import { list } from "firebase/storage";
+// import CarouselCardContainer from "../Components/CarouselCardContainer";
+// import userEvent from "@testing-library/user-event";
+// import { list } from "firebase/storage";
 function HomePage (props){
     const {listings} = props
     const {categoriesList} = props

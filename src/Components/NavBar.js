@@ -84,12 +84,15 @@ const NavBar = (props) => {
             </div>
         )
     }
-
+    console.log(auth.userId)
     // Shows create listing and logout buttons when logged in
     function ShowCreateListingLogoutButtons(){
         return(
             <>
             <h3>{auth.userFirstName && `Hi, ${auth.userFirstName}`}</h3>
+            <p onClick={()=>{
+            navigate("/listings/get-listing-by-user-id/")
+            }}>View Profile</p>
             <Button id="createButton" onClick={()=>{
                 navigate("/listings/create-listing")
                 }}>
@@ -176,19 +179,4 @@ const NavBar = (props) => {
 export default NavBar;
 
 
-// useEffect(()=> {
-//     //Get Listings
-//     axios.get(`${urlEndPoint}/listings/get-listings-by-category/${searchCategory}`)
-//     .then(function (response){
-//       console.log(response.data);
-//         setListingCategorySearch("")
-//         setListingCategorySearch(response.data.listings);
-//         console.log(listingCategorySearch);
-//     })
-//     .catch(function (error){
-//         console.log(error);
-//     })
-//     .finally(function (){
-//       //always executed
-//     })
-// },[])
+

@@ -5,6 +5,7 @@ import Layout from './Layouts/Layout';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import UserProfilePage from './Pages/UserProfilePage';
 
 const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
@@ -111,6 +112,14 @@ function App(props) {
         { 
           path: "/listings/create-listing",
           element: <CreateListingPage 
+          categoriesList={categoriesList} 
+          urlEndPoint={urlEndPoint} 
+          setShouldRefresh={setShouldRefresh}/>
+
+        },
+        { 
+          path: "/users/profile",
+          element: <UserProfilePage 
           categoriesList={categoriesList} 
           urlEndPoint={urlEndPoint} 
           setShouldRefresh={setShouldRefresh}/>

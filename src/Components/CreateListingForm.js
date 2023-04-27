@@ -1,13 +1,18 @@
 import '../index.css'
 import axios from 'axios';
 import { useNavigate  } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { storage }from "../firebase"
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from 'uuid';
+
+import { useAuth } from "../Hooks/Auth";
+const UserContext = createContext()
+
 function CreateListingForm(props){
+    const auth = useAuth(); //access the authentication context 
     const navigate = useNavigate();
     const { urlEndPoint } = props;
     console.log(urlEndPoint)
@@ -17,8 +22,8 @@ function CreateListingForm(props){
 
     const [listingType, setListingType] = useState("regular")
     //User id
-    const [listingUserId, setListingUserId] = useState("");
-
+    const [listingUserId, setListingUserId] = useState(auth.userId);
+    console.log(listingUserId)
     //category
     const [newCategoriesList, setNewCategoriesList] = useState(categoriesList)
 
@@ -663,6 +668,7 @@ function CreateListingForm(props){
         setShouldRefresh(true)
         console.log(urlEndPoint)
         const req =  {
+            listingUserId: listingUserId,
             title: listingTitle,
             listingImages: url,
             listingType: listingType,

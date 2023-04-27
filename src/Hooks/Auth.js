@@ -64,6 +64,7 @@ export const AuthProvider = ({ children }) => {
 		setUserToken(null);
 		setUserEmail("");
     setUserFirstName("");
+    setUserId("");
     setIsAuthLoading(false);
     setScope("");
   };
@@ -77,6 +78,7 @@ export const AuthProvider = ({ children }) => {
     () => ({
       scope,
       userToken,
+      userId,
 			userEmail,
       userFirstName,
       login,

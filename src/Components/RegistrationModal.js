@@ -24,6 +24,7 @@ const RegistrationModal = (props) =>{
     const [dob,setDob] = useState("");
     const [pronouns, setPronouns] = useState("")
     const [genderValue, setGenderValue] = useState('');
+    const [customGender, setCustomGender] = useState(false)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -38,7 +39,9 @@ const RegistrationModal = (props) =>{
               type = "text" 
               name = "pronouns"
               placeholder = "Pronouns"
+              value = {pronouns}
               autocomplete = "off"
+              onChange = {handlePronounsInput}
 
             />
             <input 
@@ -46,6 +49,8 @@ const RegistrationModal = (props) =>{
               class="form-control"
               type = "text" 
               name = "gender"
+              value = {genderValue}
+              onChange={handleGenderInput}
               placeholder = "Gender"
               autocomplete = "off"
 
@@ -56,9 +61,26 @@ const RegistrationModal = (props) =>{
     }
 
 
-
-    function handleGenderChange(e){
+    function handlePronounsInput(e){
+      setPronouns(e.target.value)
+    }
+    function handleGenderInput(e){
       setGenderValue(e.target.value)
+    }
+    function handleGenderChange(e){
+      if(e.target.value === "male"){
+        setGenderValue(e.target.value)
+        setPronouns("(Him/He)")
+      }
+      if(e.target.value === "female"){
+        setGenderValue(e.target.value)
+        setPronouns("(She/Her)")
+      }
+      if(e.target.value === "custom"){
+        setCustomGender(true)
+      }else{
+        setCustomGender(false)
+      }
     }
     function handleFirstNameChange(e){
       setFirstName(e.target.value)
@@ -94,6 +116,7 @@ const RegistrationModal = (props) =>{
                 type = "text" 
                 name = "firstName"
                 placeholder = "First Name"
+                value = {firstName}
                 autocomplete = "off"
                 onChange={handleFirstNameChange}
               />
@@ -104,6 +127,7 @@ const RegistrationModal = (props) =>{
                 type = "text" 
                 name = "lastName"
                 placeholder = "Last Name"
+                value = {lastName}
                 autocomplete = "off"
                 onChange={handleLastNameChange}
 
@@ -118,6 +142,7 @@ const RegistrationModal = (props) =>{
               type = "text" 
               name = "email"
               placeholder = "Email"
+              value = {email}
               autocomplete = "off"
               onChange={handleEmailChange}
 
@@ -129,6 +154,7 @@ const RegistrationModal = (props) =>{
               type = "password" 
               name = "password"
               placeholder = "Password"
+              value = {password}
               autocomplete = "off"
               onChange={handlePasswordChange}
 
@@ -142,6 +168,7 @@ const RegistrationModal = (props) =>{
                 class="form-control"
                 type = "date" 
                 name = "date"
+                value = {dob}
                 onChange={handleDobChange}
 
 
@@ -184,13 +211,13 @@ const RegistrationModal = (props) =>{
                   name = "gender" 
                   value="custom"
                   onChange = {handleGenderChange}
-                  checked = {genderValue === "custom"}
+                  checked = {customGender}
                 />              
               </div>
 
 
           </div>
-          {genderValue === "custom"&& genderForm()}
+          {customGender && genderForm()}
 
         </div>
 
@@ -212,8 +239,16 @@ const RegistrationModal = (props) =>{
                   pronouns: pronouns
 
                 }
+                // if()
                 const registerResult = await auth.register(newUser);
                 if (registerResult.success) {
+                  setFirstName("")
+                  setLastName("")
+                  setEmail("")
+                  setPassword("")
+                  setDob("")
+                  setGenderValue("")
+                  setPronouns("")
                   navigate("/");
                 }
                 if (!registerResult.success) {
