@@ -23,7 +23,7 @@ function CreateListingForm(props){
     const [listingType, setListingType] = useState("regular")
     //User id
     const [listingUserId, setListingUserId] = useState(auth.userId);
-    console.log(listingUserId)
+    // console.log(listingUserId)
     //category
     const [newCategoriesList, setNewCategoriesList] = useState(categoriesList)
 
@@ -334,7 +334,7 @@ function CreateListingForm(props){
         }
         
                 
-        console.log(listingType)
+        // console.log(listingType)
     }
     ///////////////////////////////////////////////////////////////////////////
 

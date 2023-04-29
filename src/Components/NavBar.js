@@ -91,7 +91,7 @@ const NavBar = (props) => {
             <>
             <h3>{auth.userFirstName && `Hi, ${auth.userFirstName}`}</h3>
             <p onClick={()=>{
-            navigate("/listings/get-listing-by-user-id/")
+            navigate("/users/profile")
             }}>View Profile</p>
             <Button id="createButton" onClick={()=>{
                 navigate("/listings/create-listing")

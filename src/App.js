@@ -65,7 +65,7 @@ function App(props) {
     .then(function (response){
       console.log(response);
         setListingCategorySearchResult(response.data.listings);
-        console.log(listingCategorySearchResult);
+        // console.log(listingCategorySearchResult);
   
     })
     .catch(function (error){
