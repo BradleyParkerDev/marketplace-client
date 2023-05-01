@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 
 const UpdateUserInfoForm = (props) =>{
-    const {firstName} = props;
-    const {setFirstName} = props;
-    const {lastName} = props;
-    const {setLastName} = props;
-    const {email} = props;
-    const {setEmail} = props;
-    const {password} = props;
-    const {setPassword} = props;
-    const {dob} = props;
-    const {setDob} = props;
-    const {pronouns} = props;
-    const {setPronouns} = props;   
-    const {genderValue} = props;
-    const {setGenderValue} = props;
-    const {customGender} = props;
-    const {setCustomGender} = props;                                    
+    const {firstName
+        ,userData
+        ,setFirstName
+        ,lastName
+        ,setLastName
+        ,email
+        ,setEmail
+        ,password
+        ,setPassword
+        ,dob
+        ,setDob
+        ,pronouns
+        ,setPronouns   
+        ,genderValue
+        ,setGenderValue
+        ,customGender
+        ,setCustomGender 
+    } = props;                                   
 
     function handlePronounsInput(e){
         setPronouns(e.target.value)
@@ -25,6 +27,8 @@ const UpdateUserInfoForm = (props) =>{
         setGenderValue(e.target.value)
     }
     function handleGenderChange(e){
+        setGenderValue("");
+        setPronouns("");
         if(e.target.value === "male"){
             setGenderValue(e.target.value)
             setPronouns("(Him/He)")
@@ -54,7 +58,14 @@ const UpdateUserInfoForm = (props) =>{
     function handleDobChange(e){
         setDob(e.target.value)
     }  
-
+    function togglePassord() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      } 
 
     function genderForm(){
         return(
@@ -88,9 +99,9 @@ const UpdateUserInfoForm = (props) =>{
 
 
     return(
-        <div id="registrationModal">
+        <div id="updateFormOuterDiv">
             {/* Text Inputs */}
-            <div id="registration">
+            <div id="updateFormInnerDiv">
                 {/* Name */}
                 <div id="name">
                     <input 
@@ -137,13 +148,12 @@ const UpdateUserInfoForm = (props) =>{
                 class="form-control"
                 type = "password" 
                 name = "password"
-                placeholder = "Password"
+                placeholder = "New Password"
                 value = {password}
                 autocomplete = "off"
                 onChange={handlePasswordChange}
                 />  
-
-
+                <input type="checkbox" onClick={togglePassord}/>
                 <br /> 
                 {/* Birthday  */}
                 <div id = "birthday">

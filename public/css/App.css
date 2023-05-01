@@ -286,7 +286,7 @@ UserProfilePage
 #userProfileHeader{
   height: 100px;
   width: 100%;
-   /* border: dashed black 2px; */
+  /* border: dashed black 2px; */
 }
 #userProfileHeaderTitle{
   height: 60px;
@@ -307,6 +307,45 @@ UserProfilePage
   width: 50%;
   /* border: dashed black 2px; */
 
+
+}
+
+#containerOneUpperDiv{
+  width: 100%;
+  height:80%;
+  display: flex;
+  justify-content: center;
+  /* border: dashed black 2px; */
+
+  padding-left:  40px  ;
+  padding-right:  40px  ;
+  padding-top:  10px  ;
+
+}
+#containerOneLowerDiv{
+  width: 100%;
+  height:20%;
+  /* border: dashed black 2px; */
+  display: flex;
+  justify-content: center;
+
+}
+#cOnePhotoUploadDiv{
+  display: inline-block;
+  /* border: dashed black 2px; */
+  margin-left: 102px;
+
+}
+#userProfileImage{
+  width: 70%;
+  height: 100%;
+  border: solid black 2px;
+  background-color: white;
+}
+
+#userImg{
+width: 100%;
+height: 100%;
 }
 
 #userUpdateContainer2{
@@ -329,18 +368,6 @@ UserProfilePage
   height: 50px;
   width: 200px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -767,7 +794,7 @@ RegistrationModal
   width: 400px;
 }
 #registration{
-  padding-top: 10px;
+  padding-top: 20px;
   align-items: center;
   margin-top: 15px;
   margin-left: 25px;
@@ -816,6 +843,7 @@ RegistrationModal
   display: flex;
   justify-content: space-evenly;
   width: 400px;
+  margin-left: 25px;
 
 }
 
@@ -837,6 +865,28 @@ RegistrationModal
   margin-left: 10px;
 }
 
+/* 
+////////////////////////////////////////////////////////////////////
+UpdateUserInfoForm 
+////////////////////////////////////////////////////////////////////
+*/
+
+#updateFormOuterDiv{
+  width: 400px;
+}
+#updateFormInnerDiv{
+  padding-top: 20px;
+  align-items: center;
+  margin-top: 15px;
+  margin-left: 25px;
+  width: 450px;
+  height: auto;
+  border: black solid 2px ;
+  background-color: white;
+  border-radius: 5px;
+  text-align: center;
+
+}
 
 /* 
 ////////////////////////////////////////////////////////////////////
@@ -859,6 +909,64 @@ ListingPage
   padding:20px 20px 20px 20px;
   overflow-y: scroll;
   background-color: 	#F0F0F0;
-  display:flex;
+  /* display:flex; */
   box-shadow: 5px 5px;
+}
+
+#listingPageHeader{
+height: 10%;
+width: 100%;
+border: dashed black 2px;
+}
+
+#listingPageTitle{
+height: 100%;
+width: 50%;
+border: dashed black 2px;
+}
+
+#listingPageBody{
+  height: 70%;
+  width: 100%;
+  border: dashed black 2px;
+}
+
+#listingPageFooter{
+  height: 20%;
+  width: 100%;
+  border: dashed black 2px;
+  display: flex;
+  justify-content: right;
+}
+
+#listingPublisherInfo{
+  height: 100%;
+  width: 50%;
+  border: dashed black 2px;
+  display: flex;
+}
+#publisherImage{
+  height: 100%;
+  width: 50%;
+  border: dashed black 2px;
+}
+
+#publisherinfo{
+  height: 100%;
+  width: 50%;
+  border: dashed black 2px;
+}
+#publisherName{
+  height: 20%;
+  width: 60px;
+  border: dashed black 2px;
+}
+#publisherPronouns{
+
+}
+#publisherEmail{
+
+}
+#publisherPhone{
+
 }

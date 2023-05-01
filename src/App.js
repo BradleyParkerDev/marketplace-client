@@ -103,7 +103,7 @@ function App(props) {
 
         },
         { 
-          path: "/listings/get-listing/:listingId",
+          path: "/listings/get-listing/",
           element: <ListingPage 
           urlEndPoint={urlEndPoint} 
           setShouldRefresh={setShouldRefresh}/>
@@ -122,7 +122,7 @@ function App(props) {
           element: <UserProfilePage 
           categoriesList={categoriesList} 
           urlEndPoint={urlEndPoint} 
-          setShouldRefresh={setShouldRefresh}/>
+          />
 
         },
         
