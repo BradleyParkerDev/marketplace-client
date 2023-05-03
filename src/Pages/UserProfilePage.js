@@ -47,7 +47,7 @@ function UserProfilePage (props){
         .then(function (response){
           console.log(response);
             setMyListings(response.data.listings);
-            // console.log(myListings);
+            console.log(myListings);
       
         })
         .catch(function (error){

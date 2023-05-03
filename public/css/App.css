@@ -266,13 +266,13 @@ UserProfilePage
 #userProfileDiv{
   border: white dashed 3px;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 
 #updateUserDiv{
 
   width: 90%;
-  height: auto;
+  /* height: auto; */
   margin-top: 20px;
   margin-left: 60px;
   box-shadow: 5px 5px;
@@ -296,7 +296,7 @@ UserProfilePage
   /* border: black dashed 2px; */
 }
 #userUpdateBody{
-  height: 400px;
+  height: auto;
   width: 100%;
   /* border: dashed black 2px; */
   display: flex;
@@ -338,7 +338,7 @@ UserProfilePage
 }
 #userProfileImage{
   width: 70%;
-  height: 100%;
+  height: 300px;
   border: solid black 2px;
   background-color: white;
 }
@@ -450,18 +450,18 @@ CreateListingForm
 
 #createListingDiv{
   /* height: 500px; */
-  margin-top: 30px;
+  margin-top: 10px;
   margin-left: 60px;
   margin-right: 60px;
 
-  width: 90%;
-  max-width: 100%;
-  height:750px;
+  width: 70%;
+  /* max-width: 100%; */
+  height:auto;
   /* width: 100vw; */
   border: solid black 2px;
   border-radius: 5px; 
   padding:20px 20px 20px 20px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   background-color: 	#F0F0F0;
   display:flex;
   box-shadow: 5px 5px;
@@ -473,8 +473,8 @@ CreateListingForm
 #createContainerOne{
   /* border: dashed black 2px; */
 
-  width: 65%;
-  max-width: 100%;
+  width: 100%;
+  /* max-width: 100%; */
   height: 100%;
 
 }
@@ -484,7 +484,7 @@ CreateListingForm
   /* height: 500px; */
   width: 100%;
   max-width: 100%;
-  height: 70%;
+  height: 500px;
   /* width: 100vw; */
   border: solid black 2px;
   border-radius: 5px; 
@@ -529,13 +529,36 @@ margin-bottom: 3px;
 #listingType{
   height: 100%;
   width: 100%;
-  /* border: dashed black 2px; */
+  border: dashed black 2px;
 }
+
+#newCreatedDiv{
+height:500px;
+width: 100%;
+border: dashed black 2px;
+}
+#newCreateImage{
+
+
+}
+#newCreateListingInfo{
+
+
+}
+
+
+
+
+
+
+
+
+
 
 #newListingTitle{
   margin-top: 10px;
-  width: 100%;
-  /* border: dashed black 1px; */
+  width: 50%;
+  border: dashed black 1px;
 
 }
 #priceCategorySubcategory{

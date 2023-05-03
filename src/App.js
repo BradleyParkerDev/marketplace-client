@@ -1,11 +1,12 @@
 import HomePage from './Pages/HomePage';
 import ListingPage from './Pages/ListingPage';
 import CreateListingPage from './Pages/CreateListingPage';
+import UserProfilePage from './Pages/UserProfilePage';
+import UpdateListingPage from './Pages/UpdateListingPage'
 import Layout from './Layouts/Layout';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import UserProfilePage from './Pages/UserProfilePage';
 
 const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
@@ -125,7 +126,14 @@ function App(props) {
           />
 
         },
-        
+        { 
+          path: "/listings/update-listing",
+          element: <UpdateListingPage 
+          categoriesList={categoriesList} 
+          urlEndPoint={urlEndPoint} 
+          />
+
+        },
 
       ]
 

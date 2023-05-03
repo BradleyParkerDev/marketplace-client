@@ -48,7 +48,7 @@ function CreateListingForm(props){
     ///////////////////////////////////////////////////////////////////////////
     // States and event handlers for regular listings
     ///////////////////////////////////////////////////////////////////////////
-
+    const [displayImage, setDisplayImage] = useState("");
     // Regular Listing States
     const [listingTitle,setListingTitle] = useState("")
     const [listingPrice,setListingPrice] = useState(0)
@@ -572,29 +572,29 @@ function CreateListingForm(props){
         return(
 
             <div id="propertyRadio">
-            <div className='createRadio'>
-                <label>For Rent</label>
-                {" "}
-                <input 
-                    type="radio"
-                    name ="propertyListingType"
-                    value ="Property Rentals"
-                    onChange={handleChangePropertyRental}
-                    checked = {listingPropertyListingType === "Property Rentals"}
-                />
-            </div>
-            <div className='createRadio'>
-                <label>For Sale</label>
-                {" "}
-                <input 
-                    type="radio"
-                    name ="propertyListingType"
-                    value ="Home Sales"
-                    onChange={handleChangeHomeSales}
-                    checked = {listingPropertyListingType === "Home Sales"}
+                <div className='createRadio'>
+                    <label>For Rent</label>
+                    {" "}
+                    <input 
+                        type="radio"
+                        name ="propertyListingType"
+                        value ="Property Rentals"
+                        onChange={handleChangePropertyRental}
+                        checked = {listingPropertyListingType === "Property Rentals"}
+                    />
+                </div>
+                <div className='createRadio'>
+                    <label>For Sale</label>
+                    {" "}
+                    <input 
+                        type="radio"
+                        name ="propertyListingType"
+                        value ="Home Sales"
+                        onChange={handleChangeHomeSales}
+                        checked = {listingPropertyListingType === "Home Sales"}
 
-                />                                    
-            </div> 
+                    />                                    
+                </div> 
             </div>
         )
     }
@@ -646,17 +646,13 @@ function CreateListingForm(props){
         })
 
     }
-    // useEffect( () => {
-    //     listAll(imageListRef).then((response) => {
-    //         response.items.forEach((item) => {
-    //             getDownloadURL(item).then((url) => {
-    //                 setListingImages((prev) => [...prev, url]);
 
-    //             })
-    //         })
-    //         console.log(response);
-    //     })
-    // },[])
+
+    const onImageChange = (e) => {
+        const [file] = e.target.files;
+        setDisplayImage(URL.createObjectURL(file));
+    };
+
     ///////////////////////////////////////////////////////////////////////////
 
 
@@ -780,77 +776,106 @@ function CreateListingForm(props){
 
                         </div>
                     </div>
+                    <div id="newCreateDiv">
+                        <div id="newCreateImage">
+                            <div id="createImageHolder">
+                                <img
+                                    src={displayImage}
+                                
+                                />
+                            </div>
+                            <div id="createFileInput">
+                                <input 
+                                type="file"
+                                onChange={(event)=>{
+                                    onImageChange()
+                                    setImageUpload(event.target.files)
+                                
+                                }}
+                                />                                
+                            </div>
 
-                    <input 
-                        id="newListingTitle"
-                        class="form-control"
-
-                        type = "text" 
-                        name = "title"
-                        placeholder = "Title"
-                        autocomplete = "off"
-                        maxLength="75"
-                        onChange = {handleTitleChange}
-                    /> 
-                    <div>
-                        <div id="priceCategorySubcategory">
+                        </div>
+                        <div id="newCreateListingInfo">
                             <input 
-                                id="newListingPrice"
+                                id="newListingTitle"
                                 class="form-control"
+
                                 type = "text" 
                                 name = "title"
-                                placeholder = "Price"
+                                placeholder = "Title"
                                 autocomplete = "off"
-                                onChange = {handlePriceChange}
-
+                                maxLength="75"
+                                onChange = {handleTitleChange}
                             /> 
+                            <div id = "priceCondition">
+                                <input 
+                                    id="newListingPrice"
+                                    class="form-control"
+                                    type = "text" 
+                                    name = "title"
+                                    placeholder = "Price"
+                                    autocomplete = "off"
+                                    onChange = {handlePriceChange}
 
-                            {listingType === "regular"&& showCategories()}
-                            {listingType !== "regular"&& showFixedCategory()}
+                                /> 
 
-                            {/* Dispays options for subcategories */}
-                            {/* {listingType === "property"&& showPropertyRentalTypeOptions()} */}
-                            {listingCategory === "6435910e3cd66d46af3fdf46"&& showHomeSalesTypeOptions()}
-                            {listingCategory === "64359668692fe93ea16cd998"&& showPropertyRentalTypeOptions()}
 
-                            {listingType === "vehicle"&& showVehicleTypeOptions()}
-                            {listingType === "regular"&& showSubCategoryOptions()}
+                                <Form.Select 
+                                class="form-control" 
+                                id ="conditionSelector" 
+                                aria-label="condition"
+                                onChange = {handleConditionChange}
+                                >
+                                    <option value = "">Condition</option>
+                                    <option value="New">New</option>
+                                    <option value="Used - Like New">Used - Like New</option>
+                                    <option value="Used - Good">Used - Good</option>
+                                    <option value="Used - Fair">Used - Fair</option>
 
-                        </div>
-                        <div id="conditionContact">
-                        <Form.Select 
-                        class="form-control" 
-                        id ="conditionSelector" 
-                        aria-label="condition"
-                        onChange = {handleConditionChange}
-                        >
-                                <option value = "">Condition</option>
-                                <option value="New">New</option>
-                                <option value="Used - Like New">Used - Like New</option>
-                                <option value="Used - Good">Used - Good</option>
-                                <option value="Used - Fair">Used - Fair</option>
+                                </Form.Select>  
 
-                        </Form.Select>                            
-                            <input 
-                                id="contactEmail"
-                                class="form-control"
-                                type = "email" 
-                                name = "contactEmail"
-                                placeholder = "Contact Email"
-                                autocomplete = "off"
-                                onChange={handleEmailChange}
-                            />
-                            <input 
-                                id="contactPhone"
-                                class="form-control"
-                                type = "text" 
-                                name = "contactPhone"
-                                placeholder = "Contact Phone Number"
-                                autocomplete = "off"
-                                onChange={handlePhoneNumberChange}
-                            />
+                            </div>
+                            <div id="categorySubcategory">
+
+
+                                {listingType === "regular"&& showCategories()}
+                                {listingType !== "regular"&& showFixedCategory()}
+
+                                {/* Dispays options for subcategories */}
+                                {/* {listingType === "property"&& showPropertyRentalTypeOptions()} */}
+                                {listingCategory === "6435910e3cd66d46af3fdf46"&& showHomeSalesTypeOptions()}
+                                {listingCategory === "64359668692fe93ea16cd998"&& showPropertyRentalTypeOptions()}
+
+                                {listingType === "vehicle"&& showVehicleTypeOptions()}
+                                {listingType === "regular"&& showSubCategoryOptions()}
+
+                            </div>
+                            <div id="contactEmailPhone">
+
+                                <input 
+                                    id="contactEmail"
+                                    class="form-control"
+                                    type = "email" 
+                                    name = "contactEmail"
+                                    placeholder = "Contact Email"
+                                    autocomplete = "off"
+                                    onChange={handleEmailChange}
+                                />
+                                <input 
+                                    id="contactPhone"
+                                    class="form-control"
+                                    type = "text" 
+                                    name = "contactPhone"
+                                    placeholder = "Contact Phone Number"
+                                    autocomplete = "off"
+                                    onChange={handlePhoneNumberChange}
+                                />
+                            </div>
+
                         </div>
                     </div>
+
 
 
                     <textarea 
@@ -865,25 +890,6 @@ function CreateListingForm(props){
                 </div>
                 {listingType === "vehicle"&& showVehicleFormDetails()}
                 {listingType === "property"&& showPropertyFormDetails()}
-
-            </div>
-
-
-            {/* createContainerTwo */}
-            <div id="createContainerTwo">
-                <div id="createImageUpload">
-                    <div id="uploadPhotoTitle">
-                        <p>Photos</p>
-                    </div>
-                    <div id="createImageUploadArea">
-                        <input 
-                        type="file"
-                        onChange={(event)=>{setImageUpload(event.target.files[0])}}
-                        />
-
-
-                    </div>
-                </div>
                 <Button 
                 id="createSubmitButton" 
                 variant="success"

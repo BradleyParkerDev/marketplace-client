@@ -266,7 +266,7 @@ UserProfilePage
 #userProfileDiv{
   border: white dashed 3px;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 
 #updateUserDiv{
@@ -450,18 +450,18 @@ CreateListingForm
 
 #createListingDiv{
   /* height: 500px; */
-  margin-top: 30px;
+  margin-top: 10px;
   margin-left: 60px;
   margin-right: 60px;
 
-  width: 90%;
-  max-width: 100%;
-  height:750px;
+  width: 80%;
+  /* max-width: 100%; */
+  height:auto;
   /* width: 100vw; */
   border: solid black 2px;
   border-radius: 5px; 
   padding:20px 20px 20px 20px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   background-color: 	#F0F0F0;
   display:flex;
   box-shadow: 5px 5px;
@@ -473,8 +473,8 @@ CreateListingForm
 #createContainerOne{
   /* border: dashed black 2px; */
 
-  width: 65%;
-  max-width: 100%;
+  width: 100%;
+  /* max-width: 100%; */
   height: 100%;
 
 }
@@ -484,12 +484,12 @@ CreateListingForm
   /* height: 500px; */
   width: 100%;
   max-width: 100%;
-  height: 70%;
+  height: 600px;
   /* width: 100vw; */
   border: solid black 2px;
   border-radius: 5px; 
   padding:10px 10px 10px 10px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   background-color: 	white;
 
 }
@@ -531,20 +531,84 @@ margin-bottom: 3px;
   width: 100%;
   /* border: dashed black 2px; */
 }
+#fixedType{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
+/* holds image and listing info */
+#newCreateDiv{
+  height:200px;
+  width: 100%;
+  /* border: dashed black 2px; */
+  display: flex;
+}
+#newCreateImage{
+  height: 100%;
+  width: 30%;
+  /* border: dashed black 2px; */
+
+}
+#createImageHolder{
+  width:100%;
+  height: 85%;
+  /* border: dashed black 2px; */
+}
+#createFileInput{
+  width:100%;
+  height: 15%;
+  /* border: dashed black 2px;  */
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+#newCreateListingInfo{
+  height: 100%;
+  width: 70%;
+  /* border: dashed black 2px; */
+
+}
+#priceCondition{
+  width: 100%;
+  /* border: dashed black 2px; */
+  display: flex;
+
+}
+#newListingPrice{
+  margin-top: 10px;
+  margin-right: 5px;
+  width: 50%;
+  margin-left: 5px;
+
+
+} 
+
+#conditionSelector{
+  margin-top: 12px;
+  width:50%;
+  height: 37px;
+  margin-right: 5px;
+  bottom:0;
+}
 
 #newListingTitle{
   margin-top: 10px;
-  width: 100%;
+  margin-right: 5px;
+  margin-left: 5px;
+
+  width: 98%;
   /* border: dashed black 1px; */
 
 }
-#priceCategorySubcategory{
+#categorySubcategory{
   display: flex;
   width: 100% ;
   /* border: dashed black 1px; */
 
 }
-#conditionContact{
+#contactEmailPhone{
   /* margin-top: 5px; */
   display: flex;
   width: 100%;
@@ -554,31 +618,22 @@ margin-bottom: 3px;
 #contactEmail{
   margin-top: 10px;
   margin-right: 5px;
-  width: 33%
+  margin-left: 5px;
+
+  width: 50%
 }
 #contactPhone{
   margin-top: 10px;
   margin-right: 5px;
-  width: 33%
+  width: 50%
 }
 
-#newListingPrice{
-  margin-top: 10px;
-  margin-right: 5px;
-  width: 33%
 
-} 
-
-#conditionSelector{
-  margin-top: 12px;
-  width:33%;
-  height: 37px;
-  margin-right: 5px;
-  bottom:0;
-}
 #categorySelector{
+  margin-left: 5px;
+
   margin-top: 12px;
-  width:33%;
+  width:50%;
   height: 37px;
   margin-right: 5px;
   bottom:0;
@@ -586,9 +641,11 @@ margin-bottom: 3px;
 
 #fixedCategory{
   margin-top: 12px;
+  margin-left: 5px;
+
   border: lightgrey solid 2px;
   border-radius: 5px;
-  width:33%;
+  width: 50%;
   height: 37px;
   margin-right: 5px;
   bottom:0;
@@ -599,7 +656,7 @@ margin-bottom: 3px;
 
 #subCategorySelector{
   margin-top: 12px;
-  width:33%;
+  width:50%;
   height: 37px;
   margin-right: 5px;
   bottom:0;
@@ -660,9 +717,7 @@ margin-bottom: 3px;
   margin-top: 16px;
   margin-left: 3px;
   margin-right: 3px;
-
   height: 30px;
-
 }
 #createVehicleMpg1{
   width:40px;
@@ -699,9 +754,7 @@ margin-bottom: 3px;
   margin: 5px;
 
 }
-
 /* Property Form Details */
-
 #createStreetAddress{
   width:25%;
   margin: 5px;
@@ -751,39 +804,11 @@ margin-bottom: 3px;
   width:60px;
   margin: 5px;
 }
-
-/* createContainerTwo holds the photos and submit button */
-#createContainerTwo{
-  height: auto;
-  width: 35%; 
-  /* border: dashed black 2px; */
-  border-radius: 5px; 
-  margin-left: 20px;
-
-  /* background-color: white; */
-}
-#createImageUpload{
-  height: 93%;
-  width: 100%; 
-  border: solid black 2px;
-  border-radius: 5px; 
-  background-color: white;
-}
-#uploadPhotoTitle{
-  height: 30px;
-  width: 70px;
-  font-weight: bold;
-  font-size: larger;
-  /* border: dashed black 2px; */
-  text-align: center;
-  margin-left: 35%;
-}
 #createSubmitButton{
   margin-top: 2%;
   font-weight: bold;
   width: 100%;
 }
-
 
 /* 
 ////////////////////////////////////////////////////////////////////
