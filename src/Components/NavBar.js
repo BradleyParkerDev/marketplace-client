@@ -132,6 +132,8 @@ const NavBar = (props) => {
                     setSearchCategory(`${category._id}`)
                     setSearchCategoryName(`${category.name}`)
                     console.log(searchCategory)
+                    navigate("/")
+
                 }}
                 >
                     <div className="categoryPhoto">

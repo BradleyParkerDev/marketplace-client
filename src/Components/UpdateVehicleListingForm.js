@@ -14,10 +14,55 @@ const UserContext = createContext()
 function UpdateVehicleListingForm(props){
     const auth = useAuth(); //access the authentication context 
     const navigate = useNavigate();
-    const { urlEndPoint } = props;
-    console.log(urlEndPoint)
-    const {categoriesList} = props;
-    const {setShouldRefresh} = props;
+
+    const { urlEndPoint ,
+        categoriesList,    
+        setShouldRefresh,
+        // Regular Listing props
+        myListing,
+        displayImage, 
+        setDisplayImage,
+        listingImage,
+        setListingImage,   
+        listingTitle, 
+        setListingTitle, 
+        listingPrice, 
+        setListingPrice,
+        listingCategory,
+        setListingCategory,
+        listingSubCategory,
+        setListingSubCategory,
+        listingCondition,
+        setListingCondition,
+        listingContactEmail, 
+        setListingContactEmail,
+        listingContactPhoneNumber,
+        setListingContactPhoneNumber,
+        listingDescription,
+        setListingDescription,
+
+        //Vehicle Listing Props
+        listingVehicleType, 
+        setListingVehicleType, 
+        listingVehicleMake, 
+        setListingVehicleMake, 
+        listingVehicleModel, 
+        setListingVehicleModel, 
+        listingVehicleYear, 
+        setListingVehicleYear, 
+        listingVehicleTransmission, 
+        setListingVehicleTransmission, 
+        listingVehicleColor, 
+        setListingVehicleColor, 
+        listingVehicleMilesDriven, 
+        setListingVehicleMilesDriven, 
+        listingVehicleMpgMin, 
+        setListingVehicleMpgMin, 
+        listingVehicleMpgMax, 
+        setListingVehicleMpgMax 
+
+    } = props;
+
     // const { setShouldRefresh } = props;
 
     const [listingType, setListingType] = useState("vehicle")
@@ -29,7 +74,7 @@ function UpdateVehicleListingForm(props){
 
     //Vehicle and property objects
     const vehicleCategory = categoriesList[17]
-
+    console.log(vehicleCategory.vehicleType)
 
     //Options for selecting listing category
     useEffect(()=> {
@@ -42,23 +87,7 @@ function UpdateVehicleListingForm(props){
     },[categoriesList])
 
 
-    const [subCategoriesList, setSubCategoriesList] = useState([]);
 
-    ///////////////////////////////////////////////////////////////////////////
-    // States and event handlers for regular listings
-    ///////////////////////////////////////////////////////////////////////////
-    const [displayImage, setDisplayImage] = useState("");
-    // Regular Listing States
-    const [listingTitle,setListingTitle] = useState("")
-    const [listingPrice,setListingPrice] = useState(0)
-    const [listingCategory,setListingCategory] = useState("")
-    const [listingSubCategory,setListingSubCategory] = useState("")
-    const [listingCondition,setListingCondition] = useState("")
-    const [listingContactEmail, setListingContactEmail] = useState("")
-    const [listingContactPhoneNumber, setListingContactPhoneNumber] = useState("");
-    const [listingDescription,setListingDescription] = useState("")
-    //Holds listng Images
-    const [listingImages, setListingImages] = useState([])
 
     
     //Handlers for regular listings
@@ -73,8 +102,6 @@ function UpdateVehicleListingForm(props){
         const filterCategory = categoriesList.find(
             category => category._id === e.target.value    
         )
-        setSubCategoriesList(filterCategory.subCategories)
-        setListingSubCategory("");
 
     }
     function handleSubCategoryChange(e){
@@ -94,20 +121,7 @@ function UpdateVehicleListingForm(props){
     }
     ///////////////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////////////
-    // States and event handlers for vehicle listings
-    ///////////////////////////////////////////////////////////////////////////
 
-    // Vehicle Listing States
-    const [listingVehicleType, setListingVehicleType] = useState("");
-    const [listingVehicleMake, setListingVehicleMake] = useState("");
-    const [listingVehicleModel, setListingVehicleModel] = useState("");
-    const [listingVehicleYear, setListingVehicleYear] = useState("");
-    const [listingVehicleTransmission, setListingVehicleTransmission] = useState("");
-    const [listingVehicleColor, setListingVehicleColor] = useState("");
-    const [listingVehicleMilesDriven, setListingVehicleMilesDriven] = useState("");
-    const [listingVehicleMpgMin, setListingVehicleMpgMin] = useState("");
-    const [listingVehicleMpgMax, setListingVehicleMpgMax] = useState("");
 
   
     //Handlers for vehicle listings
@@ -163,7 +177,7 @@ function UpdateVehicleListingForm(props){
         const imageRef = ref(storage, `images/${imageUpload.name + v4() }`)
         uploadBytes(imageRef, imageUpload).then((snapshot) =>{
             getDownloadURL(snapshot.ref).then((url) => {
-                setListingImages([url]);
+                setListingImage([url]);
                 return url
 
             }).then((url)=>{
@@ -253,7 +267,8 @@ function UpdateVehicleListingForm(props){
                         <div id="newCreateImage">
                             <div id="createImageHolder">
                                 <img
-                                    // src={displayImage}
+                                    id = "create-image"
+                                    src={listingImage}
                                 
                                 />
                             </div>
@@ -262,7 +277,7 @@ function UpdateVehicleListingForm(props){
                                 type="file"
                                 onChange={(event)=>{
                                     // onImageChange()
-                                    // setImageUpload(event.target.files)
+                                    setImageUpload(event.target.files)
                                 
                                 }}
                                 />                                
@@ -276,6 +291,7 @@ function UpdateVehicleListingForm(props){
 
                                 type = "text" 
                                 name = "title"
+                                value = {listingTitle}
                                 placeholder = "Title"
                                 autocomplete = "off"
                                 maxLength="75"
@@ -286,7 +302,8 @@ function UpdateVehicleListingForm(props){
                                     id="newListingPrice"
                                     class="form-control"
                                     type = "text" 
-                                    name = "title"
+                                    name = "price"
+                                    value = {listingPrice}
                                     placeholder = "Price"
                                     autocomplete = "off"
                                     onChange = {handlePriceChange}
@@ -298,6 +315,7 @@ function UpdateVehicleListingForm(props){
                                 class="form-control" 
                                 id ="conditionSelector" 
                                 aria-label="condition"
+                                value = {listingCondition}
                                 onChange = {handleConditionChange}
                                 >
                                     <option value = "">Condition</option>
@@ -318,6 +336,7 @@ function UpdateVehicleListingForm(props){
                                 <Form.Select 
                                     class="form-control" 
                                     id ="subCategorySelector" 
+                                    value = {listingVehicleType}
                                     aria-label="subCategory"
                                     onChange={handleListingVehicleTypeChange}
                                 >
@@ -333,6 +352,7 @@ function UpdateVehicleListingForm(props){
                                     id="contactEmail"
                                     class="form-control"
                                     type = "email" 
+                                    value = {listingContactEmail}
                                     name = "contactEmail"
                                     placeholder = "Contact Email"
                                     autocomplete = "off"
@@ -341,7 +361,8 @@ function UpdateVehicleListingForm(props){
                                 <input 
                                     id="contactPhone"
                                     class="form-control"
-                                    type = "text" 
+                                    type = "text"
+                                    value = {listingContactPhoneNumber} 
                                     name = "contactPhone"
                                     placeholder = "Contact Phone Number"
                                     autocomplete = "off"
@@ -354,7 +375,8 @@ function UpdateVehicleListingForm(props){
                     <textarea 
                     class="form-control" 
                     id="cld-description" 
-                    name="" 
+                    name="description" 
+                    value = {listingDescription}
                     placeholder="Description"
                     maxlength="620"
                     onChange={handleDescriptionChange}
@@ -372,6 +394,7 @@ function UpdateVehicleListingForm(props){
                             class="form-control"
                             type = "text" 
                             name = "createVehicleMake"
+                            value = {listingVehicleMake}
                             placeholder = "Make"
                             autocomplete = "off"
                             onChange={handleListingVehicleMakeChange}
@@ -381,6 +404,7 @@ function UpdateVehicleListingForm(props){
                             class="form-control"
                             type = "text" 
                             name = "createVehicleModel"
+                            value = {listingVehicleModel}
                             placeholder = "Model"
                             autocomplete = "off"
                             onChange={handleListingVehicleModelChange}
@@ -389,6 +413,7 @@ function UpdateVehicleListingForm(props){
                             id="createVehicleYear"
                             class="form-control"
                             type = "text" 
+                            value = {listingVehicleYear}
                             name = "createVehicleYear"
                             placeholder = "Year"
                             autocomplete = "off"
@@ -398,6 +423,7 @@ function UpdateVehicleListingForm(props){
                     <div id="createVehicleFactsL2">
                         <Form.Select class="form-control" 
                         id ="createVehicleTransmisson" 
+                        value = {listingVehicleTransmission}
                         aria-label="condition"
                         onChange={handleListingVehicleTransmissionChange}
                         >
@@ -409,6 +435,7 @@ function UpdateVehicleListingForm(props){
                             id="createVehicleColor"
                             class="form-control"
                             type = "text" 
+                            value = {listingVehicleColor}
                             name = "createVehicleColor"
                             placeholder = "Color"
                             autocomplete = "off"
@@ -418,6 +445,7 @@ function UpdateVehicleListingForm(props){
                             id="createVehicleMilesDriven"
                             class="form-control"
                             type = "text" 
+                            value = {listingVehicleMilesDriven}
                             name = "createVehicleMilesDriven"
                             placeholder = "# of Miles Driven"
                             autocomplete = "off"
@@ -432,6 +460,7 @@ function UpdateVehicleListingForm(props){
                             id="createVehicleMpg1"
                             class="form-control"
                             type = "text" 
+                            value = {listingVehicleMpgMin}
                             name = "createVehicleMpg1"
                             placeholder = ""
                             autocomplete = "off"
@@ -444,6 +473,7 @@ function UpdateVehicleListingForm(props){
                             id="createVehicleMpg2"
                             class="form-control"
                             type = "text" 
+                            value = {listingVehicleMpgMax}
                             name = "createVehicleMpg2"
                             placeholder = ""
                             autocomplete = "off"

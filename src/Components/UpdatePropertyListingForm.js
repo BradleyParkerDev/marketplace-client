@@ -14,10 +14,58 @@ const UserContext = createContext()
 function UpdatePropertyListingForm(props){
     const auth = useAuth(); //access the authentication context 
     const navigate = useNavigate();
-    const { urlEndPoint } = props;
-    console.log(urlEndPoint)
-    const {categoriesList} = props;
-    const {setShouldRefresh} = props;
+
+    const { urlEndPoint ,
+        categoriesList,    
+        setShouldRefresh,
+        // Regular Listing props
+        myListing,
+        displayImage, 
+        setDisplayImage,
+        listingImage,
+        setListingImage,   
+        listingTitle, 
+        setListingTitle, 
+        listingPrice, 
+        setListingPrice,
+        listingCategory,
+        setListingCategory,
+        listingSubCategory,
+        setListingSubCategory,
+        listingCondition,
+        setListingCondition,
+        listingContactEmail, 
+        setListingContactEmail,
+        listingContactPhoneNumber,
+        setListingContactPhoneNumber,
+        listingDescription,
+        setListingDescription,
+
+        // Property Listing props
+        listingPropertyListingType,
+        setListingPropertyListingType,
+        listingPropertyType,
+        setListingPropertyType,
+        listingPropertyStreetAddress,
+        setListingPropertyStreetAddress,
+        listingPropertyCity,
+        setListingPropertyCity,
+        listingPropertyState,
+        setListingPropertyState,
+        listingPropertyZipcode,
+        setListingPropertyZipcode,
+        listingPropertyYearBuilt,
+        setListingPropertyYearBuilt,
+        listingPropertyHasBasement,
+        setListingPropertyHasBasement,
+        listingPropertyHasGarage,
+        setListingPropertyHasGarage,
+        listingPropertyNumBedrooms,
+        setListingPropertyNumBedrooms,
+        listingPropertyNumBathrooms,
+        setListingPropertyNumBathrooms
+    } = props;
+
     // const { setShouldRefresh } = props;
 
     const [listingType, setListingType] = useState("regular")
@@ -40,22 +88,6 @@ function UpdatePropertyListingForm(props){
 
 
     const [subCategoriesList, setSubCategoriesList] = useState([]);
-
-    ///////////////////////////////////////////////////////////////////////////
-    // States and event handlers for regular listings
-    ///////////////////////////////////////////////////////////////////////////
-    const [displayImage, setDisplayImage] = useState("");
-    // Regular Listing States
-    const [listingTitle,setListingTitle] = useState("")
-    const [listingPrice,setListingPrice] = useState(0)
-    const [listingCategory,setListingCategory] = useState("")
-    const [listingSubCategory,setListingSubCategory] = useState("")
-    const [listingCondition,setListingCondition] = useState("")
-    const [listingContactEmail, setListingContactEmail] = useState("")
-    const [listingContactPhoneNumber, setListingContactPhoneNumber] = useState("");
-    const [listingDescription,setListingDescription] = useState("")
-    //Holds listng Images
-    const [listingImages, setListingImages] = useState([])
 
     
     //Handlers for regular listings
@@ -92,22 +124,6 @@ function UpdatePropertyListingForm(props){
     ///////////////////////////////////////////////////////////////////////////
 
 
-    ///////////////////////////////////////////////////////////////////////////
-    // States and event handlers for property listings
-    ///////////////////////////////////////////////////////////////////////////
-    
-    // Property Listing States
-    const [listingPropertyListingType, setListingPropertyListingType] = useState("Property Rentals");
-    const [listingPropertyType, setListingPropertyType] = useState("");
-    const [listingPropertyStreetAddress, setListingPropertyStreetAddress] = useState("");
-    const [listingPropertyCity, setListingPropertyCity] = useState("");
-    const [listingPropertyState, setListingPropertyState] = useState("");
-    const [listingPropertyZipcode, setListingPropertyZipcode] = useState("");
-    const [listingPropertyYearBuilt, setListingPropertyYearBuilt] = useState("");
-    const [listingPropertyHasBasement, setListingPropertyHasBasement] = useState(false);
-    const [listingPropertyHasGarage, setListingPropertyHasGarage] = useState(false);
-    const [listingPropertyNumBedrooms, setListingPropertyNumBedrooms] = useState("");
-    const [listingPropertyNumBathrooms, setListingPropertyNumBathrooms] = useState("");
 
     function handleListingPropertyTypeChange(e){
         setListingPropertyType(e.target.value)
@@ -176,6 +192,8 @@ function UpdatePropertyListingForm(props){
                 class="form-control" 
                 id ="subCategorySelector" 
                 aria-label="subCategory"
+                value = {listingPropertyType}
+
                 onChange={handleListingPropertyTypeChange}
  
                 >
@@ -193,6 +211,7 @@ function UpdatePropertyListingForm(props){
             <Form.Select 
             class="form-control" 
             id ="subCategorySelector" 
+            value = {listingPropertyType}
             aria-label="subCategory"
             onChange={handleListingPropertyTypeChange}
             >
@@ -216,7 +235,7 @@ function UpdatePropertyListingForm(props){
         const imageRef = ref(storage, `images/${imageUpload.name + v4() }`)
         uploadBytes(imageRef, imageUpload).then((snapshot) =>{
             getDownloadURL(snapshot.ref).then((url) => {
-                setListingImages([url]);
+                setListingImage([url]);
                 return url
 
             }).then((url)=>{
@@ -336,16 +355,15 @@ function UpdatePropertyListingForm(props){
                         <div id="newCreateImage">
                             <div id="createImageHolder">
                                 <img
-                                    // src={displayImage}
-                                
+                                    id = "create-image"
+                                    src={listingImage}
                                 />
                             </div>
                             <div id="createFileInput">
                                 <input 
                                 type="file"
                                 onChange={(event)=>{
-                                    // onImageChange()
-                                    // setImageUpload(event.target.files)
+                                    setImageUpload(event.target.files)
                                 
                                 }}
                                 />                                
@@ -359,6 +377,7 @@ function UpdatePropertyListingForm(props){
 
                                 type = "text" 
                                 name = "title"
+                                value = {listingTitle}
                                 placeholder = "Title"
                                 autocomplete = "off"
                                 maxLength="75"
@@ -370,6 +389,7 @@ function UpdatePropertyListingForm(props){
                                     class="form-control"
                                     type = "text" 
                                     name = "title"
+                                    value = {listingPrice}
                                     placeholder = "Price"
                                     autocomplete = "off"
                                     onChange = {handlePriceChange}
@@ -381,6 +401,7 @@ function UpdatePropertyListingForm(props){
                                 class="form-control" 
                                 id ="conditionSelector" 
                                 aria-label="condition"
+                                value = {listingCondition}
                                 onChange = {handleConditionChange}
                                 >
                                     <option value = "">Condition</option>
@@ -409,6 +430,7 @@ function UpdatePropertyListingForm(props){
                                     class="form-control"
                                     type = "email" 
                                     name = "contactEmail"
+                                    value = {listingContactEmail}
                                     placeholder = "Contact Email"
                                     autocomplete = "off"
                                     onChange={handleEmailChange}
@@ -418,6 +440,7 @@ function UpdatePropertyListingForm(props){
                                     class="form-control"
                                     type = "text" 
                                     name = "contactPhone"
+                                    value = {listingContactPhoneNumber}
                                     placeholder = "Contact Phone Number"
                                     autocomplete = "off"
                                     onChange={handlePhoneNumberChange}
@@ -429,7 +452,8 @@ function UpdatePropertyListingForm(props){
                     <textarea 
                     class="form-control" 
                     id="cld-description" 
-                    name="" 
+                    name="description"
+                    value = {listingDescription} 
                     placeholder="Description"
                     maxlength="620"
                     onChange={handleDescriptionChange}
@@ -449,6 +473,7 @@ function UpdatePropertyListingForm(props){
                             class="form-control"
                             type = "text" 
                             name = "address"
+                            value = {listingPropertyStreetAddress}
                             placeholder = "Street Address"
                             autocomplete = "off"
                             onChange={handleListingPropertyStreetAddressChange}
@@ -458,6 +483,7 @@ function UpdatePropertyListingForm(props){
                             class="form-control"
                             type = "text" 
                             name = "createCity"
+                            value = {listingPropertyCity}
                             placeholder = "City"
                             autocomplete = "off"
                             onChange={handleListingPropertyCityChange}
@@ -467,6 +493,7 @@ function UpdatePropertyListingForm(props){
                             class="form-control"
                             type = "text" 
                             name = "createState"
+                            value = {listingPropertyState}
                             placeholder = "State"
                             autocomplete = "off"
                             onChange={handleListingPropertyStateChange}
@@ -476,6 +503,7 @@ function UpdatePropertyListingForm(props){
                             class="form-control"
                             type = "text" 
                             name = "createZipCode"
+                            value = {listingPropertyZipcode}
                             placeholder = "Zipcode"
                             autocomplete = "off"
                             onChange={handleListingPropertyZipcodeChange}
@@ -489,6 +517,7 @@ function UpdatePropertyListingForm(props){
                             class="form-control"
                             type = "text" 
                             name = "createPropertyYearBuilt"
+                            value = {listingPropertyYearBuilt}
                             placeholder = "Year Built"
                             autocomplete = "off"
                             maxlength="4"
@@ -526,6 +555,7 @@ function UpdatePropertyListingForm(props){
                             class="form-control"
                             type = "text" 
                             name = "createVehicleMpg1"
+                            value = {listingPropertyNumBedrooms}
                             placeholder = ""
                             maxlength = "2"
                             autocomplete = "off"
@@ -539,6 +569,7 @@ function UpdatePropertyListingForm(props){
                             class="form-control"
                             type = "text" 
                             name = "createVehicleMpg1"
+                            value = {listingPropertyNumBathrooms}
                             placeholder = ""
                             autocomplete = "off"
                             onChange={handleListingPropertyNumBathroomsChange}

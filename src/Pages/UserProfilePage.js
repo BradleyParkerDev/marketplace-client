@@ -19,10 +19,12 @@ function UserProfilePage (props){
     const auth = useAuth(); //access the authentication context 
     const [userData,setUserData] = useState(null)
     
-    const {categoriesList} = props
-    const {searchCategory} = props
-    const {searchCategoryName} = props
-    const {listingCategorySearchResult} = props
+    const {
+        categoriesList,
+        searchCategory,
+        searchCategoryName,
+        listingCategorySearchResult
+    } = props
 
     const [shouldRefresh, setShouldRefresh] = useState(false);
     const [myListings, setMyListings] = useState([])
@@ -112,7 +114,9 @@ function UserProfilePage (props){
         const imageRef = ref(storage, `userImages/${imageUpload.name + v4() }`)
         uploadBytes(imageRef, imageUpload).then((snapshot) =>{
             getDownloadURL(snapshot.ref).then((url) => {
+                console.log(url)
                 setUserImage([url]);
+                console.log(userImage)
                 return url
 
             }).then((url)=>{
@@ -134,7 +138,7 @@ function UserProfilePage (props){
             lastName: lastName,
             email: email,
             password: password,
-            dob: dob,
+            // dob: dob,
             gender: genderValue,
             pronouns: pronouns
         }
@@ -230,7 +234,7 @@ function UserProfilePage (props){
                     </div>
                 </div>
                 <div id="card-container">
-                    {myListings.length > 0 && myListings.map(listing=>(<ListingCard listing = {listing}/>))}
+                    {myListings.length > 0 && myListings.map(listing=>(<ListingCard listing = {listing} />))}
                 </div>
             </div>
         </div>

@@ -120,15 +120,15 @@ function App(props) {
         },
         { 
           path: "/users/profile",
-          element: <UserProfilePage 
+          element: <UserProfilePage
           categoriesList={categoriesList} 
           urlEndPoint={urlEndPoint} 
           />
 
         },
         { 
-          path: "/listings/update-listing",
-          element: <UpdateListingPage 
+          path: "/listings/update-listing/:listingId",
+          element: <UpdateListingPage
           categoriesList={categoriesList} 
           urlEndPoint={urlEndPoint} 
           />

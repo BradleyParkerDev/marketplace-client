@@ -97,7 +97,15 @@ const RegistrationModal = (props) =>{
     }    
     function handleDobChange(e){
       setDob(e.target.value)
-    }  
+    } 
+    // function togglePassord() {
+    //   var x = document.getElementById("password");
+    //   if (x.type === "password") {
+    //     x.type = "text";
+    //   } else {
+    //     x.type = "password";
+    //   }
+    // }  
     return (
       <>
         <Button id="registrationButton" variant="success" onClick={handleShow}>
@@ -157,13 +165,20 @@ const RegistrationModal = (props) =>{
               value = {password}
               autocomplete = "off"
               onChange={handlePasswordChange}
-
-
-
             />  
-            <br /> 
+            
+            {/* couldnt get toggle to work here */}
+            
+            {/* <div className="showPassword">
+
+            <input type="checkbox" onClick={togglePassord}/> 
+              <p id="showPassText">Show Password</p>
+            </div>  */}
+
+
+            {/* <br />  */}
             {/* Birthday  */}
-            <div id = "birthday">
+            {/* <div id = "birthday">
               <input 
                 class="form-control"
                 type = "date" 
@@ -173,7 +188,8 @@ const RegistrationModal = (props) =>{
 
 
               /> 
-            </div>
+            </div> */}
+
             <br /> 
             {/* Gender */}
             <div id = "gender">
@@ -234,7 +250,7 @@ const RegistrationModal = (props) =>{
                   lastName: lastName,
                   email: email,
                   password: password,
-                  dob: dob,
+                  // dob: dob,
                   gender: genderValue,
                   pronouns: pronouns
 

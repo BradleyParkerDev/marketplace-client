@@ -7,19 +7,44 @@ import Form from 'react-bootstrap/Form';
 import { storage }from "../firebase"
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from 'uuid';
+import { useParams } from 'react-router-dom';
 
 import { useAuth } from "../Hooks/Auth";
 const UserContext = createContext()
 
 function UpdateListingForm(props){
+    const params = useParams();
     const auth = useAuth(); //access the authentication context 
     const navigate = useNavigate();
-    const { urlEndPoint } = props;
-    console.log(urlEndPoint)
-    const {categoriesList} = props;
-    const {setShouldRefresh} = props;
-    // const { setShouldRefresh } = props;
+    const { urlEndPoint ,
+        categoriesList,    
+        setShouldRefresh,
+        // Regular Listing props
+        myListing,
+        displayImage, 
+        setDisplayImage,
+        listingImage,
+        setListingImage,   
+        listingTitle, 
+        setListingTitle, 
+        listingPrice, 
+        setListingPrice,
+        listingCategory,
+        setListingCategory,
+        listingSubCategory,
+        setListingSubCategory,
+        listingCondition,
+        setListingCondition,
+        listingContactEmail, 
+        setListingContactEmail,
+        listingContactPhoneNumber,
+        setListingContactPhoneNumber,
+        listingDescription,
+        setListingDescription,
 
+    } = props;
+    // const { setShouldRefresh } = props;
+    console.log(urlEndPoint)
     const [listingType, setListingType] = useState("regular")
     //User id
     const [listingUserId, setListingUserId] = useState(auth.userId);
@@ -39,22 +64,6 @@ function UpdateListingForm(props){
 
 
     const [subCategoriesList, setSubCategoriesList] = useState([]);
-
-    ///////////////////////////////////////////////////////////////////////////
-    // States and event handlers for regular listings
-    ///////////////////////////////////////////////////////////////////////////
-    const [displayImage, setDisplayImage] = useState("");
-    // Regular Listing States
-    const [listingTitle,setListingTitle] = useState("")
-    const [listingPrice,setListingPrice] = useState(0)
-    const [listingCategory,setListingCategory] = useState("")
-    const [listingSubCategory,setListingSubCategory] = useState("")
-    const [listingCondition,setListingCondition] = useState("")
-    const [listingContactEmail, setListingContactEmail] = useState("")
-    const [listingContactPhoneNumber, setListingContactPhoneNumber] = useState("");
-    const [listingDescription,setListingDescription] = useState("")
-    //Holds listng Images
-    const [listingImages, setListingImages] = useState([])
 
     
     //Handlers for regular listings
@@ -92,50 +101,35 @@ function UpdateListingForm(props){
 
 
     ///////////////////////////////////////////////////////////////////////////
-    // Image upload
+    // Update Listing
     ///////////////////////////////////////////////////////////////////////////
     // Uploading images to firebase
     const [imageUpload, setImageUpload] = useState(null)
     const imageListRef = ref(storage, "listingPhotos/")
-    const uploadImage = () => {
-        //remove upload button, upload images with publish button. 
-        // hold the images in the state, then publish them
+    const updateListing = () => {
+
         if(imageUpload == null) return;
         const imageRef = ref(storage, `images/${imageUpload.name + v4() }`)
         uploadBytes(imageRef, imageUpload).then((snapshot) =>{
             getDownloadURL(snapshot.ref).then((url) => {
-                setListingImages([url]);
+                setListingImage([url]);
                 return url
 
             }).then((url)=>{
-                updateListing(url)
+                updateInfo(url)
                 // navigate('/')
             })
             alert("Image Uploaded")
         })
 
     }
-
-
-    const onImageChange = (e) => {
-        const [file] = e.target.files;
-        setDisplayImage(URL.createObjectURL(file));
-    };
-
-    ///////////////////////////////////////////////////////////////////////////
-
-
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Update Listing
-    ///////////////////////////////////////////////////////////////////////////
-    const updateListing = (url) =>{
+    // Update Info
+    const updateInfo = (url) =>{
         setShouldRefresh(true)
         console.log(urlEndPoint)
         const req =  {
-            listingUserId: listingUserId,
             title: listingTitle,
-            listingImages: url,
+            listingImage: url,
             listingType: listingType,
             price: listingPrice,
             category: listingCategory,
@@ -147,7 +141,7 @@ function UpdateListingForm(props){
         }
         
         console.log(req)
-        axios.post(`${urlEndPoint}/listings/create-listing`, req)
+        axios.put(`${urlEndPoint}/listings/update-listing/${params.listingId}`, req)
         .then(function (response) {
             navigate('/')
             setShouldRefresh(false);
@@ -185,7 +179,8 @@ function UpdateListingForm(props){
                         <div id="newCreateImage">
                             <div id="createImageHolder">
                                 <img
-                                    // src={displayImage}
+                                    id = "create-image"
+                                    src={listingImage}
                                 
                                 />
                             </div>
@@ -193,8 +188,7 @@ function UpdateListingForm(props){
                                 <input 
                                 type="file"
                                 onChange={(event)=>{
-                                    // onImageChange()
-                                    // setImageUpload(event.target.files)
+                                    setImageUpload(event.target.files)
                                 
                                 }}
                                 />                                
@@ -208,6 +202,7 @@ function UpdateListingForm(props){
 
                                 type = "text" 
                                 name = "title"
+                                value = {listingTitle}
                                 placeholder = "Title"
                                 autocomplete = "off"
                                 maxLength="75"
@@ -218,7 +213,8 @@ function UpdateListingForm(props){
                                     id="newListingPrice"
                                     class="form-control"
                                     type = "text" 
-                                    name = "title"
+                                    name = "price"
+                                    value = {listingPrice}
                                     placeholder = "Price"
                                     autocomplete = "off"
                                     onChange = {handlePriceChange}
@@ -229,6 +225,7 @@ function UpdateListingForm(props){
                                 <Form.Select 
                                 class="form-control" 
                                 id ="conditionSelector" 
+                                value = {listingCondition}
                                 aria-label="condition"
                                 onChange = {handleConditionChange}
                                 >
@@ -247,6 +244,7 @@ function UpdateListingForm(props){
                                     class="form-control" 
                                     id ="categorySelector" 
                                     aria-label="category"
+                                    value = {listingCategory}
                                     onChange = {handleCategoryChange}
                                     >
                                         <option value = "">Category</option>
@@ -261,6 +259,7 @@ function UpdateListingForm(props){
                                     class="form-control" 
                                     id ="subCategorySelector" 
                                     aria-label="subCategory"
+                                    value = {listingSubCategory}
                                     onChange={handleSubCategoryChange}
                                     >
                                         <option value = "">Subcategory</option>
@@ -279,6 +278,7 @@ function UpdateListingForm(props){
                                     id="contactEmail"
                                     class="form-control"
                                     type = "email" 
+                                    value = {listingContactEmail}
                                     name = "contactEmail"
                                     placeholder = "Contact Email"
                                     autocomplete = "off"
@@ -288,6 +288,7 @@ function UpdateListingForm(props){
                                     id="contactPhone"
                                     class="form-control"
                                     type = "text" 
+                                    value = {listingContactPhoneNumber}
                                     name = "contactPhone"
                                     placeholder = "Contact Phone Number"
                                     autocomplete = "off"
@@ -300,7 +301,8 @@ function UpdateListingForm(props){
                     <textarea 
                     class="form-control" 
                     id="cld-description" 
-                    name="" 
+                    name=""
+                    value = {listingDescription} 
                     placeholder="Description"
                     maxlength="620"
                     onChange={handleDescriptionChange}
@@ -312,7 +314,7 @@ function UpdateListingForm(props){
                 id="createSubmitButton" 
                 variant="success"
                 onClick={()=>{
-                    // uploadImage()
+                    updateListing()
                     }} >
                     Update
                 </Button>

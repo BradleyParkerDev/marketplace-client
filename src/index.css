@@ -133,7 +133,7 @@ ListingCard
   /* Add shadows to create the "card" effect */
 
   width: 250px;
-  height: 270px;
+  height: auto;
   margin: 10px 10px 10px 10px;
   border: solid grey 2px;
   background-color: white;
@@ -151,20 +151,20 @@ ListingCard
   /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
   /* transition: 0.3s; */
 
-  height: 70%;
+  height: 200px;
 }
 
 .listingPhoto{
-  border: solid grey 2px;
+  border: solid grey 1px;
   border-radius: 5px 5px 5px 5px;
 
-  height:100%;
+  height:200px;
   width: 100%;
 }
 
 .innerCardTwo{
   width: 100%;
-  height: 100%;
+  height: 100px;
   /* border: dashed black 2px; */
   border-radius: 5px 5px 5px 5px;
   padding: 2px 10px 10px 10px;
@@ -175,8 +175,8 @@ ListingCard
 
 .cardTextArea{
   width:100%;
-  height:100%;
-  /* border: dashed grey 2px; */
+  height:100px;
+  border: dashed grey 2px;
   border-radius: 5px 5px 5px 5px;
 
 }
@@ -193,17 +193,21 @@ ListingCard
 .cardPrice{
   width:100%;
   height: 50%;
-  /* border: dashed grey 2px; */
+  border: dashed grey 2px;
 
 }
 
 .cardTitle{
   width:100%;
   height: 50%;
-  /* border: dashed grey 2px; */
+  border: dashed grey 2px;
 
 }
-
+.cardUpdateDelete{
+  width:100%;
+  height: 50%;
+  border: dashed grey 2px;
+}
 /* 
 ////////////////////////////////////////////////////////////////////
 HomePage
@@ -264,7 +268,7 @@ UserProfilePage
 
 
 #userProfileDiv{
-  border: white dashed 3px;
+  /* border: white dashed 3px; */
   width: 100%;
   /* height: 100%; */
 }
@@ -368,76 +372,6 @@ height: 100%;
   height: 50px;
   width: 200px;
 }
-
-
-
-/* 
-////////////////////////////////////////////////////////////////////
-carouselCardContainer
-////////////////////////////////////////////////////////////////////
-*/
-
-#rowCategory{
-  margin-bottom:20px;
-  display: inline-block;
-  /* width: 100%; */
-  height: 50px;
-  background-color: white;
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-
-  font-weight: bold;
-  font-size: x-large;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-
-}
-#carouselOuterDiv{
-  width: 95%;
-  height: auto;
-  margin:20px 40px 20px 20px;
-  border: dashed white 2px;
-  padding:20px 20px 20px 20px;
-  background-color: 	#F0F0F0;
-  border: solid black 2px;
-  border-radius: 5px; 
-
-
-}
-#carouselCardContainer{
-  width: auto;
-  height: 350px;
-  /* background-color: white; */
-  /* border: solid black 2px; */
-  border-radius: 5px; 
-  overflow-x: scroll;
-  display: flex;
-
-}
-#rowFooter{
-  width: 100%;
-  display: flex;
-  justify-content: right;
-
-}
-#seeMore{
-  margin-top:20px;
-  display: inline-block;
-  /* width: 100%; */
-  height: 50px;
-  background-color: white;
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  justify-self: end;
-  font-weight: bold;
-  font-size: x-large;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
-
-
-
-
 
 
 
@@ -556,6 +490,13 @@ margin-bottom: 3px;
   height: 85%;
   /* border: dashed black 2px; */
 }
+
+#create-image{
+  width: 100%;
+  height: 100%;
+}
+
+
 #createFileInput{
   width:100%;
   height: 15%;
@@ -825,7 +766,7 @@ RegistrationModal
   margin-left: 25px;
   width: 450px;
   height: auto;
-  border: black solid 1px ;
+  /* border: black solid 1px ; */
   border-radius: 5px;
   text-align: center;
 
@@ -851,6 +792,19 @@ RegistrationModal
 
 
 }
+.showPassword{
+display: flex;
+align-content: space-evenly;
+height: 30px;
+width: 100%;
+padding-left: 25px;
+/* border: dashed black 1px; */
+}
+
+#showPassText{
+  margin-left: 5px;
+}
+
 #password{
   width: 400px;
   margin-left: 25px;
@@ -864,6 +818,8 @@ RegistrationModal
 }
 
 #gender{
+  /* border: dashed black 1px; */
+
   align-items: center;
   display: flex;
   justify-content: space-evenly;
@@ -874,6 +830,8 @@ RegistrationModal
 
 /* for genderForm function */
 #genderDiv{
+  /* border: dashed black 1px; */
+
   display: flex;
   margin-bottom: 15px;
 

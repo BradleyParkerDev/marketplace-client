@@ -648,10 +648,10 @@ function CreateListingForm(props){
     }
 
 
-    const onImageChange = (e) => {
-        const [file] = e.target.files;
-        setDisplayImage(URL.createObjectURL(file));
-    };
+    // const onImageChange = (e) => {
+    //     const [file] = e.target.files;
+    //     setDisplayImage(URL.createObjectURL(file));
+    // };
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -788,8 +788,8 @@ function CreateListingForm(props){
                                 <input 
                                 type="file"
                                 onChange={(event)=>{
-                                    onImageChange()
-                                    setImageUpload(event.target.files)
+                                    // onImageChange()
+                                    setImageUpload(event.target.files[0])
                                 
                                 }}
                                 />                                

@@ -65,7 +65,7 @@ const UpdateUserInfoForm = (props) =>{
         } else {
           x.type = "password";
         }
-      } 
+    } 
 
     function genderForm(){
         return(
@@ -152,11 +152,14 @@ const UpdateUserInfoForm = (props) =>{
                 value = {password}
                 autocomplete = "off"
                 onChange={handlePasswordChange}
-                />  
-                <input type="checkbox" onClick={togglePassord}/>
-                <br /> 
+                /> 
+                <div className="showPassword">
+
+                    <input type="checkbox" onClick={togglePassord}/> 
+                    <p id="showPassText">Show Password</p>
+                </div> 
                 {/* Birthday  */}
-                <div id = "birthday">
+                {/* <div id = "birthday">
                     <input 
                     class="form-control"
                     type = "date" 
@@ -164,7 +167,7 @@ const UpdateUserInfoForm = (props) =>{
                     value = {dob}
                     onChange={handleDobChange}
                     /> 
-                </div>
+                </div> */}
 
 
                 <br /> 
