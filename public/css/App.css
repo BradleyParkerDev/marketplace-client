@@ -490,6 +490,13 @@ margin-bottom: 3px;
   height: 85%;
   /* border: dashed black 2px; */
 }
+
+#create-image{
+  width: 100%;
+  height: 100%;
+}
+
+
 #createFileInput{
   width:100%;
   height: 15%;
@@ -866,17 +873,17 @@ UpdateUserInfoForm
 
 /* 
 ////////////////////////////////////////////////////////////////////
-ListingPage 
+Listing
 ////////////////////////////////////////////////////////////////////
 */
 
-#listingPageDiv{
+.listingPageDiv{
   /* height: 500px; */
   margin-top: 30px;
-  margin-left: 60px;
+  margin-left: 200px;
   margin-right: 60px;
 
-  width: 90%;
+  width: 50%;
   max-width: 100%;
   height:750px;
   /* width: 100vw; */
@@ -889,25 +896,60 @@ ListingPage
   box-shadow: 5px 5px;
 }
 
-#listingPageHeader{
+.listingPageHeader{
 height: 10%;
 width: 100%;
-border: dashed black 2px;
+/* border: dashed black 2px; */
 }
 
-#listingPageTitle{
+.listingPageTitle{
 height: 100%;
-width: 50%;
-border: dashed black 2px;
+width: 100%;
+/* border: dashed black 2px; */
 }
 
-#listingPageBody{
+.listingPageBody{
   height: 70%;
   width: 100%;
-  border: dashed black 2px;
+  /* border: dashed black 2px; */
+}
+.listing-image{
+  height: 45%;
+  width: 100%;
+  padding: 5px;
+  /* border: dashed black 2px; */
+
+}
+.actualListingImage{
+  height: 100%;
+  width: 100%;
+
+}
+.listing-info{
+  height: 20%;
+  width: 100%;
+  /* border: dashed black 2px; */
+}
+.listingInfoRow{
+  height: 33%;
+  width: 100%;
+  /* border: dashed black 2px; */
+  display: flex;
 }
 
-#listingPageFooter{
+.listing-Row-Div{
+  height: 100%;
+  width: 50%;
+  border: dashed black 2px;
+  display: flex;
+  justify-content: left;
+}
+
+.listingDescription{
+
+}
+
+.listingPageFooter{
   height: 20%;
   width: 100%;
   border: dashed black 2px;
@@ -915,34 +957,128 @@ border: dashed black 2px;
   justify-content: right;
 }
 
-#listingPublisherInfo{
+.listingPublisherInfo{
   height: 100%;
-  width: 50%;
-  border: dashed black 2px;
+  width: 65%;
+  /* border: dashed black 2px; */
   display: flex;
 }
-#publisherImage{
+.publisherImage{
   height: 100%;
-  width: 50%;
+  width: 40%;
   border: dashed black 2px;
 }
 
-#publisherinfo{
+.publisherinfo{
   height: 100%;
-  width: 50%;
+  width: 60%;
   border: dashed black 2px;
 }
-#publisherName{
+.publisherName{
+  height: 20%;
+  width: 100%;
+  border: dashed black 2px;
+}
+.publisherPronouns{
+
+}
+.publisherEmail{
+
+}
+.publisherPhone{
+
+}
+/*
+////////////////////////////////////////////////////////////////////
+Detailed Listing
+////////////////////////////////////////////////////////////////////
+*/
+.detailedListingPageDiv{
+  /* height: 500px; */
+  margin-top: 30px;
+  margin-left: 160px;
+  margin-right: 60px;
+
+  width: 70%;
+  max-width: 100%;
+  height:750px;
+  /* width: 100vw; */
+  border: solid black 2px;
+  border-radius: 5px; 
+  padding:20px 20px 20px 20px;
+  overflow-y: scroll;
+  background-color: 	#F0F0F0;
+  /* display:flex; */
+  box-shadow: 5px 5px;
+}
+
+.detailedListingPageHeader{
+height: 10%;
+width: 100%;
+border: dashed black 2px;
+}
+
+.detailedListingPageTitle{
+height: 100%;
+width: 100%;
+border: dashed black 2px;
+}
+
+.detailedListingPageBody{
+  height: 70%;
+  width: 100%;
+  border: dashed black 2px;
+}
+.detailedListing-image{
+  
+}
+
+.detailedListing-info{
+
+}
+.detailedListingCategoryRow{
+  display: flex;
+
+}
+.listingDescription{
+
+}
+.detailedListingPageFooter{
+  height: 20%;
+  width: 100%;
+  border: dashed black 2px;
+  display: flex;
+  justify-content: right;
+}
+
+.detailedListingPublisherInfo{
+  height: 100%;
+  width: 35%;
+  border: dashed black 2px;
+  display: flex;
+}
+.publisherImage{
+  height: 100%;
+  width: 40%;
+  border: dashed black 2px;
+}
+
+.publisherinfo{
+  height: 100%;
+  width: 60%;
+  border: dashed black 2px;
+}
+.publisherName{
   height: 20%;
   width: 60px;
   border: dashed black 2px;
 }
-#publisherPronouns{
+.publisherPronouns{
 
 }
-#publisherEmail{
+.publisherEmail{
 
 }
-#publisherPhone{
+.publisherPhone{
 
 }

@@ -74,6 +74,10 @@ function ListingCard(props){
                     <img className ="listingPhoto" 
                         src={`${listing.listingImage}.jpg`}
                         alt={listing.title}
+                        onClick={()=>{
+                            navigate(`/listings/get-listing/${listing.listingId}`)
+                        }}
+                                                
                     /> 
                 </div>
             </div>

@@ -104,7 +104,7 @@ function App(props) {
 
         },
         { 
-          path: "/listings/get-listing/",
+          path: "/listings/get-listing/:listingId",
           element: <ListingPage 
           urlEndPoint={urlEndPoint} 
           setShouldRefresh={setShouldRefresh}/>
