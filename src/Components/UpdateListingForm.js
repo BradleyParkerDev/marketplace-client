@@ -40,7 +40,6 @@ function UpdateListingForm(props){
     // const {listings} = props
 
 
-    console.log(urlEndPoint)
 
     //User id
     const [listingUserId, setListingUserId] = useState(auth.userId);

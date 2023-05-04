@@ -279,6 +279,7 @@ function UpdatePropertyListingForm(props){
         setShouldRefresh(true)
         console.log(urlEndPoint)
         const req =  {
+            //Regular
             title: listingTitle,
             listingImage: url,
             listingType: listingType,
@@ -289,6 +290,7 @@ function UpdatePropertyListingForm(props){
             email: listingContactEmail,
             phoneNumber: listingContactPhoneNumber,
             description: listingDescription,
+            //Property
             listingPropertyType:listingPropertyListingType,
             propertyType: listingPropertyType,
             streetAddress: listingPropertyStreetAddress,
@@ -591,8 +593,8 @@ function UpdatePropertyListingForm(props){
                 id="createSubmitButton" 
                 variant="success"
                 onClick={()=>{
-                    // uploadImage()
-                    }} >
+                    updateListing()
+               }}>
                     Update
                 </Button>
             </div>
