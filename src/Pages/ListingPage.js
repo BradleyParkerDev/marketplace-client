@@ -27,7 +27,7 @@ function ListingPage (props){
     // States For Publisher
     ///////////////////////////////////////////////////////////////////////////
     const [publisher, setPublisher] = useState("");
-    const [pulisherImage, setPublisherImage] = useState("");
+    const [publisherImage, setPublisherImage] = useState("");
     const [publisherFirstName,setPublisherFirstName] = useState("");
     const [publisherPronouns, setPublisherPronouns] = useState("");
 
@@ -95,50 +95,50 @@ function ListingPage (props){
         axios.get(`${urlEndPoint}/listings/get-listing/${params.listingId}`)
         .then(function (response){
             console.log(response);
-            setMyListing(response.data.listing[0]);
+            setMyListing(response.data.listing);
             console.log(myListing);
             setShouldRefresh(true)
-            setListingUserId(response.data.listing[0].listingUserId)
-            setListingImage(response.data.listing[0].listingImage)
-            setListingType(response.data.listing[0].listingType)
-            setListingTitle(response.data.listing[0].title)
-            setListingPrice(response.data.listing[0].price)
-            setListingCategory(response.data.listing[0].category)
-            setListingSubCategory(response.data.listing[0].subCategory)
-            setListingCondition(response.data.listing[0].condition)
-            setListingContactEmail(response.data.listing[0].email)
-            setListingContactPhoneNumber(response.data.listing[0].phoneNumber)
-            setListingDescription(response.data.listing[0].description)
+            setListingUserId(response.data.listing.listingUserId)
+            setListingImage(response.data.listing.listingImage)
+            setListingType(response.data.listing.listingType)
+            setListingTitle(response.data.listing.title)
+            setListingPrice(response.data.listing.price)
+            setListingCategory(response.data.listing.category)
+            setListingSubCategory(response.data.listing.subCategory)
+            setListingCondition(response.data.listing.condition)
+            setListingContactEmail(response.data.listing.email)
+            setListingContactPhoneNumber(response.data.listing.phoneNumber)
+            setListingDescription(response.data.listing.description)
             console.log(listingType)
             //For Vehicles
             if(listingType === "vehicle"){
-                setListingVehicleType(response.data.listing[0].vehicleType);
+                setListingVehicleType(response.data.listing.vehicleType);
                 console.log(listingVehicleType)
-                setListingVehicleMake(response.data.listing[0].make);
-                setListingVehicleModel(response.data.listing[0].model);
-                setListingVehicleYear(response.data.listing[0].year);
-                setListingVehicleTransmission(response.data.listing[0].transmission);
-                setListingVehicleColor(response.data.listing[0].color);
-                setListingVehicleMilesDriven(response.data.listing[0].milesDriven);
-                setListingVehicleMpgMin(response.data.listing[0].minMpg);
-                setListingVehicleMpgMax(response.data.listing[0].maxMpg);
+                setListingVehicleMake(response.data.listing.make);
+                setListingVehicleModel(response.data.listing.model);
+                setListingVehicleYear(response.data.listing.year);
+                setListingVehicleTransmission(response.data.listing.transmission);
+                setListingVehicleColor(response.data.listing.color);
+                setListingVehicleMilesDriven(response.data.listing.milesDriven);
+                setListingVehicleMpgMin(response.data.listing.minMpg);
+                setListingVehicleMpgMax(response.data.listing.maxMpg);
             }
 
 
 
             //For Properties
             if(listingType === "property"){
-                setListingPropertyListingType(response.data.listing[0].listingPropertyType);
-                setListingPropertyType(response.data.listing[0].propertyType);
-                setListingPropertyStreetAddress(response.data.listing[0].streetAddress);
-                setListingPropertyCity(response.data.listing[0].city);
-                setListingPropertyState(response.data.listing[0].state);
-                setListingPropertyZipcode(response.data.listing[0].zipcode);
-                setListingPropertyYearBuilt(response.data.listing[0].yearBuilt);
-                setListingPropertyHasBasement(response.data.listing[0].hasBasement);
-                setListingPropertyHasGarage(response.data.listing[0].hasGarage);
-                setListingPropertyNumBedrooms(response.data.listing[0].numberOfBedrooms);
-                setListingPropertyNumBathrooms(response.data.listing[0].numberOfBathrooms);
+                setListingPropertyListingType(response.data.listing.listingPropertyType);
+                setListingPropertyType(response.data.listing.propertyType);
+                setListingPropertyStreetAddress(response.data.listing.streetAddress);
+                setListingPropertyCity(response.data.listing.city);
+                setListingPropertyState(response.data.listing.state);
+                setListingPropertyZipcode(response.data.listing.zipcode);
+                setListingPropertyYearBuilt(response.data.listing.yearBuilt);
+                setListingPropertyHasBasement(response.data.listing.hasBasement);
+                setListingPropertyHasGarage(response.data.listing.hasGarage);
+                setListingPropertyNumBedrooms(response.data.listing.numberOfBedrooms);
+                setListingPropertyNumBathrooms(response.data.listing.numberOfBathrooms);
             }
 
         
@@ -151,6 +151,11 @@ function ListingPage (props){
         })
         
         //Getting User info
+
+
+    },[shouldRefresh])
+
+    useEffect (()=>{
         axios.get(`${urlEndPoint}/users/get-user/${listingUserId}`)
         .then(function (response){
             console.log(response);
@@ -160,7 +165,6 @@ function ListingPage (props){
             }
             setPublisherFirstName(response.data.user.firstName);
             setPublisherPronouns(response.data.user.pronouns);
-            console.log(publisher);
         })
         .catch(function (error){
             console.log(error);
@@ -168,23 +172,16 @@ function ListingPage (props){
         .finally(function (){
         //always executed
         })
-
-    },[shouldRefresh])
-
+    },[listingUserId])
 
     return(
         <div>
             {myListing.listingType === "regular" && <Listing
 
             //Publisher Info props
-            publisher = {publisher}
-            setPublisher = {setPublisher}
-            pulisherImage = {pulisherImage}
-            setPublisherImage = {setPublisherImage}
+            publisherImage = {publisherImage}
             publisherFirstName = {publisherFirstName}
-            setPublisherFirstName = {setPublisherFirstName}
             publisherPronouns = {publisherPronouns}
-            setPublisherPronouns = {setPublisherPronouns}
 
             // Regular Listing props
             myListing = {myListing}
@@ -216,14 +213,9 @@ function ListingPage (props){
             {myListing.listingType === "vehicle" && <DetailedListing
 
             //Publisher Info props
-            publisher = {publisher}
-            setPublisher = {setPublisher}
-            pulisherImage = {pulisherImage}
-            setPublisherImage = {setPublisherImage}
+            publisherImage = {publisherImage}
             publisherFirstName = {publisherFirstName}
-            setPublisherFirstName = {setPublisherFirstName}
             publisherPronouns = {publisherPronouns}
-            setPublisherPronouns = {setPublisherPronouns}
 
             // Regular Listing props
             myListing = {myListing}
@@ -279,7 +271,10 @@ function ListingPage (props){
             categoriesList = {props.categoriesList}
             urlEndPoint = {props.urlEndPoint}
             setShouldRefresh = {props.setShouldRefresh}
-
+            //Publisher Info props
+            publisherImage = {publisherImage}
+            publisherFirstName = {publisherFirstName}
+            publisherPronouns = {publisherPronouns}
             // Regular Listing props
             myListing = {myListing}
             listingType = {listingType}

@@ -124,7 +124,7 @@ function UserProfilePage (props){
                 putUserUpdate(url)
                 // navigate('/')
             })
-            alert("Image Uploaded")
+            // alert("Image Uploaded")
         })
 
     } 

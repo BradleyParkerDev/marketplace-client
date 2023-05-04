@@ -19,53 +19,78 @@ function UpdateListingForm(props){
     const { urlEndPoint ,
         categoriesList,    
         setShouldRefresh,
-        // Regular Listing props
-        myListing,
-        displayImage, 
-        setDisplayImage,
-        listingImage,
-        setListingImage,   
-        listingTitle, 
-        setListingTitle, 
-        listingPrice, 
-        setListingPrice,
-        listingCategory,
-        setListingCategory,
-        listingSubCategory,
-        setListingSubCategory,
-        listingCondition,
-        setListingCondition,
-        listingContactEmail, 
-        setListingContactEmail,
-        listingContactPhoneNumber,
-        setListingContactPhoneNumber,
-        listingDescription,
-        setListingDescription,
-
+        
     } = props;
-    // const { setShouldRefresh } = props;
+    ///////////////////////////////////////////////////////////////////////////
+    // States and event handlers for regular listings
+    ///////////////////////////////////////////////////////////////////////////
+    const [displayImage, setDisplayImage] = useState("");
+    // Regular Listing States
+    const [listingTitle,setListingTitle] = useState('')
+    const [listingType,setListingType] = useState('regular')
+    const [listingPrice,setListingPrice] = useState('')
+    const [listingCategory,setListingCategory] = useState('')
+    const [listingSubCategory,setListingSubCategory] = useState('')
+    const [listingCondition,setListingCondition] = useState('')
+    const [listingContactEmail, setListingContactEmail] = useState('')
+    const [listingContactPhoneNumber, setListingContactPhoneNumber] = useState('');
+    const [listingDescription,setListingDescription] = useState('')
+    //Holds listng Images
+    const [listingImage, setListingImage] = useState("")
+    // const {listings} = props
+
+
     console.log(urlEndPoint)
-    const [listingType, setListingType] = useState("regular")
+
     //User id
     const [listingUserId, setListingUserId] = useState(auth.userId);
-    // console.log(listingUserId)
+
     //category
     const [newCategoriesList, setNewCategoriesList] = useState(categoriesList)
+    const [subCategoriesList, setSubCategoriesList] = useState([]);
 
     //Options for selecting listing category
     useEffect(()=> {
-
         const filterResult = categoriesList.filter((category)=>{
             return category.name !== "Vehicles" && category.name !== "Property Rentals" && category.name !== "Home Sales"
         })
         setNewCategoriesList(filterResult)
+        //This sets the initial state of the subCategoriesList
+
+        console.log(params)
+        axios.get(`${urlEndPoint}/listings/get-listing/${params.listingId}`)
+        .then(function (response){
+            console.log(response);
+            setShouldRefresh(true)
+            setListingImage(response.data.listing.listingImage)
+            setListingType(response.data.listing.listingType)
+            setListingTitle(response.data.listing.title)
+            setListingPrice(response.data.listing.price)
+            setListingCategory(response.data.listing.category)
+            setListingSubCategory(response.data.listing.subCategory)
+            setListingCondition(response.data.listing.condition)
+            setListingContactEmail(response.data.listing.email)
+            setListingContactPhoneNumber(response.data.listing.phoneNumber)
+            setListingDescription(response.data.listing.description)
+
+            const initialSubCategory = categoriesList.find(
+                category => category._id === response.data.listing.category   
+            )
+            setSubCategoriesList(initialSubCategory.subCategories);
+        })
+        .catch(function (error){
+            console.log(error);
+        })
+        .finally(function (){
+          //always executed
+        })
 
     },[categoriesList])
 
 
-    const [subCategoriesList, setSubCategoriesList] = useState([]);
 
-    
+
+
     //Handlers for regular listings
     function handleTitleChange(e){
         setListingTitle(e.target.value)
@@ -80,7 +105,6 @@ function UpdateListingForm(props){
         )
         setSubCategoriesList(filterCategory.subCategories)
         setListingSubCategory("");
-
     }
     function handleSubCategoryChange(e){
         setListingSubCategory(e.target.value)
@@ -105,10 +129,13 @@ function UpdateListingForm(props){
     ///////////////////////////////////////////////////////////////////////////
     // Uploading images to firebase
     const [imageUpload, setImageUpload] = useState(null)
-    const imageListRef = ref(storage, "listingPhotos/")
+    const imageListRef = ref(storage, "images/")
     const updateListing = () => {
 
-        if(imageUpload == null) return;
+        if(imageUpload == null){
+            updateInfo();
+            return;    
+        } 
         const imageRef = ref(storage, `images/${imageUpload.name + v4() }`)
         uploadBytes(imageRef, imageUpload).then((snapshot) =>{
             getDownloadURL(snapshot.ref).then((url) => {
@@ -143,7 +170,7 @@ function UpdateListingForm(props){
         console.log(req)
         axios.put(`${urlEndPoint}/listings/update-listing/${params.listingId}`, req)
         .then(function (response) {
-            navigate('/')
+            // navigate('/')
             setShouldRefresh(false);
     
         },{
@@ -154,8 +181,6 @@ function UpdateListingForm(props){
         }); 
     }
     ///////////////////////////////////////////////////////////////////////////
-
-
 
     return(
         <div id="createListingDiv">
@@ -188,7 +213,7 @@ function UpdateListingForm(props){
                                 <input 
                                 type="file"
                                 onChange={(event)=>{
-                                    setImageUpload(event.target.files)
+                                    setImageUpload(event.target.files[0])
                                 
                                 }}
                                 />                                
@@ -220,7 +245,6 @@ function UpdateListingForm(props){
                                     onChange = {handlePriceChange}
 
                                 /> 
-
 
                                 <Form.Select 
                                 class="form-control" 

@@ -1097,6 +1097,10 @@ width: 100%;
   width: 40%;
   border: dashed black 2px;
 }
+.actualPublisherImage{
+  height: 100%;
+  width: 100%;
+}
 
 .publisherinfo{
   height: 100%;

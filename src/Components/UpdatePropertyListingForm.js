@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import { storage }from "../firebase"
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from 'uuid';
+import { useParams } from 'react-router-dom';
 
 import { useAuth } from "../Hooks/Auth";
 const UserContext = createContext()
@@ -14,61 +15,49 @@ const UserContext = createContext()
 function UpdatePropertyListingForm(props){
     const auth = useAuth(); //access the authentication context 
     const navigate = useNavigate();
+    const params = useParams();
 
     const { urlEndPoint ,
         categoriesList,    
-        setShouldRefresh,
-        // Regular Listing props
-        myListing,
-        displayImage, 
-        setDisplayImage,
-        listingImage,
-        setListingImage,   
-        listingTitle, 
-        setListingTitle, 
-        listingPrice, 
-        setListingPrice,
-        listingCategory,
-        setListingCategory,
-        listingSubCategory,
-        setListingSubCategory,
-        listingCondition,
-        setListingCondition,
-        listingContactEmail, 
-        setListingContactEmail,
-        listingContactPhoneNumber,
-        setListingContactPhoneNumber,
-        listingDescription,
-        setListingDescription,
-
-        // Property Listing props
-        listingPropertyListingType,
-        setListingPropertyListingType,
-        listingPropertyType,
-        setListingPropertyType,
-        listingPropertyStreetAddress,
-        setListingPropertyStreetAddress,
-        listingPropertyCity,
-        setListingPropertyCity,
-        listingPropertyState,
-        setListingPropertyState,
-        listingPropertyZipcode,
-        setListingPropertyZipcode,
-        listingPropertyYearBuilt,
-        setListingPropertyYearBuilt,
-        listingPropertyHasBasement,
-        setListingPropertyHasBasement,
-        listingPropertyHasGarage,
-        setListingPropertyHasGarage,
-        listingPropertyNumBedrooms,
-        setListingPropertyNumBedrooms,
-        listingPropertyNumBathrooms,
-        setListingPropertyNumBathrooms
+        // Regular Listing props     
     } = props;
 
-    // const { setShouldRefresh } = props;
+    ///////////////////////////////////////////////////////////////////////////
+    // States and event handlers for regular listings
+    ///////////////////////////////////////////////////////////////////////////
+    const [shouldRefresh, setShouldRefresh] = useState(false)
+    const [displayImage, setDisplayImage] = useState("");
+    // Regular Listing States
+    const [listingTitle,setListingTitle] = useState('')
+    const [listingType,setListingType] = useState('')
+    const [listingPrice,setListingPrice] = useState('')
+    const [listingCategory,setListingCategory] = useState('')
+    const [listingSubCategory,setListingSubCategory] = useState('')
+    const [listingCondition,setListingCondition] = useState('')
+    const [listingContactEmail, setListingContactEmail] = useState('')
+    const [listingContactPhoneNumber, setListingContactPhoneNumber] = useState('');
+    const [listingDescription,setListingDescription] = useState('')
+    //Holds listng Images
+    const [listingImage, setListingImage] = useState("")
 
-    const [listingType, setListingType] = useState("regular")
+    ///////////////////////////////////////////////////////////////////////////
+    // States and event handlers for property listings
+    ///////////////////////////////////////////////////////////////////////////
+    
+    // Property Listing States
+    const [listingPropertyListingType, setListingPropertyListingType] = useState("Property Rentals");
+    const [listingPropertyType, setListingPropertyType] = useState("");
+    const [listingPropertyStreetAddress, setListingPropertyStreetAddress] = useState("");
+    const [listingPropertyCity, setListingPropertyCity] = useState("");
+    const [listingPropertyState, setListingPropertyState] = useState("");
+    const [listingPropertyZipcode, setListingPropertyZipcode] = useState("");
+    const [listingPropertyYearBuilt, setListingPropertyYearBuilt] = useState("");
+    const [listingPropertyHasBasement, setListingPropertyHasBasement] = useState(false);
+    const [listingPropertyHasGarage, setListingPropertyHasGarage] = useState(false);
+    const [listingPropertyNumBedrooms, setListingPropertyNumBedrooms] = useState("");
+    const [listingPropertyNumBathrooms, setListingPropertyNumBathrooms] = useState("");
+
+
     //User id
     const [listingUserId, setListingUserId] = useState(auth.userId);
     // console.log(listingUserId)
@@ -76,6 +65,46 @@ function UpdatePropertyListingForm(props){
     const [newCategoriesList, setNewCategoriesList] = useState(categoriesList)
     const propertyRentalCategory = categoriesList[16]
     const homeSalesCategory = categoriesList[10]
+
+    useEffect (()=>{
+        axios.get(`${urlEndPoint}/listings/get-listing/${params.listingId}`)
+        .then(function (response){
+            console.log(response.data.listing);
+            setShouldRefresh(true)
+            setListingImage(response.data.listing.listingImage)
+            setListingType(response.data.listing.listingType)
+            setListingTitle(response.data.listing.title)
+            setListingPrice(response.data.listing.price)
+            setListingCategory(response.data.listing.category)
+            setListingSubCategory(response.data.listing.subCategory)
+            setListingCondition(response.data.listing.condition)
+            setListingContactEmail(response.data.listing.email)
+            setListingContactPhoneNumber(response.data.listing.phoneNumber)
+            setListingDescription(response.data.listing.description)
+ 
+            //For Properties
+            setListingPropertyListingType(response.data.listing.listingPropertyType);
+            setListingPropertyType(response.data.listing.propertyType);
+            setListingPropertyStreetAddress(response.data.listing.streetAddress);
+            setListingPropertyCity(response.data.listing.city);
+            setListingPropertyState(response.data.listing.state);
+            setListingPropertyZipcode(response.data.listing.zipcode);
+            setListingPropertyYearBuilt(response.data.listing.yearBuilt);
+            setListingPropertyHasBasement(response.data.listing.hasBasement);
+            setListingPropertyHasGarage(response.data.listing.hasGarage);
+            setListingPropertyNumBedrooms(response.data.listing.numberOfBedrooms);
+            setListingPropertyNumBathrooms(response.data.listing.numberOfBathrooms);
+        
+          })
+          .catch(function (error){
+              console.log(error);
+          })
+          .finally(function (){
+            //always executed
+          })
+
+    },[shouldRefresh])
+
     //Options for selecting listing category
     useEffect(()=> {
 
@@ -193,14 +222,11 @@ function UpdatePropertyListingForm(props){
                 id ="subCategorySelector" 
                 aria-label="subCategory"
                 value = {listingPropertyType}
-
                 onChange={handleListingPropertyTypeChange}
- 
                 >
                     <option value = "">Property Type</option>
                     {propertyRentalCategory.propertyType.map(pType=>(
                         <option value={pType}>{pType}</option>))} 
-
                 </Form.Select>
         )
     }
@@ -223,15 +249,17 @@ function UpdatePropertyListingForm(props){
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // Image upload
+    // Update Listing
     ///////////////////////////////////////////////////////////////////////////
     // Uploading images to firebase
     const [imageUpload, setImageUpload] = useState(null)
-    const imageListRef = ref(storage, "listingPhotos/")
-    const uploadImage = () => {
-        //remove upload button, upload images with publish button. 
-        // hold the images in the state, then publish them
-        if(imageUpload == null) return;
+    const imageListRef = ref(storage, "images/")
+    const updateListing = () => {
+
+        if(imageUpload == null){
+            updateInfo();
+            return;    
+        } 
         const imageRef = ref(storage, `images/${imageUpload.name + v4() }`)
         uploadBytes(imageRef, imageUpload).then((snapshot) =>{
             getDownloadURL(snapshot.ref).then((url) => {
@@ -239,34 +267,20 @@ function UpdatePropertyListingForm(props){
                 return url
 
             }).then((url)=>{
-                updateListing(url)
+                updateInfo(url)
                 // navigate('/')
             })
             alert("Image Uploaded")
         })
 
     }
-
-
-    const onImageChange = (e) => {
-        const [file] = e.target.files;
-        setDisplayImage(URL.createObjectURL(file));
-    };
-
-    ///////////////////////////////////////////////////////////////////////////
-
-
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Update Listing
-    ///////////////////////////////////////////////////////////////////////////
-    const updateListing = (url) =>{
+    // Update Info
+    const updateInfo = (url) =>{
         setShouldRefresh(true)
         console.log(urlEndPoint)
         const req =  {
-            listingUserId: listingUserId,
             title: listingTitle,
-            listingImages: url,
+            listingImage: url,
             listingType: listingType,
             price: listingPrice,
             category: listingCategory,
@@ -275,7 +289,6 @@ function UpdatePropertyListingForm(props){
             email: listingContactEmail,
             phoneNumber: listingContactPhoneNumber,
             description: listingDescription,
-            //for property
             listingPropertyType:listingPropertyListingType,
             propertyType: listingPropertyType,
             streetAddress: listingPropertyStreetAddress,
@@ -290,9 +303,9 @@ function UpdatePropertyListingForm(props){
         }
         
         console.log(req)
-        axios.post(`${urlEndPoint}/listings/update-listing`, req)
+        axios.put(`${urlEndPoint}/listings/update-listing/${params.listingId}`, req)
         .then(function (response) {
-            navigate('/')
+            // navigate('/')
             setShouldRefresh(false);
     
         },{
@@ -302,8 +315,6 @@ function UpdatePropertyListingForm(props){
           console.log(error);
         }); 
     }
-    ///////////////////////////////////////////////////////////////////////////
-
 
 
     return(
@@ -363,7 +374,7 @@ function UpdatePropertyListingForm(props){
                                 <input 
                                 type="file"
                                 onChange={(event)=>{
-                                    setImageUpload(event.target.files)
+                                    setImageUpload(event.target.files[0])
                                 
                                 }}
                                 />                                

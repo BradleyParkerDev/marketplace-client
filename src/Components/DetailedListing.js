@@ -12,6 +12,9 @@ const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
 const DetailedListing = (props) => {
     const { urlEndPoint ,
+        publisherImage,
+        publisherFirstName,
+        publisherPronouns,
         // Regular Listing
         myListing,
         listingType,
@@ -298,14 +301,17 @@ const DetailedListing = (props) => {
             <div className = "detailedListingPageFooter">
                 <div className = "detailedListingPublisherInfo">
                     <div className = "publisherImage">
-                        <p>Publisher Image</p>
+                        <img
+                        className="actualPublisherImage"
+                        src = {`${publisherImage}.jpg`}
+                        />
                     </div>
                     <div className = "publisherInfo">
                         <div className = "publisherName">
-                            <p>Publisher Name</p>
+                            <p>{publisherFirstName}</p>
                         </div>
                         <div className = "publisherPronouns">
-                            <p>Publisher Pronouns</p>
+                            <p>{publisherPronouns}</p>
                         </div>
                         <div className = "publisherEmail">
                             <p>{listingContactEmail}</p>

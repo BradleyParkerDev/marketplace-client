@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import { storage }from "../firebase"
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from 'uuid';
+import { useParams } from 'react-router-dom';
 
 import { useAuth } from "../Hooks/Auth";
 const UserContext = createContext()
@@ -14,81 +15,95 @@ const UserContext = createContext()
 function UpdateVehicleListingForm(props){
     const auth = useAuth(); //access the authentication context 
     const navigate = useNavigate();
+    const params = useParams();
 
-    const { urlEndPoint ,
+
+    const { urlEndPoint,
         categoriesList,    
-        setShouldRefresh,
-        // Regular Listing props
-        myListing,
-        displayImage, 
-        setDisplayImage,
-        listingImage,
-        setListingImage,   
-        listingTitle, 
-        setListingTitle, 
-        listingPrice, 
-        setListingPrice,
-        listingCategory,
-        setListingCategory,
-        listingSubCategory,
-        setListingSubCategory,
-        listingCondition,
-        setListingCondition,
-        listingContactEmail, 
-        setListingContactEmail,
-        listingContactPhoneNumber,
-        setListingContactPhoneNumber,
-        listingDescription,
-        setListingDescription,
-
-        //Vehicle Listing Props
-        listingVehicleType, 
-        setListingVehicleType, 
-        listingVehicleMake, 
-        setListingVehicleMake, 
-        listingVehicleModel, 
-        setListingVehicleModel, 
-        listingVehicleYear, 
-        setListingVehicleYear, 
-        listingVehicleTransmission, 
-        setListingVehicleTransmission, 
-        listingVehicleColor, 
-        setListingVehicleColor, 
-        listingVehicleMilesDriven, 
-        setListingVehicleMilesDriven, 
-        listingVehicleMpgMin, 
-        setListingVehicleMpgMin, 
-        listingVehicleMpgMax, 
-        setListingVehicleMpgMax 
+        // setShouldRefresh,
 
     } = props;
 
-    // const { setShouldRefresh } = props;
+    ///////////////////////////////////////////////////////////////////////////
+    // States and event handlers for regular listings
+    ///////////////////////////////////////////////////////////////////////////
+    const [shouldRefresh, setShouldRefresh] = useState(false)
+    const [displayImage, setDisplayImage] = useState("");
+    // Regular Listing States
+    const [listingTitle,setListingTitle] = useState('')
+    const [listingPrice,setListingPrice] = useState('')
+    const [listingCategory,setListingCategory] = useState('')
+    const [listingSubCategory,setListingSubCategory] = useState('')
+    const [listingCondition,setListingCondition] = useState('')
+    const [listingContactEmail, setListingContactEmail] = useState('')
+    const [listingContactPhoneNumber, setListingContactPhoneNumber] = useState('');
+    const [listingDescription,setListingDescription] = useState('')
+    const [listingImage, setListingImage] = useState("")
 
+    ///////////////////////////////////////////////////////////////////////////
+    // States and event handlers for vehicle listings
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Vehicle Listing States
+    const [listingVehicleType, setListingVehicleType] = useState("");
+    const [listingVehicleMake, setListingVehicleMake] = useState("");
+    const [listingVehicleModel, setListingVehicleModel] = useState("");
+    const [listingVehicleYear, setListingVehicleYear] = useState("");
+    const [listingVehicleTransmission, setListingVehicleTransmission] = useState("");
+    const [listingVehicleColor, setListingVehicleColor] = useState("");
+    const [listingVehicleMilesDriven, setListingVehicleMilesDriven] = useState("");
+    const [listingVehicleMpgMin, setListingVehicleMpgMin] = useState("");
+    const [listingVehicleMpgMax, setListingVehicleMpgMax] = useState("");
     const [listingType, setListingType] = useState("vehicle")
-    //User id
     const [listingUserId, setListingUserId] = useState(auth.userId);
-    // console.log(listingUserId)
-    //category
+
     const [newCategoriesList, setNewCategoriesList] = useState(categoriesList)
 
     //Vehicle and property objects
     const vehicleCategory = categoriesList[17]
-    console.log(vehicleCategory.vehicleType)
 
     //Options for selecting listing category
     useEffect(()=> {
 
-        const filterResult = categoriesList.filter((category)=>{
-            return category.name !== "Vehicles" && category.name !== "Property Rentals" && category.name !== "Home Sales"
+        console.log(params)
+        axios.get(`${urlEndPoint}/listings/get-listing/${params.listingId}`)
+        .then(function (response){
+            console.log(response.data.listing);
+            setShouldRefresh(true)
+            setListingImage(response.data.listing.listingImage)
+            console.log(listingImage)
+            setListingType(response.data.listing.listingType)
+            setListingTitle(response.data.listing.title)
+            setListingPrice(response.data.listing.price)
+            setListingCategory(response.data.listing.category)
+            setListingSubCategory(response.data.listing.subCategory)
+            setListingCondition(response.data.listing.condition)
+            setListingContactEmail(response.data.listing.email)
+            setListingContactPhoneNumber(response.data.listing.phoneNumber)
+            setListingDescription(response.data.listing.description)
+            setListingVehicleType(response.data.listing.vehicleType);
+            setListingVehicleMake(response.data.listing.make);
+            setListingVehicleModel(response.data.listing.model);
+            setListingVehicleYear(response.data.listing.year);
+            setListingVehicleTransmission(response.data.listing.transmission);
+            setListingVehicleColor(response.data.listing.color);
+            setListingVehicleMilesDriven(response.data.listing.milesDriven);
+            setListingVehicleMpgMin(response.data.listing.minMpg);
+            setListingVehicleMpgMax(response.data.listing.maxMpg);
+
         })
-        setNewCategoriesList(filterResult)
+        .catch(function (error){
+            console.log(error);
+        })
+        .finally(function (){
+          //always executed
+        })
 
-    },[categoriesList])
+    },[shouldRefresh])
 
 
 
-
+    console.log(listingImage)
     
     //Handlers for regular listings
     function handleTitleChange(e){
@@ -102,7 +117,6 @@ function UpdateVehicleListingForm(props){
         const filterCategory = categoriesList.find(
             category => category._id === e.target.value    
         )
-
     }
     function handleSubCategoryChange(e){
         setListingSubCategory(e.target.value)
@@ -119,16 +133,11 @@ function UpdateVehicleListingForm(props){
     function handleDescriptionChange(e){
         setListingDescription(e.target.value)
     }
-    ///////////////////////////////////////////////////////////////////////////
 
-
-
-  
     //Handlers for vehicle listings
     function handleListingVehicleTypeChange(e){
         setListingVehicleType(e.target.value)
         setListingSubCategory("")
-        // setListingPropertyType("")
     }
 
     function handleListingVehicleMakeChange(e){
@@ -165,15 +174,17 @@ function UpdateVehicleListingForm(props){
     ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////
-    // Image upload
+    // Update Listing
     ///////////////////////////////////////////////////////////////////////////
     // Uploading images to firebase
     const [imageUpload, setImageUpload] = useState(null)
-    const imageListRef = ref(storage, "listingPhotos/")
-    const uploadImage = () => {
-        //remove upload button, upload images with publish button. 
-        // hold the images in the state, then publish them
-        if(imageUpload == null) return;
+    const imageListRef = ref(storage, "images/")
+    const updateListing = () => {
+
+        if(imageUpload == null){
+            updateInfo();
+            return;    
+        } 
         const imageRef = ref(storage, `images/${imageUpload.name + v4() }`)
         uploadBytes(imageRef, imageUpload).then((snapshot) =>{
             getDownloadURL(snapshot.ref).then((url) => {
@@ -181,28 +192,15 @@ function UpdateVehicleListingForm(props){
                 return url
 
             }).then((url)=>{
-                updateListing(url)
+                updateInfo(url)
                 // navigate('/')
             })
             alert("Image Uploaded")
         })
 
     }
-
-
-    const onImageChange = (e) => {
-        const [file] = e.target.files;
-        setDisplayImage(URL.createObjectURL(file));
-    };
-
-    ///////////////////////////////////////////////////////////////////////////
-
-
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Update Listing
-    ///////////////////////////////////////////////////////////////////////////
-    const updateListing = (url) =>{
+    // Update Info
+    const updateInfo = (url) =>{
         setShouldRefresh(true)
         console.log(urlEndPoint)
         const req =  {
@@ -229,9 +227,9 @@ function UpdateVehicleListingForm(props){
         }
         
         console.log(req)
-        axios.post(`${urlEndPoint}/listings/update-listing`, req)
+        axios.put(`${urlEndPoint}/listings/update-listing/${params.listingId}`, req)
         .then(function (response) {
-            navigate('/')
+            // navigate('/')
             setShouldRefresh(false);
     
         },{
@@ -276,8 +274,7 @@ function UpdateVehicleListingForm(props){
                                 <input 
                                 type="file"
                                 onChange={(event)=>{
-                                    // onImageChange()
-                                    setImageUpload(event.target.files)
+                                    setImageUpload(event.target.files[0])
                                 
                                 }}
                                 />                                
@@ -488,8 +485,8 @@ function UpdateVehicleListingForm(props){
                 id="createSubmitButton" 
                 variant="success"
                 onClick={()=>{
-                    // uploadImage()
-                    }} >
+                    updateListing()
+                }} >
                     Update
                 </Button>
             </div>
