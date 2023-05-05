@@ -89,9 +89,6 @@ function ListingPage (props){
     const [listingPropertyNumBedrooms, setListingPropertyNumBedrooms] = useState("");
     const [listingPropertyNumBathrooms, setListingPropertyNumBathrooms] = useState("");
 
-
-
-
     useEffect (()=>{
         axios.get(`${urlEndPoint}/listings/get-listing/${params.listingId}`)
         .then(function (response){
@@ -142,7 +139,6 @@ function ListingPage (props){
                 setListingPropertyNumBathrooms(response.data.listing.numberOfBathrooms);
             }
 
-        
         })
         .catch(function (error){
             console.log(error);
@@ -152,7 +148,6 @@ function ListingPage (props){
         })
         
         //Getting User info
-
 
     },[shouldRefresh])
 

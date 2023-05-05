@@ -37,10 +37,7 @@ function UpdateListingForm(props){
     const [listingDescription,setListingDescription] = useState('')
     //Holds listng Images
     const [listingImage, setListingImage] = useState("")
-    // const {listings} = props
-
-
-
+    
     //User id
     const [listingUserId, setListingUserId] = useState(auth.userId);
 

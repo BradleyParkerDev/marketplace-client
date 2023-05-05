@@ -155,7 +155,8 @@ function UserProfilePage (props){
             })
             .catch(function (error) {
             console.log(error);
-        }); 
+        });
+        setPassword('') 
     }
 
     return(

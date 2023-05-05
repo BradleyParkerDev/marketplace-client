@@ -46,7 +46,7 @@ const Listing = (props) => {
     } = props;
 
     console.log(categoriesList)
-    console.log(`${publisherImage}`)
+    // console.log(`${publisherImage}`)
 
     return(
         <div className = "listingPageDiv">

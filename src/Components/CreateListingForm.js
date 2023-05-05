@@ -18,12 +18,10 @@ function CreateListingForm(props){
     console.log(urlEndPoint)
     const {categoriesList} = props;
     const {setShouldRefresh} = props;
-    // const { setShouldRefresh } = props;
 
     const [listingType, setListingType] = useState("regular")
     //User id
     const [listingUserId, setListingUserId] = useState(auth.userId);
-    // console.log(listingUserId)
     //category
     const [newCategoriesList, setNewCategoriesList] = useState(categoriesList)
 
@@ -627,11 +625,14 @@ function CreateListingForm(props){
     ///////////////////////////////////////////////////////////////////////////
     //Uploading images to firebase
     const [imageUpload, setImageUpload] = useState(null)
-    const imageListRef = ref(storage, "listingPhotos/")
+    const imageListRef = ref(storage, "images/")
     const uploadImage = () => {
         //remove upload button, upload images with publish button. 
         // hold the images in the state, then publish them
-        if(imageUpload == null) return;
+        if(imageUpload == null){
+            postListing();
+            return;    
+        }         
         const imageRef = ref(storage, `images/${imageUpload.name + v4() }`)
         uploadBytes(imageRef, imageUpload).then((snapshot) =>{
             getDownloadURL(snapshot.ref).then((url) => {
@@ -648,15 +649,6 @@ function CreateListingForm(props){
     }
 
 
-    // const onImageChange = (e) => {
-    //     const [file] = e.target.files;
-    //     setDisplayImage(URL.createObjectURL(file));
-    // };
-
-    ///////////////////////////////////////////////////////////////////////////
-
-
-
     ///////////////////////////////////////////////////////////////////////////
     // Post Listing
     ///////////////////////////////////////////////////////////////////////////
@@ -666,7 +658,7 @@ function CreateListingForm(props){
         const req =  {
             listingUserId: listingUserId,
             title: listingTitle,
-            listingImages: url,
+            listingImage: url,
             listingType: listingType,
             price: listingPrice,
             category: listingCategory,
@@ -788,7 +780,6 @@ function CreateListingForm(props){
                                 <input 
                                 type="file"
                                 onChange={(event)=>{
-                                    // onImageChange()
                                     setImageUpload(event.target.files[0])
                                 
                                 }}

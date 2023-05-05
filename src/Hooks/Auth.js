@@ -95,19 +95,6 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-// const updatePassword = async (password) => {
-//   const url = `${urlEndpoint}/users/registration`;
-//   const response = await fetch(url, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(newUser),
-//   });
-//   const responseJSON = await response.json();
-//   return responseJSON;
-
-// }
 
 const registerUser = async (newUser) => {
   const url = `${urlEndpoint}/users/registration`;
