@@ -77,7 +77,11 @@ const RegistrationModal = (props) =>{
         setPronouns("(She/Her)")
       }
       if(e.target.value === "custom"){
+        setPronouns("")
+        setGenderValue("")
+
         setCustomGender(true)
+
       }else{
         setCustomGender(false)
       }

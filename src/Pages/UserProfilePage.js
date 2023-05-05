@@ -174,6 +174,7 @@ function UserProfilePage (props){
                                 <img
                                     id="userImg"
                                     src = {`${displayImage}.jpg`}
+                                    alt = "User Image"
 
                                 />
                             </div>                            
