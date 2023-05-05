@@ -46,7 +46,9 @@ const Listing = (props) => {
     } = props;
 
     console.log(categoriesList)
-    // console.log(`${publisherImage}`)
+    console.log(listingCategory)
+    const category = categoriesList.find(c=>c._id === listingCategory)
+    console.log(category.name)
 
     return(
         <div className = "listingPageDiv">
@@ -79,7 +81,7 @@ const Listing = (props) => {
                     </div>
                     <div className = "listingInfoRow">
                         <div className = "listing-Row-Div">
-                            <p>{listingCategory}</p>
+                            <p>{category.name}</p>
                         </div> 
                         <div className = "listing-Row-Div">
                             <p>{listingSubCategory}</p>

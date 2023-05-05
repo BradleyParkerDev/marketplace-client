@@ -175,7 +175,7 @@ console.log(categoriesList)
             {myListing.listingType === "regular" && <Listing
 
             //Publisher Info props
-            categoriesList = {props.categoriesList}
+            categoriesList = {categoriesList}
             publisherImage = {publisherImage}
             publisherFirstName = {publisherFirstName}
             publisherPronouns = {publisherPronouns}

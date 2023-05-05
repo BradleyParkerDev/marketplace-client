@@ -21,10 +21,10 @@ function ListingCard(props){
         categoriesList,
     } = props;
 
+    console.log(categoriesList)
 
-
-    console.log(auth.userId)
-    console.log(listing.listingUserId)
+    // console.log(auth.userId)
+    // console.log(listing.listingUserId)
 
     const deleteListing= (listingId)=>{
         // setShouldRefresh(true)

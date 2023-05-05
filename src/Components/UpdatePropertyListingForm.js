@@ -270,7 +270,7 @@ function UpdatePropertyListingForm(props){
                 updateInfo(url)
                 // navigate('/')
             })
-            alert("Image Uploaded")
+            // alert("Listing Updated")
         })
 
     }
@@ -464,7 +464,7 @@ function UpdatePropertyListingForm(props){
                     name="description"
                     value = {listingDescription} 
                     placeholder="Description"
-                    maxlength="620"
+                    // maxlength="620"
                     onChange={handleDescriptionChange}
                     >
                     </textarea>

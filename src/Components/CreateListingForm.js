@@ -874,7 +874,7 @@ function CreateListingForm(props){
                     id="cld-description" 
                     name="" 
                     placeholder="Description"
-                    maxlength="620"
+                    // maxlength="620"
                     onChange={handleDescriptionChange}
                     >
                     </textarea>

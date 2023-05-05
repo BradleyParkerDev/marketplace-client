@@ -77,7 +77,7 @@ function App(props) {
     })
   },[searchCategory])
 
-
+  console.log(categoriesList)
   const router = createBrowserRouter([
     {
       path: "/",
@@ -106,6 +106,7 @@ function App(props) {
         { 
           path: "/listings/get-listing/:listingId",
           element: <ListingPage 
+          categoriesList = {categoriesList}
           urlEndPoint={urlEndPoint} 
           setShouldRefresh={setShouldRefresh}/>
 
