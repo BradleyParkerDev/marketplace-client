@@ -332,11 +332,7 @@ function UpdatePropertyListingForm(props){
                             <div id="lt-title">Listing Type:</div>
                             <div id="fixedType">
                                 <p>Property</p>
-
                             </div>
-
-
-
                             <div id="propertyRadio">
                                 <div className='createRadio'>
                                     <label>For Rent</label>

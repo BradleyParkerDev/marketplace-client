@@ -17,7 +17,6 @@ function UpdateVehicleListingForm(props){
     const navigate = useNavigate();
     const params = useParams();
 
-
     const { urlEndPoint,
         categoriesList,    
         // setShouldRefresh,
@@ -61,6 +60,17 @@ function UpdateVehicleListingForm(props){
 
     //Vehicle and property objects
     const vehicleCategory = categoriesList[17]
+    // let vehicleTypeList = vehicleCategory.vehicleType
+    // console.log(vehicleTypeList)
+
+    // function showVehicleTypeOptions(){
+
+    //     return(
+    //         vehicleTypeList && vehicleTypeList.map(vType=>(
+    //             <option value={vType}>{vType}</option>))
+    //     )
+    // }
+
 
     //Options for selecting listing category
     useEffect(()=> {
@@ -71,7 +81,6 @@ function UpdateVehicleListingForm(props){
             console.log(response.data.listing);
             setShouldRefresh(true)
             setListingImage(response.data.listing.listingImage)
-            console.log(listingImage)
             setListingType(response.data.listing.listingType)
             setListingTitle(response.data.listing.title)
             setListingPrice(response.data.listing.price)
@@ -206,7 +215,7 @@ function UpdateVehicleListingForm(props){
         const req =  {
             listingUserId: listingUserId,
             title: listingTitle,
-            listingImages: url,
+            listingImage: url,
             listingType: listingType,
             price: listingPrice,
             condition: listingCondition,
@@ -337,9 +346,11 @@ function UpdateVehicleListingForm(props){
                                     aria-label="subCategory"
                                     onChange={handleListingVehicleTypeChange}
                                 >
-                                    <option value = "">Vehicle Type</option>
-                                    {vehicleCategory.vehicleType.map(vType=>(
-                                    <option value={vType}>{vType}</option>))} 
+                                        <option value = "">Vehicle Type</option>
+                                        <option value = "Automobile">Automobile</option>
+                                        <option value = "Boat">Boat</option>
+                                        <option value = "Plane">Plane</option>
+                                        <option value = "Other">Other</option>
                                 </Form.Select>
 
                             </div>
