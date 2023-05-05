@@ -12,6 +12,7 @@ const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
 const Listing = (props) => {
     const { urlEndPoint ,
+        categoriesList,
 
         publisherImage,
         publisherFirstName,
@@ -44,6 +45,7 @@ const Listing = (props) => {
 
     } = props;
 
+    console.log(categoriesList)
     console.log(`${publisherImage}`)
 
     return(

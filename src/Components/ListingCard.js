@@ -90,7 +90,7 @@ function ListingCard(props){
                         <p>{listing.title}</p>
                     </div>
                 </div>
-                {showUpdateDelete()}
+                {auth.userId === listing.listingUserId && showUpdateDelete()}
 
                 {/* {`${auth.userID}`===`${listing.listingUserId}` && showUpdateDelete()} */}
             </div>

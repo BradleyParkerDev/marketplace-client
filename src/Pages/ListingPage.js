@@ -18,10 +18,14 @@ const UserContext = createContext()
 function ListingPage (props){
     const params = useParams();
     const auth = useAuth(); //access the authentication context 
+    const {
+        categoriesList,
+        urlEndPoint
+    } = props
     const [myListing, setMyListing] = useState([])
     const [shouldRefresh, setShouldRefresh] = useState(false)
     console.log(params.listingId)
-
+    console.log(categoriesList)
 
     ///////////////////////////////////////////////////////////////////////////
     // States For Publisher
@@ -85,10 +89,7 @@ function ListingPage (props){
     const [listingPropertyNumBedrooms, setListingPropertyNumBedrooms] = useState("");
     const [listingPropertyNumBathrooms, setListingPropertyNumBathrooms] = useState("");
 
-    const {
-        categoriesList,
-        urlEndPoint
-    } = props
+
 
 
     useEffect (()=>{
@@ -173,12 +174,13 @@ function ListingPage (props){
         //always executed
         })
     },[listingUserId])
-
+console.log(categoriesList)
     return(
         <div>
             {myListing.listingType === "regular" && <Listing
 
             //Publisher Info props
+            categoriesList = {props.categoriesList}
             publisherImage = {publisherImage}
             publisherFirstName = {publisherFirstName}
             publisherPronouns = {publisherPronouns}

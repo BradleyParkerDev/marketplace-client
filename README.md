@@ -33,6 +33,4 @@ _Layout:_
 - PUT
     update listing
 - Delete
-    delete user
-- Delete
     delete listing
